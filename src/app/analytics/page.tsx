@@ -29,6 +29,7 @@ import {
 import { AppLayout } from "@/components/layout/AppLayout";
 import { formatCurrency } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
+import { motion } from "framer-motion";
 
 const COLORS = ["#8B5CF6", "#06B6D4", "#EC4899", "#F59E0B", "#10B981", "#3B82F6", "#F43F5E"];
 
@@ -121,36 +122,37 @@ export default function AnalyticsPage() {
 
       {/* Top 4 Performance Badges */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="glass-card rounded-2xl p-5 border border-emerald-500/20">
-          <span className="text-xs text-slate-400 font-medium">Period Income</span>
-          <div className="text-xl sm:text-2xl font-black text-emerald-400 mt-1">
-            {formatAmount(summary.totalIncomeCents)}
-          </div>
-        </div>
-        <div className="glass-card rounded-2xl p-5 border border-rose-500/20">
-          <span className="text-xs text-slate-400 font-medium">Period Expenses</span>
-          <div className="text-xl sm:text-2xl font-black text-rose-400 mt-1">
-            {formatAmount(summary.totalExpenseCents)}
-          </div>
-        </div>
-        <div className="glass-card rounded-2xl p-5 border border-cyan-500/20">
-          <span className="text-xs text-slate-400 font-medium">Net Savings</span>
-          <div className="text-xl sm:text-2xl font-black text-cyan-400 mt-1">
-            {formatAmount(summary.netCashFlowCents)}
-          </div>
-        </div>
-        <div className="glass-card rounded-2xl p-5 border border-purple-500/20">
-          <span className="text-xs text-slate-400 font-medium">Average Savings Rate</span>
-          <div className="text-xl sm:text-2xl font-black text-purple-400 mt-1">
-            {summary.overallSavingsRate}%
-          </div>
-        </div>
+        {[
+          { label: "Period Income", val: formatAmount(summary.totalIncomeCents), border: "border-emerald-500/20", text: "text-emerald-400" },
+          { label: "Period Expenses", val: formatAmount(summary.totalExpenseCents), border: "border-rose-500/20", text: "text-rose-400" },
+          { label: "Net Savings", val: formatAmount(summary.netCashFlowCents), border: "border-cyan-500/20", text: "text-cyan-400" },
+          { label: "Average Savings Rate", val: `${summary.overallSavingsRate}%`, border: "border-purple-500/20", text: "text-purple-400" },
+        ].map((badge, i) => (
+          <motion.div
+            key={badge.label}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -2, transition: { duration: 0.2 } }}
+            className={`glass-card rounded-2xl p-5 border ${badge.border}`}
+          >
+            <span className="text-xs text-slate-400 font-medium">{badge.label}</span>
+            <div className={`text-xl sm:text-2xl font-black ${badge.text} mt-1`}>
+              {badge.val}
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       {/* 2 Primary Charts: Monthly Cash Flow & Category Donut */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         {/* Monthly Cash Flow Area Chart (2 cols) */}
-        <div className="lg:col-span-2 glass-card rounded-2xl p-6 border border-white/[0.08]">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-2 glass-card rounded-2xl p-6 border border-white/[0.08]"
+        >
           <h3 className="text-base font-bold text-white mb-1 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-cyan-400" /> Net Savings & Trend
           </h3>
@@ -187,10 +189,15 @@ export default function AnalyticsPage() {
               </ResponsiveContainer>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Category Pie / Donut Chart (1 col) */}
-        <div className="glass-card rounded-2xl p-6 border border-white/[0.08]">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-card rounded-2xl p-6 border border-white/[0.08]"
+        >
           <h3 className="text-base font-bold text-white mb-1 flex items-center gap-2">
             <PieIcon className="w-4 h-4 text-purple-400" /> Spending Distribution
           </h3>
@@ -233,7 +240,7 @@ export default function AnalyticsPage() {
               </ResponsiveContainer>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Top Expense Categories Breakdown Table */}

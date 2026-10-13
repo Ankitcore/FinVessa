@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { LucideIcon, ArrowUpRight, ArrowDownRight, Eye, EyeOff } from "lucide-react";
 import { useCurrency } from "@/context/CurrencyContext";
 
@@ -12,6 +13,7 @@ interface SummaryCardProps {
   trendLabel?: string;
   gradient: "purple" | "cyan" | "emerald" | "rose";
   isBalanceCard?: boolean;
+  index?: number;
 }
 
 export function SummaryCard({
@@ -22,6 +24,7 @@ export function SummaryCard({
   trendLabel = "vs last month",
   gradient,
   isBalanceCard = false,
+  index = 0,
 }: SummaryCardProps) {
   const { formatAmount, isBalanceHidden, toggleBalanceVisibility } = useCurrency();
 
@@ -51,8 +54,16 @@ export function SummaryCard({
   const isPositiveTrend = (trendPercentage || 0) >= 0;
 
   return (
-    <div
-      className={`glass-card glass-card-hover rounded-2xl p-5 sm:p-6 transition-all duration-300 relative group overflow-hidden ${gradientStyles.border} ${gradientStyles.glow}`}
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      whileHover={{ y: -3, transition: { duration: 0.2 } }}
+      className={`glass-card rounded-2xl p-5 sm:p-6 transition-all duration-300 relative group overflow-hidden ${gradientStyles.border} ${gradientStyles.glow}`}
     >
       {/* Subtle background light blur */}
       <div className="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-white/[0.02] group-hover:bg-white/[0.04] blur-xl pointer-events-none transition-all" />
@@ -109,6 +120,6 @@ export function SummaryCard({
           <span className="text-slate-300 font-medium truncate">{trendLabel}</span>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

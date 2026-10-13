@@ -15,6 +15,7 @@ import {
 import { AppLayout } from "@/components/layout/AppLayout";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
 
 export default function BudgetsPage() {
   const { formatAmount } = useCurrency();
@@ -118,7 +119,12 @@ export default function BudgetsPage() {
       onRefreshData={loadBudgets}
     >
       {/* Overview Card */}
-      <div className="glass-card rounded-2xl p-6 border border-white/[0.08] mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-card rounded-2xl p-6 border border-white/[0.08] mb-8"
+      >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
@@ -150,17 +156,17 @@ export default function BudgetsPage() {
           </div>
 
           <div className="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden p-0.5 border border-white/[0.05]">
-            <div
-              className={`h-full rounded-full transition-all duration-500 ${
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.min(100, summary.percentageUsed || 0)}%` }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              className={`h-full rounded-full ${
                 (summary.percentageUsed || 0) > 100
                   ? "bg-rose-500 shadow-glow"
                   : (summary.percentageUsed || 0) > 80
                   ? "bg-amber-400"
                   : "bg-gradient-to-r from-purple-500 to-cyan-400"
               }`}
-              style={{
-                width: `${Math.min(100, summary.percentageUsed || 0)}%`,
-              }}
             />
           </div>
 
@@ -182,7 +188,7 @@ export default function BudgetsPage() {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Budgets Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -196,13 +202,21 @@ export default function BudgetsPage() {
             No budgets created yet. Click &ldquo;Create Budget&rdquo; to set a category spending limit.
           </div>
         ) : (
-          budgets.map((b) => {
+          budgets.map((b, index) => {
             const isExceeded = b.isExceeded;
             const isWarning = b.percentageUsed >= 80 && !isExceeded;
 
             return (
-              <div
+              <motion.div
                 key={b.id}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.45,
+                  delay: Math.min(index * 0.05, 0.4),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 className={`glass-card rounded-2xl p-5 border transition-all ${
                   isExceeded
                     ? "border-rose-500/40 bg-rose-950/10 shadow-rose-950/20"
@@ -254,15 +268,21 @@ export default function BudgetsPage() {
 
                 {/* Progress Bar */}
                 <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden mb-3">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.min(100, b.percentageUsed)}%` }}
+                    transition={{
+                      duration: 0.75,
+                      delay: Math.min(index * 0.05 + 0.1, 0.5),
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className={`h-full rounded-full ${
                       isExceeded
                         ? "bg-rose-500"
                         : isWarning
                         ? "bg-amber-400"
                         : "bg-gradient-to-r from-purple-500 to-cyan-400"
                     }`}
-                    style={{ width: `${Math.min(100, b.percentageUsed)}%` }}
                   />
                 </div>
 
@@ -279,7 +299,7 @@ export default function BudgetsPage() {
                     </strong>
                   </span>
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}

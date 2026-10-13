@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   ResponsiveContainer,
   BarChart,
@@ -62,7 +63,12 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
   };
 
   return (
-    <div className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08] relative">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08] relative"
+    >
       {/* Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
@@ -167,6 +173,6 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
           )}
         </ResponsiveContainer>
       </div>
-    </div>
+    </motion.div>
   );
 }

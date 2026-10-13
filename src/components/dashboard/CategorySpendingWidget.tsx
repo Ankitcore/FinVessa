@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { PieChart, ArrowRight } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { useCurrency } from "@/context/CurrencyContext";
 
 interface CategoryBreakdownItem {
@@ -24,7 +24,12 @@ export function CategorySpendingWidget({
   const { formatAmount } = useCurrency();
 
   return (
-    <div className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]"
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -66,7 +71,17 @@ export function CategorySpendingWidget({
             const colorClass = barColors[idx % barColors.length];
 
             return (
-              <div key={cat.name} className="space-y-1.5">
+              <motion.div
+                key={cat.name}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: idx * 0.06,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="space-y-1.5"
+              >
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-medium text-slate-200 flex items-center gap-2">
                     <span
@@ -85,21 +100,27 @@ export function CategorySpendingWidget({
                   </div>
                 </div>
 
-                {/* Progress bar */}
-                <div className="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
+                {/* Animated Progress bar */}
+                <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden relative">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.min(100, Math.max(2, percentage))}%` }}
+                    transition={{
+                      duration: 0.85,
+                      delay: 0.15 + idx * 0.08,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className={`h-full rounded-full relative overflow-hidden ${colorClass}`}
                     style={{
-                      width: `${Math.min(100, Math.max(2, percentage))}%`,
                       backgroundColor: cat.color || undefined,
                     }}
                   />
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

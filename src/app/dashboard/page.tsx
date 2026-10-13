@@ -187,6 +187,7 @@ export default function DashboardPage() {
           trendPercentage={12.4}
           gradient="purple"
           isBalanceCard={true}
+          index={0}
         />
         <SummaryCard
           title="Monthly Income"
@@ -194,6 +195,7 @@ export default function DashboardPage() {
           icon={ArrowUpRight}
           trendPercentage={8.2}
           gradient="emerald"
+          index={1}
         />
         <SummaryCard
           title="Monthly Expenses"
@@ -201,6 +203,7 @@ export default function DashboardPage() {
           icon={ArrowDownLeft}
           trendPercentage={-3.5}
           gradient="rose"
+          index={2}
         />
         <SummaryCard
           title="Net Cash Flow"
@@ -209,6 +212,7 @@ export default function DashboardPage() {
           trendLabel={`Savings rate: ${metrics.savingsRate}%`}
           trendPercentage={metrics.savingsRate}
           gradient="cyan"
+          index={3}
         />
       </div>
 

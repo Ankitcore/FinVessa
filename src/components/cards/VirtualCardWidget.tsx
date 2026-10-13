@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   Wifi,
   Eye,
@@ -70,12 +71,29 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
   };
 
   return (
-    <div className="relative group">
-      {/* Glow Backdrop */}
-      <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600/40 via-cyan-500/30 to-purple-800/40 blur-xl opacity-60 group-hover:opacity-90 transition duration-500" />
+    <motion.div
+      initial={{ opacity: 0, scale: 0.98, y: 12 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="relative group"
+    >
+      {/* Ambient Breathing Glow Backdrop */}
+      <motion.div
+        animate={{
+          opacity: [0.55, 0.85, 0.55],
+          scale: [0.99, 1.01, 0.99],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600/40 via-cyan-500/30 to-purple-800/40 blur-xl pointer-events-none"
+      />
 
       {/* Main Virtual Card Element */}
-      <div
+      <motion.div
+        whileHover={{ scale: 1.01, y: -2, transition: { duration: 0.25 } }}
         className={`relative w-full rounded-2xl p-6 sm:p-7 text-white shadow-2xl transition-all duration-300 overflow-hidden border ${
           isFrozen
             ? "bg-slate-900/90 border-cyan-500/30 saturate-50"
@@ -211,7 +229,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Card Quick Controls underneath */}
       <div className="flex items-center justify-between mt-3 px-2 text-xs">
@@ -233,6 +251,6 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
           <span>Limit: {formatCurrency(card?.spendingLimitCents || 500000)}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

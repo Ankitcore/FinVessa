@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
+import { motion } from "framer-motion";
 
 interface TransactionItem {
   id: string;
@@ -63,7 +64,12 @@ export function RecentTransactionsWidget({
   };
 
   return (
-    <div className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]"
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -88,14 +94,21 @@ export function RecentTransactionsWidget({
             No transactions recorded yet.
           </div>
         ) : (
-          transactions.map((tx) => {
+          transactions.map((tx, index) => {
             const Icon = getCategoryIcon(tx.category?.name);
             const isIncome = tx.type === "INCOME";
             const isTransfer = tx.type === "TRANSFER";
 
             return (
-              <div
+              <motion.div
                 key={tx.id}
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.35,
+                  delay: Math.min(0.15 + index * 0.04, 0.45),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="py-3 flex items-center justify-between gap-3 group hover:bg-white/[0.02] -mx-2 px-2 rounded-xl transition-colors"
               >
                 {/* Left: Icon & Description */}
@@ -140,11 +153,11 @@ export function RecentTransactionsWidget({
                     {formatDate(tx.date)}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

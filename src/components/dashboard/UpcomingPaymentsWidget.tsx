@@ -6,6 +6,7 @@ import { Calendar, ArrowRight, Check, AlertCircle, Loader2 } from "lucide-react"
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
 
 interface BillItem {
   id: string;
@@ -53,7 +54,12 @@ export function UpcomingPaymentsWidget({
   };
 
   return (
-    <div className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]"
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -78,13 +84,20 @@ export function UpcomingPaymentsWidget({
             No upcoming bills pending payment.
           </div>
         ) : (
-          bills.map((bill) => {
+          bills.map((bill, index) => {
             const isDueSoon = new Date(bill.dueDate) <= new Date();
             const isPaying = payingId === bill.id;
 
             return (
-              <div
+              <motion.div
                 key={bill.id}
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.35,
+                  delay: Math.min(0.2 + index * 0.05, 0.5),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] transition-all"
               >
                 <div className="flex items-center gap-3 min-w-0">
@@ -129,11 +142,11 @@ export function UpcomingPaymentsWidget({
                     <span>Pay</span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
