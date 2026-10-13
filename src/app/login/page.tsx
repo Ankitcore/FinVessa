@@ -66,7 +66,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-white flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-[#080c14] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute w-[500px] h-[500px] rounded-full bg-purple-700/10 blur-[130px] pointer-events-none -top-40 -left-40" />
       <div className="absolute w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none -bottom-40 -right-40" />
