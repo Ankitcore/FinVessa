@@ -13,6 +13,7 @@ import {
   Sparkles,
   X,
   ChevronRight,
+  ChevronDown,
   ArrowUp,
   CreditCard,
   Building2,
@@ -28,6 +29,11 @@ interface FooterProps {
 
 export function Footer({ variant = "full" }: FooterProps) {
   const [activeModal, setActiveModal] = useState<"privacy" | "terms" | "security" | null>(null);
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
+
+  const toggleMobileSection = (section: string) => {
+    setOpenMobileSection((prev) => (prev === section ? null : section));
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -96,8 +102,337 @@ export function Footer({ variant = "full" }: FooterProps) {
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 via-cyan-500/40 to-transparent" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-          {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10 pb-10 border-b border-white/[0.06]">
+          {/* ===================== MOBILE VIEW (Optimized Accordion & Quick Actions) ===================== */}
+          <div className="block md:hidden space-y-6 pb-6 border-b border-white/[0.06]">
+            {/* Mobile Brand & Trust Badges Header */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Link href="/dashboard" className="inline-flex items-center gap-2 group">
+                  <div className="w-8 h-8 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0">
+                    <Image
+                      src="/finvessa-icon.png"
+                      alt="FINVESSA"
+                      width={32}
+                      height={32}
+                      className="w-full h-full object-cover rounded-[9px]"
+                    />
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-base tracking-tight text-white">
+                      FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                    </span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold">
+                      IN
+                    </span>
+                  </div>
+                </Link>
+
+                {/* Mobile Live Status Badge */}
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-400 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>99.99% Uptime</span>
+                </div>
+              </div>
+
+              <p className="text-cyan-400 font-medium text-xs tracking-wide">
+                See your money. Shape your future
+              </p>
+
+              <p className="text-slate-400 text-xs leading-relaxed">
+                India&apos;s unified finance dashboard across HDFC, SBI, ICICI, RuPay cards, and investment portfolios.
+              </p>
+
+              {/* Mobile Security & Trust Badges */}
+              <div className="grid grid-cols-3 gap-2 pt-1">
+                <div className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
+                  <ShieldCheck className="w-3 h-3 text-cyan-400 shrink-0" />
+                  <span className="truncate">256-Bit SSL</span>
+                </div>
+                <div className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
+                  <Lock className="w-3 h-3 text-purple-400 shrink-0" />
+                  <span className="truncate">Atomic Ledger</span>
+                </div>
+                <div className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                  <span className="truncate">RBI Compliant</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Accordion Navigation Drawers */}
+            <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+              {/* Accordion 1: Platform */}
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("platform")}
+                  className="w-full px-4 py-3 flex items-center justify-between text-left text-xs font-semibold text-white focus:outline-none"
+                  aria-expanded={openMobileSection === "platform"}
+                >
+                  <span className="flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-purple-400" />
+                    <span>Platform</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-slate-400 font-mono">
+                      7
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      openMobileSection === "platform" ? "rotate-180 text-cyan-400" : ""
+                    }`}
+                  />
+                </button>
+                {openMobileSection === "platform" && (
+                  <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
+                    <ul className="space-y-2.5 text-xs text-slate-400">
+                      <li>
+                        <Link href="/dashboard" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Dashboard Overview
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/transactions" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Transactions Ledger
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/accounts" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Bank Accounts
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/analytics" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Cash Flow & Trends
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/budgets" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Smart Monthly Budgets
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/bills" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Bills & Upcoming Dues
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/cards" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Virtual RuPay & Visa Cards
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 2: Ecosystem */}
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("ecosystem")}
+                  className="w-full px-4 py-3 flex items-center justify-between text-left text-xs font-semibold text-white focus:outline-none"
+                  aria-expanded={openMobileSection === "ecosystem"}
+                >
+                  <span className="flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-cyan-400" />
+                    <span>Ecosystem</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-slate-400 font-mono">
+                      6
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      openMobileSection === "ecosystem" ? "rotate-180 text-cyan-400" : ""
+                    }`}
+                  />
+                </button>
+                {openMobileSection === "ecosystem" && (
+                  <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
+                    <ul className="space-y-2.5 text-xs text-slate-400">
+                      <li className="flex items-center justify-between py-1">
+                        <span>HDFC Bank Salary</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                      </li>
+                      <li className="flex items-center justify-between py-1">
+                        <span>SBI Wealth Savings</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                      </li>
+                      <li className="flex items-center justify-between py-1">
+                        <span>ICICI Sapphiro RuPay</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Active</span>
+                      </li>
+                      <li className="flex items-center justify-between py-1">
+                        <span>Zerodha & Groww</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Synced</span>
+                      </li>
+                      <li>
+                        <Link href="/accounts" className="flex items-center justify-between py-1 hover:text-cyan-400 transition-colors">
+                          <span>Atomic Fund Transfer</span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/cards" className="flex items-center justify-between py-1 hover:text-cyan-400 transition-colors">
+                          <span>RuPay Virtual Card Shield</span>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 3: Privacy & Controls */}
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("privacy")}
+                  className="w-full px-4 py-3 flex items-center justify-between text-left text-xs font-semibold text-white focus:outline-none"
+                  aria-expanded={openMobileSection === "privacy"}
+                >
+                  <span className="flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-amber-400" />
+                    <span>Privacy & Controls</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-slate-400 font-mono">
+                      5
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      openMobileSection === "privacy" ? "rotate-180 text-cyan-400" : ""
+                    }`}
+                  />
+                </button>
+                {openMobileSection === "privacy" && (
+                  <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
+                    <ul className="space-y-2.5 text-xs text-slate-400">
+                      <li>
+                        <Link href="/settings" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Balance Privacy Mask
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/settings" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Profile & Avatar Studio
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/settings" className="block py-1 hover:text-cyan-400 transition-colors">
+                          JSON Data Backup & Export
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/settings" className="block py-1 hover:text-cyan-400 transition-colors">
+                          Multi-Currency (INR, USD, EUR)
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => setActiveModal("security")}
+                          className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
+                        >
+                          Security Architecture
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 4: Governance */}
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("governance")}
+                  className="w-full px-4 py-3 flex items-center justify-between text-left text-xs font-semibold text-white focus:outline-none"
+                  aria-expanded={openMobileSection === "governance"}
+                >
+                  <span className="flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-emerald-400" />
+                    <span>Governance & Legal</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-slate-400 font-mono">
+                      5
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      openMobileSection === "governance" ? "rotate-180 text-cyan-400" : ""
+                    }`}
+                  />
+                </button>
+                {openMobileSection === "governance" && (
+                  <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
+                    <ul className="space-y-2.5 text-xs text-slate-400">
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => setActiveModal("privacy")}
+                          className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
+                        >
+                          Privacy Policy
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => setActiveModal("terms")}
+                          className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
+                        >
+                          Terms of Service
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => setActiveModal("security")}
+                          className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
+                        >
+                          Data Protection Standards
+                        </button>
+                      </li>
+                      <li className="pt-1 flex items-center justify-between py-1 border-t border-white/[0.04]">
+                        <span>Currency</span>
+                        <span className="text-slate-300 font-semibold">INR (₹)</span>
+                      </li>
+                      <li className="flex items-center justify-between py-1">
+                        <span>Financial Year</span>
+                        <span className="text-slate-300 font-semibold">FY 2026-27</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Quick 1-Tap Legal Pills on Mobile */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setActiveModal("privacy")}
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+              >
+                Privacy Policy
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveModal("terms")}
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+              >
+                Terms of Service
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveModal("security")}
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+              >
+                Security Specs
+              </button>
+            </div>
+          </div>
+
+          {/* ===================== DESKTOP VIEW (Full 6-Column Grid) ===================== */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10 pb-10 border-b border-white/[0.06]">
             {/* Left Column: Brand & Trust Badges (Spans 2 cols on LG) */}
             <div className="lg:col-span-2 space-y-4">
               <Link href="/dashboard" className="inline-flex items-center gap-2.5 group">
