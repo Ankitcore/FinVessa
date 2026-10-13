@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="public/finvessa-banner.png" alt="FINVESSA - See your money. Shape your future" width="100%" style="max-width: 780px; border-radius: 16px; margin-bottom: 12px;" />
+  <img src="public/finvessa-logo.svg" alt="FINVESSA - See your money. Shape your future" width="100%" style="max-width: 780px; border-radius: 16px; margin-bottom: 12px;" />
 
   # 
   ### *See your money. Shape your future*
