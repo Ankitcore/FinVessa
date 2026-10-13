@@ -24,7 +24,7 @@ export default function SettingsPage() {
   const { currency, setCurrency, isBalanceHidden, toggleBalanceVisibility } = useCurrency();
   const { toast } = useToast();
 
-  const [name, setName] = useState(user?.name || "Aarav Sharma");
+  const [name, setName] = useState(user?.name || "Spershika Sharam");
   const [selectedCurrency, setSelectedCurrency] = useState(currency || "INR");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -164,7 +164,7 @@ export default function SettingsPage() {
                 <input
                   type="email"
                   disabled
-                  value={user?.email || "aarav@finvessa.in"}
+                  value={user?.email || "spershika@finvessa.in"}
                   className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-slate-400 outline-none cursor-not-allowed"
                 />
               </div>

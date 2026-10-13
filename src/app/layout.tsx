@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     "budgeting",
     "cash flow",
     "Bharat wealth management",
-    "Zyrovia",
+    "FinVessa",
   ],
-  authors: [{ name: "FINVESSA (Zyrovia)" }],
+  authors: [{ name: "FinVessa" }],
   icons: {
     icon: "/finvessa-icon.png",
     shortcut: "/finvessa-app-icon.png",

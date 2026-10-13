@@ -20,8 +20,8 @@ async function main() {
   const passwordHash = await bcrypt.hash("Demo123!*", 10);
   const user = await prisma.user.create({
     data: {
-      name: "Aarav Sharma",
-      email: "aarav@novafinance.in",
+      name: "Spershika Sharam",
+      email: "spershika@finvessa.in",
       passwordHash,
       currency: "INR",
       theme: "dark",
@@ -29,11 +29,11 @@ async function main() {
     },
   });
 
-  // Also create demo@novafinance.com so old demo link still works seamlessly
+  // Also create aliases so existing links continue to work seamlessly
   await prisma.user.create({
     data: {
-      name: "Aarav Sharma",
-      email: "demo@novafinance.com",
+      name: "Spershika Sharam",
+      email: "demo@finvessa.in",
       passwordHash,
       currency: "INR",
       theme: "dark",
@@ -122,7 +122,7 @@ async function main() {
     data: {
       userId: user.id,
       accountId: iciciCreditCard.id,
-      cardholderName: "AARAV SHARMA",
+      cardholderName: "SPERSHIKA SHARAM",
       cardNumberMasked: "•••• •••• •••• 8291",
       fullNumber: "6521 8920 1840 8291",
       cardExpiry: "08/29",
@@ -138,7 +138,7 @@ async function main() {
     data: {
       userId: user.id,
       accountId: hdfcAccount.id,
-      cardholderName: "AARAV SHARMA",
+      cardholderName: "SPERSHIKA SHARAM",
       cardNumberMasked: "•••• •••• •••• 4109",
       fullNumber: "4242 8100 8922 4109",
       cardExpiry: "12/28",
@@ -433,7 +433,7 @@ async function main() {
     },
   });
 
-  console.log("Indian database seeded successfully for Aarav Sharma!");
+  console.log("Indian database seeded successfully for Spershika Sharam!");
 }
 
 main()

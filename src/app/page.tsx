@@ -149,7 +149,7 @@ export default function HomePage() {
             </div>
             <span className="font-bold text-slate-200">FINVESSA</span>
           </div>
-          <p className="text-slate-400">© 2026 Zyrovia. All rights reserved to Ankit Kumar.</p>
+          <p className="text-slate-400">© 2026 FinVessa. All rights reserved to Ankit Kumar.</p>
           <div className="flex items-center gap-4 text-slate-400">
             <Link href="/dashboard" className="hover:text-slate-200 transition-colors">
               Dashboard

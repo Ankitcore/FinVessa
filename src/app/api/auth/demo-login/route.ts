@@ -6,14 +6,19 @@ export async function POST() {
   try {
     const demoUser =
       (await prisma.user.findFirst({
+        where: { email: "spershika@finvessa.in" },
+      })) ||
+      (await prisma.user.findFirst({
         where: {
           OR: [
+            { email: "demo@finvessa.in" },
             { email: "aarav@finvessa.in" },
             { email: "aarav@novafinance.in" },
             { email: "demo@novafinance.com" },
           ],
         },
-      })) || (await prisma.user.findFirst());
+      })) ||
+      (await prisma.user.findFirst());
 
     if (!demoUser) {
       return NextResponse.json(

@@ -33,7 +33,7 @@ export default function CardsPage() {
   // Modals
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isLimitOpen, setIsLimitOpen] = useState(false);
-  const [cardholderName, setCardholderName] = useState("Aarav Sharma");
+  const [cardholderName, setCardholderName] = useState("Spershika Sharam");
   const [accountId, setAccountId] = useState("");
   const [cardType, setCardType] = useState("RUPAY");
   const [cardStyle, setCardStyle] = useState("PURPLE_CYAN");

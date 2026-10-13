@@ -58,7 +58,7 @@ export function AppLayout({
               <span className="text-slate-400">•</span>
               <span className="text-cyan-400 font-medium">See your money. Shape your future</span>
             </div>
-            <p className="text-slate-400 font-medium">© 2026 Zyrovia. All rights reserved to Ankit Kumar.</p>
+            <p className="text-slate-400 font-medium">© 2026 FinVessa. All rights reserved to Ankit Kumar.</p>
           </div>
         </footer>
       </div>

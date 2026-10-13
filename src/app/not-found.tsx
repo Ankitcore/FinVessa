@@ -47,7 +47,7 @@ export default function NotFound() {
       </div>
 
       <p className="mt-8 text-xs text-slate-400 flex items-center gap-1.5 z-10">
-        <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> FINVESSA Secure Core • © 2026 Zyrovia. All rights reserved to Ankit Kumar.
+        <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> FINVESSA Secure Core • © 2026 FinVessa. All rights reserved to Ankit Kumar.
       </p>
     </div>
   );

@@ -93,7 +93,7 @@ export default function SignupPage() {
               <input
                 type="text"
                 required
-                placeholder="Aarav Sharma"
+                placeholder="Spershika Sharam"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
@@ -110,7 +110,7 @@ export default function SignupPage() {
               <input
                 type="email"
                 required
-                placeholder="aarav@finvessa.in"
+                placeholder="spershika@finvessa.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
@@ -170,7 +170,7 @@ export default function SignupPage() {
       </div>
 
       <p className="mt-6 text-center text-xs text-slate-400 relative z-10">
-        © 2026 Zyrovia. All rights reserved to Ankit Kumar.
+        © 2026 FinVessa. All rights reserved to Ankit Kumar.
       </p>
     </div>
   );
