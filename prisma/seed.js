@@ -20,7 +20,7 @@ async function main() {
   const passwordHash = await bcrypt.hash("Demo123!*", 10);
   const user = await prisma.user.create({
     data: {
-      name: "Spershika Sharam",
+      name: "Spershika Sharma",
       email: "spershika@finvessa.in",
       passwordHash,
       currency: "INR",
@@ -32,7 +32,7 @@ async function main() {
   // Also create aliases so existing links continue to work seamlessly
   await prisma.user.create({
     data: {
-      name: "Spershika Sharam",
+      name: "Spershika Sharma",
       email: "demo@finvessa.in",
       passwordHash,
       currency: "INR",
@@ -122,7 +122,7 @@ async function main() {
     data: {
       userId: user.id,
       accountId: iciciCreditCard.id,
-      cardholderName: "SPERSHIKA SHARAM",
+      cardholderName: "SPERSHIKA SHARMA",
       cardNumberMasked: "•••• •••• •••• 8291",
       fullNumber: "6521 8920 1840 8291",
       cardExpiry: "08/29",
@@ -138,7 +138,7 @@ async function main() {
     data: {
       userId: user.id,
       accountId: hdfcAccount.id,
-      cardholderName: "SPERSHIKA SHARAM",
+      cardholderName: "SPERSHIKA SHARMA",
       cardNumberMasked: "•••• •••• •••• 4109",
       fullNumber: "4242 8100 8922 4109",
       cardExpiry: "12/28",
@@ -433,7 +433,7 @@ async function main() {
     },
   });
 
-  console.log("Indian database seeded successfully for Spershika Sharam!");
+  console.log("Indian database seeded successfully for Spershika Sharma!");
 }
 
 main()

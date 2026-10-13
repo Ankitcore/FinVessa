@@ -113,7 +113,7 @@ export default function DashboardPage() {
             See your money. <span className="text-gradient-purple-cyan">Shape your future</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Welcome back, <span className="text-slate-200 font-semibold">{user?.name || "Spershika Sharam"}</span>. Unified overview of your wealth, liquid cash flows, and investments.
+            Welcome back, <span className="text-slate-200 font-semibold">{user?.name || "Spershika Sharma"}</span>. Unified overview of your wealth, liquid cash flows, and investments.
           </p>
         </div>
 

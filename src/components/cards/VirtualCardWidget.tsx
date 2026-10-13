@@ -45,7 +45,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
       : card.cardNumberMasked
     : "•••• •••• •••• 8291";
 
-  const cardholder = card?.cardholderName || "SPERSHIKA SHARAM";
+  const cardholder = card?.cardholderName || "SPERSHIKA SHARMA";
   const expiry = card?.cardExpiry || "08/29";
   const cvv = showCvv ? card?.cardCvv || "739" : "•••";
 

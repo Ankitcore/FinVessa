@@ -240,11 +240,19 @@ export function Header({
           {/* User profile avatar */}
           <Link
             href="/settings"
-            className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 p-[1.5px] transition-transform hover:scale-105"
+            className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 p-[1.5px] transition-transform hover:scale-105 shrink-0"
             title="User Profile & Settings"
           >
-            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-xs font-bold text-white">
-              {user?.name ? user.name.charAt(0).toUpperCase() : "A"}
+            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-xs font-bold text-white overflow-hidden">
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name || "Spershika Sharma"}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              ) : (
+                user?.name ? user.name.charAt(0).toUpperCase() : "S"
+              )}
             </div>
           </Link>
         </div>

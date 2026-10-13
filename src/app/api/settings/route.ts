@@ -5,6 +5,7 @@ import { z } from "zod";
 
 const updateSettingsSchema = z.object({
   name: z.string().min(2).optional(),
+  avatar: z.string().nullable().optional(),
   currency: z.string().optional(),
   theme: z.string().optional(),
   balanceHidden: z.boolean().optional(),
@@ -25,6 +26,7 @@ export async function GET(req: NextRequest) {
         id: true,
         name: true,
         email: true,
+        avatar: true,
         currency: true,
         theme: true,
         balanceHidden: true,
@@ -68,6 +70,7 @@ export async function PUT(req: NextRequest) {
     const updateData: Record<string, unknown> = {};
 
     if (data.name) updateData.name = data.name.trim();
+    if (data.avatar !== undefined) updateData.avatar = data.avatar;
     if (data.currency) updateData.currency = data.currency;
     if (data.theme) updateData.theme = data.theme;
     if (data.balanceHidden !== undefined) updateData.balanceHidden = data.balanceHidden;
@@ -97,6 +100,7 @@ export async function PUT(req: NextRequest) {
         id: true,
         name: true,
         email: true,
+        avatar: true,
         currency: true,
         theme: true,
         balanceHidden: true,

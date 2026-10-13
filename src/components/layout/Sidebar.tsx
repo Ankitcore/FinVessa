@@ -204,15 +204,23 @@ export function Sidebar() {
           <Link
             href="/settings"
             className="flex items-center gap-2.5 min-w-0 group"
-            title={user?.name || "Spershika Sharam"}
+            title={user?.name || "Spershika Sharma"}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20 shrink-0">
-              {user?.name ? user.name.charAt(0).toUpperCase() : "S"}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20 shrink-0 overflow-hidden">
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name || "Spershika Sharma"}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              ) : (
+                user?.name ? user.name.charAt(0).toUpperCase() : "S"
+              )}
             </div>
             {!isCollapsed && (
               <div className="min-w-0 overflow-hidden">
                 <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-purple-300 transition-colors">
-                  {user?.name || "Spershika Sharam"}
+                  {user?.name || "Spershika Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-300 truncate">
                   {user?.email || "spershika@finvessa.in"}

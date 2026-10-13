@@ -52,7 +52,7 @@ export default function LoginPage() {
       const res = await fetch("/api/auth/demo-login", { method: "POST" });
       const data = await res.json();
       if (res.ok) {
-        toast.success("Welcome, Spershika Sharam! Demo session initialized.");
+        toast.success("Welcome, Spershika Sharma! Demo session initialized.");
         await refreshUser();
         router.push("/dashboard");
       } else {
@@ -104,7 +104,7 @@ export default function LoginPage() {
             ) : (
               <Zap className="w-4 h-4 text-cyan-400" />
             )}
-            <span>1-Click Demo Login (Spershika Sharam)</span>
+            <span>1-Click Demo Login (Spershika Sharma)</span>
           </button>
           <div className="flex items-center gap-3 my-4">
             <div className="flex-1 h-[1px] bg-white/[0.08]" />

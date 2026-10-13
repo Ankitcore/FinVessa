@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   User,
   Shield,
@@ -13,18 +13,46 @@ import {
   CheckCircle2,
   Loader2,
   Moon,
+  Camera,
+  Upload,
+  Trash2,
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
 
+const PRESET_AVATARS = [
+  {
+    label: "Cyber Violet",
+    url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%238b5cf6'/><stop offset='100%25' stop-color='%2306b6d4'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g1)'/><circle cx='50' cy='38' r='18' fill='%23ffffff' fill-opacity='0.9'/><path d='M22 84 C26 60 74 60 78 84 Z' fill='%23ffffff' fill-opacity='0.9'/></svg>",
+  },
+  {
+    label: "Neon Rose",
+    url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23ec4899'/><stop offset='100%25' stop-color='%238b5cf6'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g2)'/><circle cx='50' cy='38' r='18' fill='%23ffffff' fill-opacity='0.9'/><path d='M22 84 C26 60 74 60 78 84 Z' fill='%23ffffff' fill-opacity='0.9'/></svg>",
+  },
+  {
+    label: "Emerald Teal",
+    url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2310b981'/><stop offset='100%25' stop-color='%2306b6d4'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g3)'/><circle cx='50' cy='38' r='18' fill='%23ffffff' fill-opacity='0.9'/><path d='M22 84 C26 60 74 60 78 84 Z' fill='%23ffffff' fill-opacity='0.9'/></svg>",
+  },
+  {
+    label: "Sunset Amber",
+    url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f59e0b'/><stop offset='100%25' stop-color='%23ef4444'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g4)'/><circle cx='50' cy='38' r='18' fill='%23ffffff' fill-opacity='0.9'/><path d='M22 84 C26 60 74 60 78 84 Z' fill='%23ffffff' fill-opacity='0.9'/></svg>",
+  },
+  {
+    label: "Spershika Monogram",
+    url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='100%25' stop-color='%23a855f7'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g5)'/><text x='50' y='58' font-family='system-ui,sans-serif' font-size='34' font-weight='900' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>SS</text></svg>",
+  },
+];
+
 export default function SettingsPage() {
   const { user, logout, refreshUser } = useAuth();
   const { currency, setCurrency, isBalanceHidden, toggleBalanceVisibility } = useCurrency();
   const { toast } = useToast();
 
-  const [name, setName] = useState(user?.name || "Spershika Sharam");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [name, setName] = useState(user?.name || "Spershika Sharma");
+  const [avatar, setAvatar] = useState(user?.avatar || "");
   const [selectedCurrency, setSelectedCurrency] = useState(currency || "INR");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -35,7 +63,58 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (user?.name) setName(user.name);
+    if (user?.avatar !== undefined) setAvatar(user.avatar || "");
   }, [user]);
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select a valid image file");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image file should be under 5MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const maxSize = 256;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxSize) {
+            height = Math.round((height * maxSize) / width);
+            width = maxSize;
+          }
+        } else {
+          if (height > maxSize) {
+            width = Math.round((width * maxSize) / height);
+            height = maxSize;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+          setAvatar(dataUrl);
+          toast.info("Image loaded! Click 'Save Profile Preferences' below to save changes.");
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +125,7 @@ export default function SettingsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
+          avatar: avatar || null,
           currency: selectedCurrency,
         }),
       });
@@ -142,7 +222,111 @@ export default function SettingsPage() {
             Manage your display identity and default financial currency
           </p>
 
-          <form onSubmit={handleUpdateProfile} className="space-y-4">
+          <form onSubmit={handleUpdateProfile} className="space-y-5">
+            {/* Avatar Section */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+              {/* Avatar Preview */}
+              <div className="relative group shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-[2px] shadow-glow">
+                  <div className="w-full h-full rounded-[14px] bg-[#0b101c] flex items-center justify-center overflow-hidden">
+                    {avatar ? (
+                      <img
+                        src={avatar}
+                        alt={name || "Spershika Sharma"}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-2xl font-black text-white">
+                        {name ? name.charAt(0).toUpperCase() : "S"}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-lg bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+                  title="Upload photo from device"
+                  aria-label="Upload photo"
+                >
+                  <Camera className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Upload Controls & Presets */}
+              <div className="flex-1 space-y-3 w-full text-center sm:text-left">
+                <div>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <span className="text-sm font-semibold text-white">Profile Photo</span>
+                    {avatar && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                        Photo Configured
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Upload your picture (JPG, PNG or WebP) or choose a designed preset.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleImageFileChange}
+                    accept="image/*"
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-xs font-semibold text-purple-200 transition-colors"
+                  >
+                    <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                    Upload Photo
+                  </button>
+
+                  {avatar && (
+                    <button
+                      type="button"
+                      onClick={() => setAvatar("")}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-xs font-medium text-rose-300 transition-colors"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                {/* Presets */}
+                <div className="pt-1">
+                  <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">
+                    Or select an avatar style:
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    {PRESET_AVATARS.map((preset, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setAvatar(preset.url)}
+                        title={preset.label}
+                        className={`w-9 h-9 rounded-xl overflow-hidden border transition-all ${
+                          avatar === preset.url
+                            ? "border-cyan-400 ring-2 ring-cyan-400/40 scale-105"
+                            : "border-white/10 hover:border-white/30 opacity-75 hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={preset.url}
+                          alt={preset.label}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">

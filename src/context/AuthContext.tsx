@@ -10,6 +10,7 @@ export interface AuthUser {
   currency: string;
   theme?: string;
   balanceHidden?: boolean;
+  avatar?: string | null;
 }
 
 interface AuthContextType {

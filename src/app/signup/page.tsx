@@ -93,7 +93,7 @@ export default function SignupPage() {
               <input
                 type="text"
                 required
-                placeholder="Spershika Sharam"
+                placeholder="Spershika Sharma"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"

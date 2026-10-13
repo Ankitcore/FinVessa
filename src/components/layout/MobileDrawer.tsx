@@ -195,12 +195,20 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               onClick={onClose}
               className="flex items-center gap-2.5 min-w-0 flex-1 py-1"
             >
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-1 ring-white/20">
-                {user?.name ? user.name.charAt(0).toUpperCase() : "S"}
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-1 ring-white/20 overflow-hidden">
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name || "Spershika Sharma"}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                ) : (
+                  user?.name ? user.name.charAt(0).toUpperCase() : "S"
+                )}
               </div>
               <div className="min-w-0 pr-2">
                 <p className="text-xs font-semibold text-slate-200 truncate">
-                  {user?.name || "Spershika Sharam"}
+                  {user?.name || "Spershika Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-400 truncate">
                   {user?.email || "spershika@finvessa.in"}
