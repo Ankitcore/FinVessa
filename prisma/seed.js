@@ -282,7 +282,76 @@ async function main() {
     },
   ];
 
-  for (const item of sampleTransactions) {
+  // Generate multi-month historical transactions so Cash Flow charts look vibrant and realistic
+  const historicalTransactions = [];
+  for (let m = 1; m <= 5; m++) {
+    const monthDate = (day) => {
+      return new Date(now.getFullYear(), now.getMonth() - m, day, 12, 0, 0);
+    };
+
+    historicalTransactions.push(
+      {
+        desc: "TCS Engineering Monthly Salary",
+        type: "INCOME",
+        amount: 18500000,
+        date: monthDate(1),
+        acc: hdfcAccount.id,
+        cat: categories["Salary & Corporate"].id,
+      },
+      {
+        desc: "Zerodha Portfolio Dividends & Gains",
+        type: "INCOME",
+        amount: 3200000 + m * 250000,
+        date: monthDate(16),
+        acc: zerodhaAccount.id,
+        cat: categories["Mutual Funds & Dividends"].id,
+      },
+      {
+        desc: "Prestige Whitefield Apartment Rent",
+        type: "EXPENSE",
+        amount: 3800000,
+        date: monthDate(4),
+        acc: hdfcAccount.id,
+        cat: categories["Rent & Society Maintenance"].id,
+      },
+      {
+        desc: "Blinkit & Nature's Basket Groceries",
+        type: "EXPENSE",
+        amount: 1450000 + m * 80000,
+        date: monthDate(8),
+        acc: hdfcAccount.id,
+        cat: categories["Groceries & Blinkit"].id,
+      },
+      {
+        desc: "Electricity & Fiber Utilities Bill",
+        type: "EXPENSE",
+        amount: 485000 + m * 20000,
+        date: monthDate(12),
+        acc: iciciCreditCard.id,
+        cat: categories["Electricity & Utilities"].id,
+      },
+      {
+        desc: "Swiggy & Zomato Dining Experiences",
+        type: "EXPENSE",
+        amount: 920000 + (m % 2) * 110000,
+        date: monthDate(19),
+        acc: iciciCreditCard.id,
+        cat: categories["Dining & Swiggy/Zomato"].id,
+      },
+      {
+        desc: "Uber & Airport Transit Commutes",
+        type: "EXPENSE",
+        amount: 285000,
+        date: monthDate(22),
+        acc: iciciCreditCard.id,
+        cat: categories["Cabs & Transit (Uber/Ola)"].id,
+      }
+    );
+  }
+
+  const allSeedTransactions = [...sampleTransactions, ...historicalTransactions];
+
+  for (const item of allSeedTransactions) {
     await prisma.transaction.create({
       data: {
         userId: user.id,

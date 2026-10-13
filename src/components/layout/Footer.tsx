@@ -22,7 +22,11 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-export function Footer() {
+interface FooterProps {
+  variant?: "full" | "compact";
+}
+
+export function Footer({ variant = "full" }: FooterProps) {
   const [activeModal, setActiveModal] = useState<"privacy" | "terms" | "security" | null>(null);
 
   const scrollToTop = () => {
@@ -31,11 +35,67 @@ export function Footer() {
 
   return (
     <>
-      <footer className="w-full bg-[#060a12]/95 border-t border-white/[0.08] text-xs text-slate-400 mt-auto relative overflow-hidden">
-        {/* Subtle top glow line */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 via-cyan-500/40 to-transparent" />
+      {variant === "compact" ? (
+        <footer className="w-full bg-[#060a12]/90 backdrop-blur-md border-t border-white/[0.08] text-xs text-slate-400 mt-auto relative">
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 via-cyan-500/30 to-transparent" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
+            {/* Left: Live status & Version */}
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-400 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Operational (99.99%)</span>
+              </div>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span className="text-[11px] text-slate-500 hidden sm:inline">v2.4.0 Production</span>
+            </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            {/* Center: Copyright */}
+            <div className="text-center">
+              <p className="font-semibold text-slate-300 text-xs">
+                © 2026 FinVessa. All rights reserved to Ankit Kumar.
+              </p>
+            </div>
+
+            {/* Right: Quick Legal Links & Scroll to top */}
+            <div className="flex items-center gap-3 text-xs">
+              <button
+                onClick={() => setActiveModal("privacy")}
+                className="hover:text-cyan-400 transition-colors text-slate-400"
+              >
+                Privacy
+              </button>
+              <span className="text-slate-600">•</span>
+              <button
+                onClick={() => setActiveModal("terms")}
+                className="hover:text-cyan-400 transition-colors text-slate-400"
+              >
+                Terms
+              </button>
+              <span className="text-slate-600">•</span>
+              <button
+                onClick={() => setActiveModal("security")}
+                className="hover:text-cyan-400 transition-colors text-slate-400"
+              >
+                Security
+              </button>
+              <span className="text-slate-600">•</span>
+              <button
+                onClick={scrollToTop}
+                className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                title="Scroll to top"
+                aria-label="Scroll to top"
+              >
+                <ArrowUp className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </footer>
+      ) : (
+        <footer className="w-full bg-[#060a12]/95 border-t border-white/[0.08] text-xs text-slate-400 mt-auto relative overflow-hidden">
+          {/* Subtle top glow line */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 via-cyan-500/40 to-transparent" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
           {/* Main Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10 pb-10 border-b border-white/[0.06]">
             {/* Left Column: Brand & Trust Badges (Spans 2 cols on LG) */}
@@ -281,6 +341,7 @@ export function Footer() {
           </div>
         </div>
       </footer>
+      )}
 
       {/* Interactive Compliance & Legal Modal */}
       {activeModal && (

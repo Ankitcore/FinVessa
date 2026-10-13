@@ -106,16 +106,21 @@ export async function GET(req: NextRequest) {
     }
     const chartData = Object.values(monthlyDataMap);
 
-    // Category spending breakdown (for donut / breakdown list)
-    const categoryMap: Record<string, { name: string; color: string; amountCents: number }> = {};
+    // Category spending breakdown (for donut / breakdown list) within active date range
+    const categoryMap: Record<string, { name: string; color: string; amountCents: number; amount: number }> = {};
     for (const tx of allTransactions) {
       if (tx.type === "EXPENSE" && tx.status === "COMPLETED") {
+        const txDate = new Date(tx.date);
+        if (startDate && txDate < startDate) continue;
+        if (endDate && txDate > endDate) continue;
+
         const catName = tx.category?.name || "General";
         const catColor = tx.category?.color || "#8B5CF6";
         if (!categoryMap[catName]) {
-          categoryMap[catName] = { name: catName, color: catColor, amountCents: 0 };
+          categoryMap[catName] = { name: catName, color: catColor, amountCents: 0, amount: 0 };
         }
         categoryMap[catName].amountCents += tx.amountCents;
+        categoryMap[catName].amount += tx.amountCents;
       }
     }
 

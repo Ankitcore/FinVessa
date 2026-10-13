@@ -55,10 +55,12 @@ export function CategorySpendingWidget({
           </div>
         ) : (
           categories.map((cat, idx) => {
+            const rawAmount = cat.amountCents ?? (cat as { amount?: number }).amount ?? 0;
             const percentage =
               totalExpenseCents > 0
-                ? Math.round((cat.amountCents / totalExpenseCents) * 100)
+                ? Math.min(100, Math.round((rawAmount / totalExpenseCents) * 100))
                 : 0;
+            const safePercentage = isNaN(percentage) ? 0 : Math.max(0, percentage);
 
             const barColors = [
               "bg-purple-500",
@@ -92,10 +94,10 @@ export function CategorySpendingWidget({
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-white">
-                      {formatAmount(cat.amountCents)}
+                      {formatAmount(rawAmount)}
                     </span>
                     <span className="text-slate-400 text-[11px] w-8 text-right">
-                      {percentage}%
+                      {safePercentage}%
                     </span>
                   </div>
                 </div>
@@ -104,7 +106,7 @@ export function CategorySpendingWidget({
                 <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden relative">
                   <motion.div
                     initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, Math.max(2, percentage))}%` }}
+                    animate={{ width: `${Math.min(100, Math.max(2, safePercentage))}%` }}
                     transition={{
                       duration: 0.85,
                       delay: 0.15 + idx * 0.08,

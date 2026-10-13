@@ -52,7 +52,7 @@ export function AppLayout({
         </main>
 
         {/* Global Application Footer */}
-        <Footer />
+        <Footer variant="compact" />
       </div>
 
       {/* Global Quick Action Modal */}
