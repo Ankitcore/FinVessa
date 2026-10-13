@@ -15,6 +15,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { Footer } from "@/components/layout/Footer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -134,35 +135,8 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full border-t border-white/[0.07] py-8 px-6 sm:px-12 text-center text-xs text-slate-400">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-lg overflow-hidden bg-[#090d16] border border-white/10 shrink-0">
-              <Image
-                src="/finvessa-icon.png"
-                alt="FINVESSA"
-                width={24}
-                height={24}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <span className="font-bold text-slate-200">FINVESSA</span>
-          </div>
-          <p className="text-slate-400">© 2026 FinVessa. All rights reserved to Ankit Kumar.</p>
-          <div className="flex items-center gap-4 text-slate-400">
-            <Link href="/dashboard" className="hover:text-slate-200 transition-colors">
-              Dashboard
-            </Link>
-            <Link href="/login" className="hover:text-slate-200 transition-colors">
-              Sign In
-            </Link>
-            <Link href="/settings" className="hover:text-slate-200 transition-colors">
-              Settings
-            </Link>
-          </div>
-        </div>
-      </footer>
+      {/* Global Comprehensive Footer */}
+      <Footer />
     </div>
   );
 }

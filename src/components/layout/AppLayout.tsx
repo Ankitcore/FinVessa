@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { MobileDrawer } from "./MobileDrawer";
 import { Header } from "./Header";
+import { Footer } from "./Footer";
 import { QuickActionsModal } from "../modals/QuickActionsModal";
 
 import { useSidebar } from "@/context/SidebarContext";
@@ -51,16 +52,7 @@ export function AppLayout({
         </main>
 
         {/* Global Application Footer */}
-        <footer className="w-full border-t border-white/[0.05] py-4 px-4 sm:px-6 lg:px-8 mt-auto">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-300 tracking-wider">FINVESSA</span>
-              <span className="text-slate-400">•</span>
-              <span className="text-cyan-400 font-medium">See your money. Shape your future</span>
-            </div>
-            <p className="text-slate-400 font-medium">© 2026 FinVessa. All rights reserved to Ankit Kumar.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
 
       {/* Global Quick Action Modal */}
