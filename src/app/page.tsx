@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -20,23 +20,43 @@ import { Footer } from "@/components/layout/Footer";
 export default function HomePage() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && user) {
-      router.push("/dashboard");
-    }
-  }, [user, isLoading, router]);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-white selection:bg-purple-500 selection:text-white flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen bg-[#080c14] text-white selection:bg-purple-500 selection:text-white flex flex-col justify-between relative overflow-x-clip">
       {/* Background radial gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-purple-600/20 via-cyan-500/10 to-transparent blur-3xl pointer-events-none" />
 
-      {/* Top Navbar */}
-      <header className="sticky top-0 z-30 w-full bg-[#080c14]/70 backdrop-blur-xl border-b border-white/[0.08] px-6 sm:px-12 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      {/* Top Navbar with scroll rounded popup animation */}
+      <header
+        className={`sticky top-0 z-30 w-full transition-all duration-300 ease-out ${
+          isScrolled
+            ? "px-4 sm:px-8 pt-3 pb-1 pointer-events-none"
+            : "px-0 pt-0 pb-0"
+        }`}
+      >
+        <div
+          className={`w-full transition-all duration-300 ease-out relative ${
+            isScrolled
+              ? "pointer-events-auto max-w-7xl mx-auto rounded-2xl bg-[#090e1a]/92 backdrop-blur-xl border border-white/[0.14] shadow-2xl shadow-black/80 shadow-purple-950/40 ring-1 ring-purple-500/20 px-5 sm:px-8 py-3 scale-[0.995] sm:scale-100 overflow-hidden flex items-center justify-between"
+              : "bg-[#080c14]/70 backdrop-blur-xl border-b border-white/[0.08] px-6 sm:px-12 py-4 rounded-none shadow-none flex items-center justify-between"
+          }`}
+        >
+          {/* Subtle top glow line when floating */}
+          {isScrolled && (
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 via-purple-400/40 to-transparent pointer-events-none" />
+          )}
           <Link href="/" className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow flex items-center justify-center shrink-0">
               <Image

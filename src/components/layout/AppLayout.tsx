@@ -26,7 +26,7 @@ export function AppLayout({
   const [quickActionOpen, setQuickActionOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex overflow-x-hidden">
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex">
       {/* Desktop Sidebar */}
       <Sidebar />
 
@@ -37,7 +37,7 @@ export function AppLayout({
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Sticky Header */}
         <Header
           title={title}

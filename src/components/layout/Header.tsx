@@ -89,9 +89,39 @@ export function Header({
     }
   };
 
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  // Scroll detection for floating rounded popup animation
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-20 w-full bg-[#080c14]/80 backdrop-blur-md border-b border-white/[0.07] px-4 sm:px-6 lg:px-8 py-4 transition-all">
-      <div className="flex items-center justify-between gap-4">
+    <header
+      className={`sticky top-0 z-30 w-full transition-all duration-300 ease-out ${
+        isScrolled
+          ? "px-3 sm:px-6 lg:px-8 pt-3 pb-1 pointer-events-none"
+          : "px-0 pt-0 pb-0"
+      }`}
+    >
+      <div
+        className={`w-full transition-all duration-300 ease-out relative ${
+          isScrolled
+            ? "pointer-events-auto max-w-7xl mx-auto rounded-2xl bg-[#090e1a]/92 backdrop-blur-xl border border-white/[0.14] shadow-2xl shadow-black/80 shadow-purple-950/40 ring-1 ring-purple-500/20 px-4 sm:px-6 py-2.5 sm:py-3 scale-[0.995] sm:scale-100 overflow-hidden"
+            : "bg-[#080c14]/80 backdrop-blur-md border-b border-white/[0.07] px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 rounded-none shadow-none"
+        }`}
+      >
+        {/* Subtle top glow line when floating with rounded corners */}
+        {isScrolled && (
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 via-purple-400/40 to-transparent pointer-events-none" />
+        )}
+
+        <div className="flex items-center justify-between gap-4">
         {/* Left side: Hamburger (mobile) + Page Titles */}
         <div className="flex items-center gap-3">
           <button
@@ -257,6 +287,7 @@ export function Header({
           </Link>
         </div>
       </div>
-    </header>
-  );
+    </div>
+  </header>
+);
 }
