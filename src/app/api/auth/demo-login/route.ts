@@ -13,8 +13,6 @@ export async function POST() {
           OR: [
             { email: "demo@finvessa.in" },
             { email: "aarav@finvessa.in" },
-            { email: "aarav@novafinance.in" },
-            { email: "demo@novafinance.com" },
           ],
         },
       })) ||

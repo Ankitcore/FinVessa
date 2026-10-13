@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
-const JWT_SECRET = process.env.JWT_SECRET || "nova-finance-secure-jwt-secret-key-32-chars-long-2026";
-export const AUTH_COOKIE_NAME = "nova_auth_token";
+const JWT_SECRET = process.env.JWT_SECRET || "finvessa-secure-jwt-secret-key-32-chars-long-2026";
+export const AUTH_COOKIE_NAME = "finvessa_session";
 
 export interface SessionUser {
   id: string;

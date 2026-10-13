@@ -19,22 +19,22 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Read local storage preferences
-    const savedCurrency = localStorage.getItem("nova_currency");
+    const savedCurrency = localStorage.getItem("finvessa_currency");
     if (savedCurrency) setCurrencyState(savedCurrency);
 
-    const savedHide = localStorage.getItem("nova_hide_balance");
+    const savedHide = localStorage.getItem("finvessa_hide_balance");
     if (savedHide !== null) setIsBalanceHidden(savedHide === "true");
   }, []);
 
   const setCurrency = (code: string) => {
     setCurrencyState(code);
-    localStorage.setItem("nova_currency", code);
+    localStorage.setItem("finvessa_currency", code);
   };
 
   const toggleBalanceVisibility = () => {
     setIsBalanceHidden((prev) => {
       const next = !prev;
-      localStorage.setItem("nova_hide_balance", String(next));
+      localStorage.setItem("finvessa_hide_balance", String(next));
       return next;
     });
   };

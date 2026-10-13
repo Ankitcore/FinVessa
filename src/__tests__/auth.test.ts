@@ -25,9 +25,9 @@ describe("Cryptographic Authentication & Token Safety", () => {
   it("signs JWT token and successfully decodes session user", () => {
     const user: SessionUser = {
       id: "usr_9921",
-      email: "alex@novafinance.com",
-      name: "Alex Sterling",
-      currency: "USD",
+      email: "spershika@finvessa.in",
+      name: "Spershika Sharma",
+      currency: "INR",
     };
 
     const token = signToken(user);

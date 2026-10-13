@@ -19,7 +19,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("nova_sidebar_collapsed");
+      const stored = localStorage.getItem("finvessa_sidebar_collapsed");
       if (stored !== null) {
         setIsCollapsed(stored === "true");
       }
@@ -32,7 +32,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     setIsCollapsed((prev) => {
       const next = !prev;
       try {
-        localStorage.setItem("nova_sidebar_collapsed", String(next));
+        localStorage.setItem("finvessa_sidebar_collapsed", String(next));
       } catch {
         // ignore
       }
@@ -43,7 +43,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const setCollapsed = (val: boolean) => {
     setIsCollapsed(val);
     try {
-      localStorage.setItem("nova_sidebar_collapsed", String(val));
+      localStorage.setItem("finvessa_sidebar_collapsed", String(val));
     } catch {
       // ignore
     }
