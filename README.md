@@ -2,9 +2,6 @@
 
   <img src="public/finvessa-banner.png" alt="FINVESSA - See your money. Shape your future" width="100%" style="max-width: 780px; border-radius: 16px; margin-bottom: 12px;" />
 
-  # ⚡ FINVESSA
-  ### *See your money. Shape your future*
-
   **Next-Generation Personal Finance, Wealth Intelligence & Double-Entry Ledger for India and Global Citizens**
 
   <p align="center">
