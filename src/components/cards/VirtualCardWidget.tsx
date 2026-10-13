@@ -128,13 +128,13 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
           </div>
 
           {/* Number */}
-          <div className="flex-1 flex items-center justify-between">
-            <span className="font-mono text-base sm:text-lg tracking-widest font-semibold drop-shadow">
+          <div className="flex-1 flex items-center justify-between min-w-0">
+            <span className="font-mono text-xs sm:text-base md:text-lg tracking-wider sm:tracking-widest font-semibold drop-shadow truncate pr-1">
               {cardNumber}
             </span>
             <button
               onClick={() => setShowFullNumber((prev) => !prev)}
-              className="p-1 text-slate-300 hover:text-white transition-colors"
+              className="p-1.5 text-slate-300 hover:text-white transition-colors shrink-0"
               title={showFullNumber ? "Hide digits" : "Reveal full digits"}
             >
               {showFullNumber ? (

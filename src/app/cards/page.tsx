@@ -33,11 +33,11 @@ export default function CardsPage() {
   // Modals
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isLimitOpen, setIsLimitOpen] = useState(false);
-  const [cardholderName, setCardholderName] = useState("Alex Sterling");
+  const [cardholderName, setCardholderName] = useState("Aarav Sharma");
   const [accountId, setAccountId] = useState("");
-  const [cardType, setCardType] = useState("VISA");
+  const [cardType, setCardType] = useState("RUPAY");
   const [cardStyle, setCardStyle] = useState("PURPLE_CYAN");
-  const [newLimit, setNewLimit] = useState("5000");
+  const [newLimit, setNewLimit] = useState("50000");
   const [submitting, setSubmitting] = useState(false);
 
   const loadCards = useCallback(async () => {
@@ -205,9 +205,9 @@ export default function CardsPage() {
               </h3>
               <button
                 onClick={() => setIsAddOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center justify-center shrink-0"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
@@ -221,7 +221,7 @@ export default function CardsPage() {
                   required
                   value={cardholderName}
                   onChange={(e) => setCardholderName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -232,7 +232,7 @@ export default function CardsPage() {
                 <select
                   value={accountId}
                   onChange={(e) => setAccountId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="">No Account (Standalone Virtual)</option>
                   {accounts.map((a) => (
@@ -251,8 +251,9 @@ export default function CardsPage() {
                   <select
                     value={cardType}
                     onChange={(e) => setCardType(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   >
+                    <option value="RUPAY">RuPay Platinum</option>
                     <option value="VISA">Visa Infinite</option>
                     <option value="MASTERCARD">Mastercard World</option>
                   </select>
@@ -260,15 +261,15 @@ export default function CardsPage() {
 
                 <div>
                   <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Monthly Cap ($)
+                    Monthly Cap (₹)
                   </label>
                   <input
                     type="number"
-                    step="100"
+                    step="500"
                     required
                     value={newLimit}
                     onChange={(e) => setNewLimit(e.target.value)}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -277,14 +278,14 @@ export default function CardsPage() {
                 <button
                   type="button"
                   onClick={() => setIsAddOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Issue Card
@@ -309,29 +310,29 @@ export default function CardsPage() {
             <form onSubmit={handleUpdateLimit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Monthly Limit ($)
+                  Monthly Limit (₹)
                 </label>
                 <input
                   type="number"
-                  step="100"
+                  step="500"
                   required
                   value={newLimit}
                   onChange={(e) => setNewLimit(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-base font-bold text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 text-base font-bold text-white outline-none transition-all"
                 />
               </div>
               <div className="flex items-center justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setIsLimitOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-glow-cyan"
+                  className="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-glow-cyan min-h-[44px]"
                 >
                   Save Limit
                 </button>

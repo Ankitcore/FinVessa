@@ -391,7 +391,7 @@ export default function AccountsPage() {
                   placeholder="e.g. HDFC Bank Salary, SBI Wealth Vault, Zerodha"
                   value={createName}
                   onChange={(e) => setCreateName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -402,7 +402,7 @@ export default function AccountsPage() {
                 <select
                   value={createType}
                   onChange={(e) => setCreateType(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="CHECKING">Salary / Current Account</option>
                   <option value="SAVINGS">High Yield Savings</option>
@@ -421,7 +421,7 @@ export default function AccountsPage() {
                   step="0.01"
                   value={createBalance}
                   onChange={(e) => setCreateBalance(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 

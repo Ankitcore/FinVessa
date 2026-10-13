@@ -299,9 +299,9 @@ export default function BudgetsPage() {
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center justify-center shrink-0"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
@@ -316,7 +316,7 @@ export default function BudgetsPage() {
                   placeholder="e.g. Dining & Restaurants"
                   value={budgetName}
                   onChange={(e) => setBudgetName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -327,7 +327,7 @@ export default function BudgetsPage() {
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="">All Categories (General)</option>
                   {categories.map((c) => (
@@ -349,7 +349,7 @@ export default function BudgetsPage() {
                   placeholder="15000"
                   value={budgetLimit}
                   onChange={(e) => setBudgetLimit(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -357,14 +357,14 @@ export default function BudgetsPage() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Save Budget

@@ -16,9 +16,12 @@ import {
   Eye,
   EyeOff,
   Sparkles,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { useSidebar } from "@/context/SidebarContext";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -35,36 +38,68 @@ export function Sidebar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const { isBalanceHidden, toggleBalanceVisibility } = useCurrency();
+  const { isCollapsed, toggleSidebar } = useSidebar();
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 h-screen sticky top-0 bg-[#0b101c]/90 backdrop-blur-xl border-r border-white/[0.07] px-4 py-6 z-30 select-none">
-      {/* Brand Logo */}
-      <Link
-        href="/dashboard"
-        className="flex items-center gap-3 px-3 py-2 mb-8 group transition-all"
-        aria-label="Nova Finance Dashboard"
-      >
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] shadow-glow">
-          <div className="w-full h-full bg-[#090d16] rounded-[11px] flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
+    <aside
+      className={`hidden lg:flex flex-col h-screen sticky top-0 bg-[#0b101c]/95 backdrop-blur-xl border-r border-white/[0.07] z-30 select-none transition-all duration-300 ease-in-out ${
+        isCollapsed ? "w-20 px-2.5 py-5" : "w-64 px-4 py-6"
+      }`}
+      aria-label="Desktop Navigation Sidebar"
+    >
+      {/* Brand Logo & Collapse Toggle */}
+      <div className="flex items-center justify-between gap-2 mb-6">
+        <Link
+          href="/dashboard"
+          className={`flex items-center gap-3 transition-all group ${
+            isCollapsed ? "justify-center w-full px-0" : "px-2"
+          }`}
+          aria-label="Nova Finance Dashboard"
+          title="Nova Finance India (Bharat Wealth)"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] shadow-glow shrink-0">
+            <div className="w-full h-full bg-[#090d16] rounded-[11px] flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
+            </div>
           </div>
-        </div>
-        <div>
-          <span className="font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
-            Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold ml-1">IN</span>
-          </span>
-          <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
-            Bharat Wealth & RuPay
-          </p>
-        </div>
-      </Link>
+          {!isCollapsed && (
+            <div className="overflow-hidden transition-all duration-300">
+              <span className="font-bold text-lg tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
+                Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold ml-1">
+                  IN
+                </span>
+              </span>
+              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold whitespace-nowrap">
+                Bharat Wealth & RuPay
+              </p>
+            </div>
+          )}
+        </Link>
+
+        {/* Toggle Button in Header when expanded */}
+        {!isCollapsed && (
+          <button
+            onClick={toggleSidebar}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors shrink-0"
+            title="Collapse sidebar"
+            aria-label="Collapse sidebar"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+        )}
+      </div>
 
       {/* Nav links */}
-      <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1">
-        <div className="px-3 pb-2 text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
-          Menu
-        </div>
+      <nav className="flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-0.5 scrollbar-thin">
+        {!isCollapsed ? (
+          <div className="px-3 pb-2 text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+            Menu
+          </div>
+        ) : (
+          <div className="w-full h-[1px] bg-white/[0.06] my-2" />
+        )}
+
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -73,71 +108,117 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
+              title={isCollapsed ? item.name : undefined}
+              className={`flex items-center rounded-xl font-medium text-sm transition-all duration-200 group relative ${
+                isCollapsed
+                  ? "justify-center py-3 px-0 w-full"
+                  : "gap-3.5 px-3.5 py-2.5"
+              } ${
                 isActive
                   ? "bg-gradient-to-r from-purple-600/20 to-cyan-500/10 text-white border border-purple-500/30 shadow-glow"
                   : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]"
               }`}
             >
               <Icon
-                className={`w-4 h-4 transition-colors ${
+                className={`w-4 h-4 shrink-0 transition-colors ${
                   isActive
                     ? "text-cyan-400"
                     : "text-slate-400 group-hover:text-purple-400"
                 }`}
               />
-              <span>{item.name}</span>
+              {!isCollapsed && (
+                <span className="truncate whitespace-nowrap">{item.name}</span>
+              )}
               {isActive && (
-                <div className="absolute right-2 w-1.5 h-4 bg-cyan-400 rounded-full shadow-glow-cyan" />
+                <div
+                  className={`absolute bg-cyan-400 rounded-full shadow-glow-cyan ${
+                    isCollapsed
+                      ? "right-1.5 w-1 h-3"
+                      : "right-2 w-1.5 h-4"
+                  }`}
+                />
               )}
             </Link>
           );
         })}
       </nav>
 
-      {/* Bottom section: Balance privacy & User */}
-      <div className="pt-4 border-t border-white/[0.07] space-y-3">
+      {/* Bottom section: Balance privacy, Expand Toggle & User Profile */}
+      <div className="pt-3 border-t border-white/[0.07] space-y-2.5">
+        {/* Expand button when collapsed */}
+        {isCollapsed && (
+          <button
+            onClick={toggleSidebar}
+            className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors"
+            title="Expand sidebar"
+            aria-label="Expand sidebar"
+          >
+            <ChevronRight className="w-4 h-4 text-cyan-400" />
+          </button>
+        )}
+
         {/* Balance Toggle button */}
         <button
           onClick={toggleBalanceVisibility}
-          className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-xs text-slate-400 hover:text-slate-200 transition-colors"
-          title="Toggle balance visibility across the entire app"
+          className={`flex items-center rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-xs text-slate-400 hover:text-slate-200 transition-colors ${
+            isCollapsed
+              ? "w-full justify-center p-2.5"
+              : "w-full justify-between px-3.5 py-2"
+          }`}
+          title={
+            isBalanceHidden
+              ? "Balances Hidden — Click to Reveal"
+              : "Balances Visible — Click to Conceal"
+          }
         >
           <span className="flex items-center gap-2">
             {isBalanceHidden ? (
-              <EyeOff className="w-3.5 h-3.5 text-amber-400" />
+              <EyeOff className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             ) : (
-              <Eye className="w-3.5 h-3.5 text-cyan-400" />
+              <Eye className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
             )}
-            <span>{isBalanceHidden ? "Balances Hidden" : "Balances Visible"}</span>
+            {!isCollapsed && (
+              <span className="whitespace-nowrap">
+                {isBalanceHidden ? "Balances Hidden" : "Balances Visible"}
+              </span>
+            )}
           </span>
-          <span className="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">
-            {isBalanceHidden ? "Show" : "Hide"}
-          </span>
+          {!isCollapsed && (
+            <span className="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">
+              {isBalanceHidden ? "Show" : "Hide"}
+            </span>
+          )}
         </button>
 
         {/* User profile & Logout */}
-        <div className="flex items-center justify-between px-2 py-1">
+        <div
+          className={`flex items-center ${
+            isCollapsed ? "flex-col gap-2 py-1" : "justify-between px-2 py-1"
+          }`}
+        >
           <Link
             href="/settings"
             className="flex items-center gap-2.5 min-w-0 group"
+            title={user?.name || "Aarav Sharma"}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20 shrink-0">
               {user?.name ? user.name.charAt(0).toUpperCase() : "A"}
             </div>
-            <div className="min-w-0">
-              <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-purple-300 transition-colors">
-                {user?.name || "Aarav Sharma"}
-              </p>
-              <p className="text-[10px] text-slate-300 truncate">
-                {user?.email || "aarav@novafinance.in"}
-              </p>
-            </div>
+            {!isCollapsed && (
+              <div className="min-w-0 overflow-hidden">
+                <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-purple-300 transition-colors">
+                  {user?.name || "Aarav Sharma"}
+                </p>
+                <p className="text-[10px] text-slate-300 truncate">
+                  {user?.email || "aarav@novafinance.in"}
+                </p>
+              </div>
+            )}
           </Link>
 
           <button
             onClick={() => logout()}
-            className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+            className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors shrink-0"
             title="Sign out"
             aria-label="Sign out"
           >

@@ -338,9 +338,9 @@ export default function BillsPage() {
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center justify-center shrink-0"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
@@ -355,7 +355,7 @@ export default function BillsPage() {
                   placeholder="e.g. Tata Power Electricity, Airtel Fiber, HDFC EMI"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -370,11 +370,11 @@ export default function BillsPage() {
                   placeholder="3420.00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-slate-300 mb-1">
                     Due Date
@@ -384,7 +384,7 @@ export default function BillsPage() {
                     required
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   />
                 </div>
 
@@ -395,7 +395,7 @@ export default function BillsPage() {
                   <select
                     value={recurrence}
                     onChange={(e) => setRecurrence(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   >
                     <option value="MONTHLY">Monthly</option>
                     <option value="WEEKLY">Weekly</option>
@@ -412,7 +412,7 @@ export default function BillsPage() {
                 <select
                   value={accountId}
                   onChange={(e) => setAccountId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   {accounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -422,15 +422,15 @@ export default function BillsPage() {
                 </select>
               </div>
 
-              <div className="flex items-center gap-2 pt-1">
+              <div className="flex items-center gap-2.5 pt-1">
                 <input
                   type="checkbox"
                   id="autoPayCheck"
                   checked={autoPay}
                   onChange={(e) => setAutoPay(e.target.checked)}
-                  className="rounded bg-white/[0.06] border-white/20 text-purple-600 focus:ring-0 cursor-pointer"
+                  className="w-4 h-4 rounded bg-white/[0.06] border-white/20 text-purple-600 focus:ring-0 cursor-pointer"
                 />
-                <label htmlFor="autoPayCheck" className="text-xs text-slate-300 cursor-pointer">
+                <label htmlFor="autoPayCheck" className="text-xs text-slate-300 cursor-pointer select-none">
                   Enable automatic payment reminder badge
                 </label>
               </div>
@@ -439,14 +439,14 @@ export default function BillsPage() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Schedule Bill

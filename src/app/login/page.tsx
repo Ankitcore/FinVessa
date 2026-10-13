@@ -130,7 +130,7 @@ export default function LoginPage() {
                 placeholder="aarav@novafinance.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-slate-400 outline-none transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
               />
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function LoginPage() {
                 placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-10 py-2.5 text-xs text-white placeholder-slate-400 outline-none transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-10 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
               />
               <button
                 type="button"

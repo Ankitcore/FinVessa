@@ -100,10 +100,10 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
       </div>
 
       {/* Chart Container */}
-      <div className="w-full h-64 sm:h-72">
+      <div className="w-full min-w-0 h-64 sm:h-72 overflow-hidden">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === "bar" ? (
-            <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <BarChart data={data} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
               <defs>
                 <linearGradient id="incomeBarGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#06b6d4" stopOpacity={1} />
@@ -121,7 +121,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
                 fontSize={11}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(val) => `$${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
+                tickFormatter={(val) => `${currency === "INR" ? "₹" : "$"}${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend
@@ -134,7 +134,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
               <Bar dataKey="expense" name="Expense" fill="url(#expenseBarGradient)" radius={[6, 6, 0, 0]} maxBarSize={28} />
             </BarChart>
           ) : (
-            <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <AreaChart data={data} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
               <defs>
                 <linearGradient id="incomeArea" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.4} />
@@ -152,7 +152,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
                 fontSize={11}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(val) => `$${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
+                tickFormatter={(val) => `${currency === "INR" ? "₹" : "$"}${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend

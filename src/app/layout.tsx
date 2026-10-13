@@ -32,6 +32,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { SidebarProvider } from "@/context/SidebarContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -42,7 +44,9 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-[#080c14] text-slate-100 min-h-screen">
         <AuthProvider>
           <CurrencyProvider>
-            <ToastProvider>{children}</ToastProvider>
+            <SidebarProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </SidebarProvider>
           </CurrencyProvider>
         </AuthProvider>
       </body>

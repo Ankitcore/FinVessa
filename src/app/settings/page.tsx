@@ -153,7 +153,7 @@ export default function SettingsPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none transition-all"
                 />
               </div>
 
@@ -165,7 +165,7 @@ export default function SettingsPage() {
                   type="email"
                   disabled
                   value={user?.email || "aarav@novafinance.in"}
-                  className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-400 outline-none cursor-not-allowed"
+                  className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-slate-400 outline-none cursor-not-allowed"
                 />
               </div>
             </div>
@@ -177,7 +177,7 @@ export default function SettingsPage() {
               <select
                 value={selectedCurrency}
                 onChange={(e) => setSelectedCurrency(e.target.value)}
-                className="w-full sm:w-64 bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none"
+                className="w-full sm:w-64 bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none min-h-[44px]"
               >
                 <option value="INR">INR (₹) — Indian Rupee (Default)</option>
                 <option value="USD">USD ($) — United States Dollar</option>
@@ -196,7 +196,7 @@ export default function SettingsPage() {
               <button
                 type="submit"
                 disabled={savingProfile}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs shadow-glow transition-all disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs shadow-glow transition-all disabled:opacity-50 min-h-[44px]"
               >
                 {savingProfile && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                 Save Profile Preferences
@@ -257,7 +257,7 @@ export default function SettingsPage() {
                 placeholder="••••••••••••"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
               />
             </div>
 
@@ -271,7 +271,7 @@ export default function SettingsPage() {
                 placeholder="At least 6 characters"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
               />
             </div>
 
@@ -285,14 +285,14 @@ export default function SettingsPage() {
                 placeholder="Repeat new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
               />
             </div>
 
             <button
               type="submit"
               disabled={savingPassword}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-glow transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-glow transition-all disabled:opacity-50 min-h-[44px]"
             >
               {savingPassword && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               Update Password

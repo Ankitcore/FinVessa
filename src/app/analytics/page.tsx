@@ -158,14 +158,14 @@ export default function AnalyticsPage() {
             Visual progression of monthly net cash flow
           </p>
 
-          <div className="w-full h-72">
+          <div className="w-full min-w-0 h-72 overflow-hidden">
             {loading ? (
               <div className="h-full flex items-center justify-center text-slate-400">
                 <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={data?.monthlyTrends || []}>
+                <AreaChart data={data?.monthlyTrends || []} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
                   <defs>
                     <linearGradient id="netGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.4} />
@@ -174,7 +174,13 @@ export default function AnalyticsPage() {
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                   <XAxis dataKey="month" stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(val) => `$${val}`} />
+                  <YAxis
+                    stroke="#64748b"
+                    fontSize={11}
+                    tickLine={false}
+                    axisLine={false}
+                    tickFormatter={(val) => `${currency === "INR" ? "₹" : "$"}${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
+                  />
                   <Tooltip content={<CustomTooltip />} />
                   <Area type="monotone" dataKey="net" name="Net Flow" stroke="#8b5cf6" strokeWidth={2.5} fill="url(#netGradient)" />
                 </AreaChart>

@@ -6,6 +6,8 @@ import { MobileDrawer } from "./MobileDrawer";
 import { Header } from "./Header";
 import { QuickActionsModal } from "../modals/QuickActionsModal";
 
+import { useSidebar } from "@/context/SidebarContext";
+
 interface AppLayoutProps {
   children: React.ReactNode;
   title: string;
@@ -19,11 +21,11 @@ export function AppLayout({
   subtitle,
   onRefreshData,
 }: AppLayoutProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { mobileMenuOpen, setMobileMenuOpen } = useSidebar();
   const [quickActionOpen, setQuickActionOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex">
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex overflow-x-hidden">
       {/* Desktop Sidebar */}
       <Sidebar />
 
@@ -34,7 +36,7 @@ export function AppLayout({
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
         {/* Sticky Header */}
         <Header
           title={title}

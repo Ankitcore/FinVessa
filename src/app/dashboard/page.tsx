@@ -153,24 +153,24 @@ export default function DashboardPage() {
         </div>
 
         {/* Right: Quick Action Buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => openAction("EXPENSE")}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
           >
             <ArrowDownLeft className="w-3.5 h-3.5" />
             <span>Add Expense</span>
           </button>
           <button
             onClick={() => openAction("INCOME")}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>Add Income</span>
           </button>
           <button
             onClick={() => openAction("TRANSFER")}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Transfer</span>

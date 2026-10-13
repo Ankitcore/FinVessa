@@ -177,7 +177,7 @@ export function QuickActionsModal({
       aria-modal="true"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-lg bg-[#0e1526] border border-white/10 rounded-2xl shadow-2xl p-6 overflow-hidden">
+      <div className="relative w-full max-w-lg bg-[#0e1526] border border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
@@ -185,7 +185,7 @@ export function QuickActionsModal({
           </h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors"
+            className="w-10 h-10 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center justify-center shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -197,7 +197,7 @@ export function QuickActionsModal({
           <button
             type="button"
             onClick={() => setActiveTab("EXPENSE")}
-            className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] ${
               activeTab === "EXPENSE"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-glow"
                 : "text-slate-400 hover:text-slate-200"
@@ -208,7 +208,7 @@ export function QuickActionsModal({
           <button
             type="button"
             onClick={() => setActiveTab("INCOME")}
-            className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] ${
               activeTab === "INCOME"
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-glow"
                 : "text-slate-400 hover:text-slate-200"
@@ -219,7 +219,7 @@ export function QuickActionsModal({
           <button
             type="button"
             onClick={() => setActiveTab("TRANSFER")}
-            className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all min-h-[40px] ${
               activeTab === "TRANSFER"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-glow"
                 : "text-slate-400 hover:text-slate-200"
@@ -239,7 +239,7 @@ export function QuickActionsModal({
           {/* Amount Input */}
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1">
-              Amount
+              Amount (₹)
             </label>
             <div className="relative">
               <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
@@ -274,7 +274,7 @@ export function QuickActionsModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-400 outline-none transition-all"
+              className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white placeholder-slate-400 outline-none transition-all"
             />
           </div>
 
@@ -287,7 +287,7 @@ export function QuickActionsModal({
               <select
                 value={accountId}
                 onChange={(e) => setAccountId(e.target.value)}
-                className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
               >
                 {accounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
@@ -305,7 +305,7 @@ export function QuickActionsModal({
                 <select
                   value={transferAccountId}
                   onChange={(e) => setTransferAccountId(e.target.value)}
-                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
                 >
                   {accounts.map((acc) => (
                     <option key={acc.id} value={acc.id}>
@@ -322,7 +322,7 @@ export function QuickActionsModal({
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
                 >
                   <option value="">Uncategorized</option>
                   {filteredCategories.map((cat) => (
@@ -344,7 +344,7 @@ export function QuickActionsModal({
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2 text-xs text-white outline-none"
+              className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
             />
           </div>
 
@@ -354,14 +354,14 @@ export function QuickActionsModal({
               type="button"
               onClick={onClose}
               disabled={submitting}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors"
+              className="px-4 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-medium text-xs shadow-glow transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-medium text-xs shadow-glow transition-all disabled:opacity-50 min-h-[44px]"
             >
               {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               {activeTab === "INCOME"

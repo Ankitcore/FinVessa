@@ -316,86 +316,50 @@ export default function TransactionsPage() {
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-white/[0.02] border-b border-white/[0.06] text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
-                <tr>
-                  <th className="py-3.5 px-4 sm:px-6">Description</th>
-                  <th className="py-3.5 px-4">Category</th>
-                  <th className="py-3.5 px-4">Account</th>
-                  <th className="py-3.5 px-4">Date</th>
-                  <th className="py-3.5 px-4 text-right">Amount</th>
-                  <th className="py-3.5 px-4 text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/[0.04]">
-                {transactions.map((tx) => {
-                  const isIncome = tx.type === "INCOME";
-                  const isTransfer = tx.type === "TRANSFER";
+          <>
+            {/* Mobile View: Card List (md:hidden) */}
+            <div className="md:hidden divide-y divide-white/[0.04] p-3 space-y-2.5">
+              {transactions.map((tx) => {
+                const isIncome = tx.type === "INCOME";
+                const isTransfer = tx.type === "TRANSFER";
 
-                  return (
-                    <tr
-                      key={tx.id}
-                      className="hover:bg-white/[0.02] transition-colors group"
-                    >
-                      <td className="py-3.5 px-4 sm:px-6">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border ${
-                              isIncome
-                                ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                                : isTransfer
-                                ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
-                                : "bg-purple-500/10 border-purple-500/30 text-purple-400"
-                            }`}
-                          >
-                            {isIncome ? (
-                              <ArrowUpRight className="w-3.5 h-3.5" />
-                            ) : isTransfer ? (
-                              <ArrowLeftRight className="w-3.5 h-3.5" />
-                            ) : (
-                              <ArrowDownLeft className="w-3.5 h-3.5" />
-                            )}
-                          </div>
-                          <div>
-                            <span className="font-semibold text-slate-100 block">
-                              {tx.description}
-                            </span>
-                            <span className="text-[10px] text-slate-300 uppercase tracking-wider">
-                              {tx.type}
-                            </span>
-                          </div>
+                return (
+                  <div
+                    key={tx.id}
+                    className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2.5"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div
+                          className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
+                            isIncome
+                              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+                              : isTransfer
+                              ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                              : "bg-purple-500/10 border-purple-500/30 text-purple-400"
+                          }`}
+                        >
+                          {isIncome ? (
+                            <ArrowUpRight className="w-4 h-4" />
+                          ) : isTransfer ? (
+                            <ArrowLeftRight className="w-4 h-4" />
+                          ) : (
+                            <ArrowDownLeft className="w-4 h-4" />
+                          )}
                         </div>
-                      </td>
-
-                      <td className="py-3.5 px-4 text-slate-300">
-                        {tx.category ? (
-                          <span
-                            className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border"
-                            style={{
-                              backgroundColor: `${tx.category.color}15`,
-                              borderColor: `${tx.category.color}35`,
-                              color: tx.category.color,
-                            }}
-                          >
-                            {tx.category.name}
+                        <div className="min-w-0">
+                          <span className="font-semibold text-slate-100 block text-xs truncate">
+                            {tx.description}
                           </span>
-                        ) : (
-                          <span className="text-slate-400 text-xs">General</span>
-                        )}
-                      </td>
+                          <span className="text-[10px] text-slate-400">
+                            {formatDate(tx.date)} • {tx.account?.name || "Primary"}
+                          </span>
+                        </div>
+                      </div>
 
-                      <td className="py-3.5 px-4 text-slate-300 text-xs">
-                        {tx.account?.name || "Primary"}
-                      </td>
-
-                      <td className="py-3.5 px-4 text-slate-300 text-xs whitespace-nowrap">
-                        {formatDate(tx.date)}
-                      </td>
-
-                      <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                      <div className="text-right shrink-0">
                         <span
-                          className={`font-bold ${
+                          className={`font-bold text-xs sm:text-sm ${
                             isIncome
                               ? "text-emerald-400"
                               : isTransfer
@@ -406,32 +370,169 @@ export default function TransactionsPage() {
                           {isIncome ? "+" : isTransfer ? "" : "-"}
                           {formatAmount(tx.amountCents)}
                         </span>
-                      </td>
+                      </div>
+                    </div>
 
-                      <td className="py-3.5 px-4 text-center">
-                        <div className="flex items-center justify-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={() => handleEditOpen(tx)}
-                            className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition-colors"
-                            title="Edit transaction"
+                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.04]">
+                      <div>
+                        {tx.category ? (
+                          <span
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium border"
+                            style={{
+                              backgroundColor: `${tx.category.color}15`,
+                              borderColor: `${tx.category.color}35`,
+                              color: tx.category.color,
+                            }}
                           >
-                            <Edit2 className="w-3.5 h-3.5" />
-                          </button>
-                          <button
-                            onClick={() => setDeletingTx(tx)}
-                            className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
-                            title="Delete transaction"
+                            {tx.category.name}
+                          </span>
+                        ) : (
+                          <span className="text-slate-500 text-[10px]">General</span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleEditOpen(tx)}
+                          className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-cyan-400 rounded-lg hover:bg-white/[0.05] transition-colors"
+                          title="Edit transaction"
+                          aria-label="Edit transaction"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => setDeletingTx(tx)}
+                          className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-rose-400 rounded-lg hover:bg-rose-500/10 transition-colors"
+                          title="Delete transaction"
+                          aria-label="Delete transaction"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Desktop View: Full Ledger Table (hidden md:block) */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-white/[0.02] border-b border-white/[0.06] text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
+                  <tr>
+                    <th className="py-3.5 px-4 sm:px-6">Description</th>
+                    <th className="py-3.5 px-4">Category</th>
+                    <th className="py-3.5 px-4">Account</th>
+                    <th className="py-3.5 px-4">Date</th>
+                    <th className="py-3.5 px-4 text-right">Amount</th>
+                    <th className="py-3.5 px-4 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/[0.04]">
+                  {transactions.map((tx) => {
+                    const isIncome = tx.type === "INCOME";
+                    const isTransfer = tx.type === "TRANSFER";
+
+                    return (
+                      <tr
+                        key={tx.id}
+                        className="hover:bg-white/[0.02] transition-colors group"
+                      >
+                        <td className="py-3.5 px-4 sm:px-6">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border ${
+                                isIncome
+                                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+                                  : isTransfer
+                                  ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                                  : "bg-purple-500/10 border-purple-500/30 text-purple-400"
+                              }`}
+                            >
+                              {isIncome ? (
+                                <ArrowUpRight className="w-3.5 h-3.5" />
+                              ) : isTransfer ? (
+                                <ArrowLeftRight className="w-3.5 h-3.5" />
+                              ) : (
+                                <ArrowDownLeft className="w-3.5 h-3.5" />
+                              )}
+                            </div>
+                            <div>
+                              <span className="font-semibold text-slate-100 block">
+                                {tx.description}
+                              </span>
+                              <span className="text-[10px] text-slate-300 uppercase tracking-wider">
+                                {tx.type}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="py-3.5 px-4 text-slate-300">
+                          {tx.category ? (
+                            <span
+                              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border"
+                              style={{
+                                backgroundColor: `${tx.category.color}15`,
+                                borderColor: `${tx.category.color}35`,
+                                color: tx.category.color,
+                              }}
+                            >
+                              {tx.category.name}
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 text-xs">General</span>
+                          )}
+                        </td>
+
+                        <td className="py-3.5 px-4 text-slate-300 text-xs">
+                          {tx.account?.name || "Primary"}
+                        </td>
+
+                        <td className="py-3.5 px-4 text-slate-300 text-xs whitespace-nowrap">
+                          {formatDate(tx.date)}
+                        </td>
+
+                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                          <span
+                            className={`font-bold ${
+                              isIncome
+                                ? "text-emerald-400"
+                                : isTransfer
+                                ? "text-cyan-400"
+                                : "text-slate-100"
+                            }`}
                           >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                            {isIncome ? "+" : isTransfer ? "" : "-"}
+                            {formatAmount(tx.amountCents)}
+                          </span>
+                        </td>
+
+                        <td className="py-3.5 px-4 text-center">
+                          <div className="flex items-center justify-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                            <button
+                              onClick={() => handleEditOpen(tx)}
+                              className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition-colors"
+                              title="Edit transaction"
+                            >
+                              <Edit2 className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => setDeletingTx(tx)}
+                              className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                              title="Delete transaction"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
 
         {/* Pagination Bar */}
@@ -552,13 +653,13 @@ export default function TransactionsPage() {
                   required
                   value={editDesc}
                   onChange={(e) => setEditDesc(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none transition-all"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Amount
+                  Amount (₹)
                 </label>
                 <input
                   type="number"
@@ -566,7 +667,7 @@ export default function TransactionsPage() {
                   required
                   value={editAmount}
                   onChange={(e) => setEditAmount(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none transition-all"
                 />
               </div>
 
@@ -577,7 +678,7 @@ export default function TransactionsPage() {
                 <select
                   value={editCategory}
                   onChange={(e) => setEditCategory(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none transition-all"
                 >
                   <option value="">Uncategorized</option>
                   {categories.map((c) => (
@@ -596,7 +697,7 @@ export default function TransactionsPage() {
                   type="date"
                   value={editDate}
                   onChange={(e) => setEditDate(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-white outline-none transition-all"
                 />
               </div>
 
@@ -604,14 +705,14 @@ export default function TransactionsPage() {
                 <button
                   type="button"
                   onClick={() => setEditingTx(null)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-glow-cyan transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold shadow-glow-cyan transition-all disabled:opacity-50 min-h-[44px]"
                 >
                   {isSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Save Changes

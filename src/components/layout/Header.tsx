@@ -96,18 +96,18 @@ export function Header({
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMobileMenu}
-            className="p-2 lg:hidden text-slate-300 hover:text-white rounded-lg hover:bg-white/[0.06] transition-colors"
+            className="w-10 h-10 lg:hidden text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.08] transition-colors flex items-center justify-center shrink-0"
             aria-label="Open mobile navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2 truncate">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs sm:text-sm text-slate-400 hidden sm:block">
+              <p className="text-xs sm:text-sm text-slate-400 hidden sm:block truncate">
                 {subtitle}
               </p>
             )}
@@ -115,7 +115,7 @@ export function Header({
         </div>
 
         {/* Right side controls: Search, Quick Add, Visibility, Notifications, User */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Global Search Bar */}
           <div className="relative hidden md:block w-48 lg:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
@@ -131,14 +131,14 @@ export function Header({
                   )}`;
                 }
               }}
-              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-400 outline-none transition-all focus:bg-white/[0.07]"
+              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 outline-none transition-all focus:bg-white/[0.07]"
             />
           </div>
 
           {/* Quick Action Button */}
           <button
             onClick={onOpenQuickAction}
-            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs sm:text-sm font-medium shadow-glow transition-all active:scale-95 shrink-0"
+            className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs sm:text-sm font-semibold shadow-glow transition-all active:scale-95 shrink-0 min-h-[40px]"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden xs:inline">New Action</span>
@@ -147,7 +147,7 @@ export function Header({
           {/* Eye Icon for Balance Visibility */}
           <button
             onClick={toggleBalanceVisibility}
-            className="p-2 text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors"
+            className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors shrink-0"
             title={isBalanceHidden ? "Show account balances" : "Hide account balances"}
             aria-label="Toggle balance privacy"
           >
@@ -162,7 +162,7 @@ export function Header({
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setIsNotifOpen((prev) => !prev)}
-              className="p-2 text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors relative"
+              className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors relative shrink-0"
               aria-label="Notifications"
             >
               <Bell className="w-4 h-4" />
@@ -174,7 +174,7 @@ export function Header({
             </button>
 
             {isNotifOpen && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#0f1626] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-[#0f1626] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-150">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.07] bg-white/[0.02]">
                   <span className="font-semibold text-sm text-white flex items-center gap-2">
                     <Bell className="w-4 h-4 text-cyan-400" /> Notifications
