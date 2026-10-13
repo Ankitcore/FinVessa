@@ -195,7 +195,8 @@ export default function BudgetsPage() {
         {loading ? (
           <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-400">
             <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-2" />
-            <p className="text-xs">Calculating budget limits...</p>
+            <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Calculating live category thresholds & limits...</p>
           </div>
         ) : budgets.length === 0 ? (
           <div className="col-span-full py-12 text-center text-slate-400">

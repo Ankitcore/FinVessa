@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(JSON.stringify(exportPayload, null, 2), {
       headers: {
         "Content-Type": "application/json",
-        "Content-Disposition": `attachment; filename="nova-finance-export-${new Date().toISOString().split("T")[0]}.json"`,
+        "Content-Disposition": `attachment; filename="finvessa-export-${new Date().toISOString().split("T")[0]}.json"`,
       },
     });
   } catch (error) {

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -103,22 +104,26 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
             href="/dashboard"
             onClick={onClose}
             className="flex items-center gap-2.5"
-            aria-label="Nova Finance Dashboard"
+            aria-label="FINVESSA Dashboard"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] shadow-glow">
-              <div className="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-              </div>
+            <div className="w-9 h-9 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0 flex items-center justify-center">
+              <Image
+                src="/finvessa-icon.png"
+                alt="FINVESSA Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-cover rounded-[9px]"
+              />
             </div>
             <div>
-              <span className="font-bold text-base text-white flex items-center gap-1">
-                Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold ml-1">
+              <span className="font-extrabold text-base text-white flex items-center gap-1">
+                FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold ml-1">
                   IN
                 </span>
               </span>
-              <p className="text-[9px] text-slate-400 uppercase tracking-widest font-semibold">
-                Bharat Wealth & RuPay
+              <p className="text-[9px] text-slate-400 font-medium">
+                See your money. Shape your future
               </p>
             </div>
           </Link>
@@ -198,7 +203,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
                   {user?.name || "Aarav Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-400 truncate">
-                  {user?.email || "aarav@novafinance.in"}
+                  {user?.email || "aarav@finvessa.in"}
                 </p>
               </div>
             </Link>

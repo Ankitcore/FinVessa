@@ -20,8 +20,10 @@ import { RecentTransactionsWidget } from "@/components/dashboard/RecentTransacti
 import { UpcomingPaymentsWidget } from "@/components/dashboard/UpcomingPaymentsWidget";
 import { CategorySpendingWidget } from "@/components/dashboard/CategorySpendingWidget";
 import { QuickActionsModal } from "@/components/modals/QuickActionsModal";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -85,12 +87,49 @@ export default function DashboardPage() {
     setIsQuickActionOpen(true);
   };
 
+  if ((loading || authLoading) && !data) {
+    return <LoadingScreen message="Your money, in perspective." fullScreen />;
+  }
+
   return (
     <AppLayout
       title="Financial Dashboard"
-      subtitle="Overview of your balances, cash flows, and investments"
+      subtitle="See your money. Shape your future"
       onRefreshData={loadDashboardData}
     >
+      {/* Dashboard Greeting Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-8 p-6 rounded-2xl glass-card border border-white/[0.08] relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4"
+      >
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[11px] font-semibold mb-2.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Bharat RuPay & Banking Connected</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            See your money. <span className="text-gradient-purple-cyan">Shape your future</span>
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Welcome back, <span className="text-slate-200 font-semibold">{user?.name || "Aarav Sharma"}</span>. Unified overview of your wealth, liquid cash flows, and investments.
+          </p>
+        </div>
+
+        <div className="relative z-10 flex items-center gap-3">
+          <div className="px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-right">
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Today&apos;s Status</span>
+            <span className="text-xs font-bold text-emerald-400 flex items-center justify-end gap-1">
+              Ledger Synchronized
+            </span>
+          </div>
+        </div>
+
+        {/* Ambient decorative gradient blur */}
+        <div className="absolute -right-16 -top-16 w-56 h-56 bg-gradient-to-br from-purple-600/20 to-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+      </motion.div>
+
       {/* Filters & Quick Actions Header Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         {/* Left: Account & Date Range Filters */}

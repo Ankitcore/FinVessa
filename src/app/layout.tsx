@@ -13,22 +13,26 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Nova Finance — Intelligent Wealth & Cash Flow Management",
-    template: "%s | Nova Finance",
+    default: "FINVESSA — See your money. Shape your future",
+    template: "%s | FINVESSA",
   },
   description:
-    "Next-generation personal finance dashboard with real-time financial summaries, cash flow analytics, virtual cards, budget tracking, and automated bill scheduling.",
+    "FINVESSA — See your money. Shape your future. Next-generation personal finance dashboard with real-time financial summaries, cash flow analytics, RuPay virtual cards, and budget tracking.",
   keywords: [
+    "FINVESSA",
     "personal finance",
-    "fintech dashboard",
+    "RuPay virtual cards",
     "expense tracker",
     "budgeting",
     "cash flow",
-    "wealth management",
+    "Bharat wealth management",
+    "Zyrovia",
   ],
-  authors: [{ name: "Nova Finance" }],
+  authors: [{ name: "FINVESSA (Zyrovia)" }],
   icons: {
-    icon: "/icon.svg",
+    icon: "/finvessa-icon.png",
+    shortcut: "/finvessa-app-icon.png",
+    apple: "/finvessa-icon.png",
   },
 };
 

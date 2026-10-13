@@ -238,7 +238,8 @@ export default function AccountsPage() {
         {loading ? (
           <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-400">
             <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-2" />
-            <p className="text-xs">Loading accounts...</p>
+            <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Syncing account balances & Bharat banking...</p>
           </div>
         ) : (
           accounts.map((acc) => {

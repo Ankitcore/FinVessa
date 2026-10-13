@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Sparkles,
@@ -73,16 +74,20 @@ export default function LoginPage() {
       <div className="glass-card max-w-md w-full rounded-3xl p-7 sm:p-9 border border-white/10 relative z-10 shadow-2xl">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] mb-4 shadow-glow">
-            <div className="w-full h-full bg-[#0d1424] rounded-[15px] flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-cyan-400" />
-            </div>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl overflow-hidden bg-[#0d1424] border border-white/10 p-1 mb-4 shadow-glow">
+            <Image
+              src="/finvessa-icon.png"
+              alt="FINVESSA Logo"
+              width={56}
+              height={56}
+              className="w-full h-full object-cover rounded-[12px]"
+            />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">
-            Welcome to <span className="text-gradient-purple-cyan">Nova Finance</span>
+          <h1 className="text-2xl font-extrabold tracking-tight text-white">
+            Welcome to <span className="text-gradient-purple-cyan">FINVESSA</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Access your Bharat wealth dashboard & RuPay cards
+          <p className="text-xs text-slate-400 mt-1 font-medium">
+            See your money. Shape your future
           </p>
         </div>
 
@@ -127,7 +132,7 @@ export default function LoginPage() {
               <input
                 type="email"
                 required
-                placeholder="aarav@novafinance.in"
+                placeholder="aarav@finvessa.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
@@ -186,6 +191,10 @@ export default function LoginPage() {
           </Link>
         </div>
       </div>
+
+      <p className="mt-6 text-center text-xs text-slate-400 relative z-10">
+        © 2026 Zyrovia. All rights reserved to Ankit Kumar.
+      </p>
     </div>
   );
 }

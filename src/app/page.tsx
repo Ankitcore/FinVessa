@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Sparkles,
@@ -36,13 +37,17 @@ export default function HomePage() {
       <header className="sticky top-0 z-30 w-full bg-[#080c14]/70 backdrop-blur-xl border-b border-white/[0.08] px-6 sm:px-12 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] shadow-glow">
-              <div className="w-full h-full bg-[#090d16] rounded-[11px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-cyan-400" />
-              </div>
+            <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow flex items-center justify-center shrink-0">
+              <Image
+                src="/finvessa-icon.png"
+                alt="FINVESSA Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover rounded-[10px]"
+              />
             </div>
-            <span className="font-bold text-lg text-white">
-              Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
+            <span className="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
+              FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
             </span>
           </Link>
 
@@ -66,18 +71,18 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <main className="flex-1 max-w-7xl mx-auto px-6 sm:px-12 py-16 sm:py-24 flex flex-col items-center text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold mb-8 animate-pulse-subtle">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-semibold mb-8 animate-pulse-subtle">
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Next-Generation Personal Finance Architecture</span>
+          <span>See your money. Shape your future</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl text-white leading-[1.1] mb-6">
-          Master Your Wealth With <br className="hidden sm:block" />
-          <span className="text-gradient-purple-cyan">Flawless Clarity</span>
+          See Your Money. <br className="hidden sm:block" />
+          <span className="text-gradient-purple-cyan">Shape Your Future.</span>
         </h1>
 
         <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-10">
-          A high-performance personal finance platform built for precision. Experience live cash flow charts, dynamic budget thresholds, virtual obsidian cards, and atomic transfers.
+          A high-performance personal finance platform built for precision. Experience live RuPay cards, dynamic budget thresholds, encrypted cash flows, and atomic transfers.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
@@ -132,11 +137,19 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="w-full border-t border-white/[0.07] py-8 px-6 sm:px-12 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="font-semibold text-slate-300">Nova Finance</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-6 rounded-lg overflow-hidden bg-[#090d16] border border-white/10 shrink-0">
+              <Image
+                src="/finvessa-icon.png"
+                alt="FINVESSA"
+                width={24}
+                height={24}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="font-bold text-slate-200">FINVESSA</span>
           </div>
-          <p>© {currentYear} Nova Finance Inc. All rights reserved.</p>
+          <p className="text-slate-400">© 2026 Zyrovia. All rights reserved to Ankit Kumar.</p>
           <div className="flex items-center gap-4 text-slate-400">
             <Link href="/dashboard" className="hover:text-slate-200 transition-colors">
               Dashboard

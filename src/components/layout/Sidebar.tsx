@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -54,24 +55,28 @@ export function Sidebar() {
           className={`flex items-center gap-3 transition-all group ${
             isCollapsed ? "justify-center w-full px-0" : "px-2"
           }`}
-          aria-label="Nova Finance Dashboard"
-          title="Nova Finance India (Bharat Wealth)"
+          aria-label="FINVESSA Dashboard"
+          title="FINVESSA — See your money. Shape your future"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1px] shadow-glow shrink-0">
-            <div className="w-full h-full bg-[#090d16] rounded-[11px] flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
-            </div>
+          <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0 flex items-center justify-center">
+            <Image
+              src="/finvessa-icon.png"
+              alt="FINVESSA Logo"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover rounded-[10px] group-hover:scale-105 transition-transform"
+            />
           </div>
           {!isCollapsed && (
             <div className="overflow-hidden transition-all duration-300">
-              <span className="font-bold text-lg tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
-                Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold ml-1">
+              <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
+                FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold ml-1">
                   IN
                 </span>
               </span>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold whitespace-nowrap">
-                Bharat Wealth & RuPay
+              <p className="text-[9px] text-slate-400 font-medium tracking-tight whitespace-nowrap">
+                See your money. Shape your future
               </p>
             </div>
           )}
@@ -210,7 +215,7 @@ export function Sidebar() {
                   {user?.name || "Aarav Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-300 truncate">
-                  {user?.email || "aarav@novafinance.in"}
+                  {user?.email || "aarav@finvessa.in"}
                 </p>
               </div>
             )}

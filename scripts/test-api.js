@@ -1,7 +1,7 @@
 const http = require("http");
 
 async function main() {
-  console.log("=== NOVA FINANCE LIVE INTEGRATION TEST ===");
+  console.log("=== FINVESSA LIVE INTEGRATION TEST ===");
 
   // 1. Test Demo Login
   const loginRes = await fetch("http://localhost:3000/api/auth/demo-login", {

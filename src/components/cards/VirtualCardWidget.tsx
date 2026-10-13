@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Wifi,
@@ -118,15 +119,21 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
         {/* Card Header: Brand & Contactless */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/20">
-              <CardIcon className="w-4 h-4 text-cyan-300" />
+            <div className="w-7 h-7 rounded-lg overflow-hidden bg-black/40 border border-white/20 p-0.5 shrink-0 flex items-center justify-center">
+              <Image
+                src="/finvessa-icon.png"
+                alt="FINVESSA"
+                width={28}
+                height={28}
+                className="w-full h-full object-cover rounded"
+              />
             </div>
             <div>
-              <span className="font-bold tracking-wider text-xs sm:text-sm text-slate-100 flex items-center gap-1">
-                NOVA <span className="text-cyan-300 font-light">BHARAT</span>
+              <span className="font-extrabold tracking-wider text-xs sm:text-sm text-slate-100 flex items-center gap-1">
+                FINVESSA <span className="text-cyan-300 font-normal">ELITE</span>
               </span>
               <span className="text-[8px] text-orange-400 font-semibold tracking-widest block uppercase">
-                UPI ENABLED
+                BHARAT • RUPAY PLATINUM
               </span>
             </div>
           </div>

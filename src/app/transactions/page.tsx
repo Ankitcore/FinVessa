@@ -303,7 +303,8 @@ export default function TransactionsPage() {
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-slate-400">
             <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-3" />
-            <p className="text-xs">Loading transaction ledger...</p>
+            <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Fetching transaction ledger & RuPay records...</p>
           </div>
         ) : transactions.length === 0 ? (
           <div className="py-16 text-center text-slate-400 px-4">

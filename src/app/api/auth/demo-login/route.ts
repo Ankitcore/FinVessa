@@ -8,6 +8,7 @@ export async function POST() {
       (await prisma.user.findFirst({
         where: {
           OR: [
+            { email: "aarav@finvessa.in" },
             { email: "aarav@novafinance.in" },
             { email: "demo@novafinance.com" },
           ],

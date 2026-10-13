@@ -112,7 +112,7 @@ export default function SettingsPage() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `nova-finance-backup-${new Date().toISOString().split("T")[0]}.json`;
+        a.download = `finvessa-backup-${new Date().toISOString().split("T")[0]}.json`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -164,7 +164,7 @@ export default function SettingsPage() {
                 <input
                   type="email"
                   disabled
-                  value={user?.email || "aarav@novafinance.in"}
+                  value={user?.email || "aarav@finvessa.in"}
                   className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-slate-400 outline-none cursor-not-allowed"
                 />
               </div>
