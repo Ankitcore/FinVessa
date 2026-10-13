@@ -52,9 +52,10 @@ export function Sidebar() {
         <div>
           <span className="font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
             Nova<span className="text-gradient-purple-cyan font-black">Finance</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold ml-1">IN</span>
           </span>
           <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
-            Premium Wealth
+            Bharat Wealth & RuPay
           </p>
         </div>
       </Link>
@@ -126,10 +127,10 @@ export function Sidebar() {
             </div>
             <div className="min-w-0">
               <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-purple-300 transition-colors">
-                {user?.name || "Alex Sterling"}
+                {user?.name || "Aarav Sharma"}
               </p>
               <p className="text-[10px] text-slate-300 truncate">
-                {user?.email || "demo@novafinance.com"}
+                {user?.email || "aarav@novafinance.in"}
               </p>
             </div>
           </Link>

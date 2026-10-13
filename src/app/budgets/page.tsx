@@ -340,13 +340,13 @@ export default function BudgetsPage() {
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Monthly Limit ($)
+                  Monthly Limit (₹)
                 </label>
                 <input
                   type="number"
-                  step="1"
+                  step="100"
                   required
-                  placeholder="500"
+                  placeholder="15000"
                   value={budgetLimit}
                   onChange={(e) => setBudgetLimit(e.target.value)}
                   className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"

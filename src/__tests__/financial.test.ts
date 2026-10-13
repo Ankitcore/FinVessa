@@ -193,9 +193,12 @@ describe("Financial Correctness & Authoritative Calculations", () => {
   });
 
   it("formats currency using minor units and supports privacy concealing", () => {
+    expect(formatCurrency(125050)).toBe("₹1,250.50"); // default INR
+    expect(formatCurrency(125050, "INR", false)).toBe("₹1,250.50");
+    expect(formatCurrency(12500000, "INR", false)).toBe("₹1,25,000.00"); // Indian lakh formatting
     expect(formatCurrency(125050, "USD", false)).toBe("$1,250.50");
     expect(formatCurrency(125050, "EUR", false)).toBe("€1,250.50");
     expect(formatCurrency(125050, "GBP", false)).toBe("£1,250.50");
-    expect(formatCurrency(125050, "USD", true)).toBe("••••••");
+    expect(formatCurrency(125050, "INR", true)).toBe("••••••");
   });
 });

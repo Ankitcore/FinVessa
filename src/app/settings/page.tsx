@@ -24,8 +24,8 @@ export default function SettingsPage() {
   const { currency, setCurrency, isBalanceHidden, toggleBalanceVisibility } = useCurrency();
   const { toast } = useToast();
 
-  const [name, setName] = useState(user?.name || "Alex Sterling");
-  const [selectedCurrency, setSelectedCurrency] = useState(currency || "USD");
+  const [name, setName] = useState(user?.name || "Aarav Sharma");
+  const [selectedCurrency, setSelectedCurrency] = useState(currency || "INR");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -164,7 +164,7 @@ export default function SettingsPage() {
                 <input
                   type="email"
                   disabled
-                  value={user?.email || "demo@novafinance.com"}
+                  value={user?.email || "aarav@novafinance.in"}
                   className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-400 outline-none cursor-not-allowed"
                 />
               </div>
@@ -179,11 +179,11 @@ export default function SettingsPage() {
                 onChange={(e) => setSelectedCurrency(e.target.value)}
                 className="w-full sm:w-64 bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none"
               >
+                <option value="INR">INR (₹) — Indian Rupee (Default)</option>
                 <option value="USD">USD ($) — United States Dollar</option>
                 <option value="EUR">EUR (€) — Euro</option>
                 <option value="GBP">GBP (£) — British Pound</option>
                 <option value="JPY">JPY (¥) — Japanese Yen</option>
-                <option value="INR">INR (₹) — Indian Rupee</option>
                 <option value="CAD">CAD (CA$) — Canadian Dollar</option>
                 <option value="AUD">AUD (AU$) — Australian Dollar</option>
               </select>

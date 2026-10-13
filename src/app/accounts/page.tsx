@@ -388,7 +388,7 @@ export default function AccountsPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Fidelity Brokerage, Chase Savings"
+                  placeholder="e.g. HDFC Bank Salary, SBI Wealth Vault, Zerodha"
                   value={createName}
                   onChange={(e) => setCreateName(e.target.value)}
                   className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
@@ -404,17 +404,17 @@ export default function AccountsPage() {
                   onChange={(e) => setCreateType(e.target.value)}
                   className="w-full bg-[#0f1626] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
                 >
-                  <option value="CHECKING">Checking Account</option>
+                  <option value="CHECKING">Salary / Current Account</option>
                   <option value="SAVINGS">High Yield Savings</option>
-                  <option value="CREDIT_CARD">Credit Card / Liability</option>
-                  <option value="INVESTMENT">Investment & Crypto</option>
-                  <option value="CASH">Cash Wallet</option>
+                  <option value="CREDIT_CARD">RuPay / Credit Card (Liability)</option>
+                  <option value="INVESTMENT">Mutual Funds & Demat</option>
+                  <option value="CASH">Cash / UPI Wallet</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Starting Balance ($)
+                  Starting Balance (₹)
                 </label>
                 <input
                   type="number"
@@ -528,7 +528,7 @@ export default function AccountsPage() {
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Transfer Amount ($)
+                  Transfer Amount (₹)
                 </label>
                 <input
                   type="number"

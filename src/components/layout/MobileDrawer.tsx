@@ -156,10 +156,10 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-medium text-slate-200 truncate">
-                  {user?.name || "Alex Sterling"}
+                  {user?.name || "Aarav Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-300 truncate">
-                  {user?.email || "demo@novafinance.com"}
+                  {user?.email || "aarav@novafinance.in"}
                 </p>
               </div>
             </div>

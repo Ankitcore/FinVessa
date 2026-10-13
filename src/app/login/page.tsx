@@ -51,7 +51,7 @@ export default function LoginPage() {
       const res = await fetch("/api/auth/demo-login", { method: "POST" });
       const data = await res.json();
       if (res.ok) {
-        toast.success("Welcome, Alex Sterling! Demo session initialized.");
+        toast.success("Welcome, Aarav Sharma! Demo session initialized.");
         await refreshUser();
         router.push("/dashboard");
       } else {
@@ -82,7 +82,7 @@ export default function LoginPage() {
             Welcome to <span className="text-gradient-purple-cyan">Nova Finance</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Access your private wealth dashboard & cash flow
+            Access your Bharat wealth dashboard & RuPay cards
           </p>
         </div>
 
@@ -99,7 +99,7 @@ export default function LoginPage() {
             ) : (
               <Zap className="w-4 h-4 text-cyan-400" />
             )}
-            <span>1-Click Demo Login (Alex Sterling)</span>
+            <span>1-Click Demo Login (Aarav Sharma)</span>
           </button>
           <div className="flex items-center gap-3 my-4">
             <div className="flex-1 h-[1px] bg-white/[0.08]" />
@@ -127,7 +127,7 @@ export default function LoginPage() {
               <input
                 type="email"
                 required
-                placeholder="demo@novafinance.com"
+                placeholder="aarav@novafinance.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-slate-400 outline-none transition-all"

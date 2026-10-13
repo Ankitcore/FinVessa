@@ -42,33 +42,33 @@ export async function POST(req: NextRequest) {
         name: name.trim(),
         email: lowerEmail,
         passwordHash,
-        currency: "USD",
+        currency: "INR",
         accounts: {
           create: [
             {
-              name: "Primary Checking",
+              name: "HDFC Primary Salary Account",
               type: "CHECKING",
-              balanceCents: 500000, // $5,000 starter demo balance
+              balanceCents: 5000000, // ₹50,000.00 starter balance
               color: "#8B5CF6",
             },
             {
-              name: "Emergency Savings",
+              name: "SBI Emergency Savings Vault",
               type: "SAVINGS",
-              balanceCents: 1000000, // $10,000 starter demo balance
+              balanceCents: 10000000, // ₹1,00,000.00 starter balance
               color: "#06B6D4",
             },
           ],
         },
         categories: {
           create: [
-            { name: "Salary & Wages", type: "INCOME", icon: "Briefcase", color: "#10B981" },
-            { name: "Freelance", type: "INCOME", icon: "Laptop", color: "#06B6D4" },
-            { name: "Rent & Housing", type: "EXPENSE", icon: "Home", color: "#F43F5E" },
-            { name: "Groceries", type: "EXPENSE", icon: "ShoppingCart", color: "#F59E0B" },
-            { name: "Dining & Food", type: "EXPENSE", icon: "Utensils", color: "#EC4899" },
-            { name: "Tech & Software", type: "EXPENSE", icon: "Cpu", color: "#8B5CF6" },
-            { name: "Utilities", type: "EXPENSE", icon: "Zap", color: "#06B6D4" },
-            { name: "Entertainment", type: "EXPENSE", icon: "Film", color: "#A855F7" },
+            { name: "Salary & Corporate", type: "INCOME", icon: "Briefcase", color: "#10B981" },
+            { name: "Freelance & Consulting", type: "INCOME", icon: "Laptop", color: "#06B6D4" },
+            { name: "Rent & Society Maintenance", type: "EXPENSE", icon: "Home", color: "#F43F5E" },
+            { name: "Groceries & Blinkit", type: "EXPENSE", icon: "ShoppingCart", color: "#F59E0B" },
+            { name: "Dining & Swiggy/Zomato", type: "EXPENSE", icon: "Utensils", color: "#EC4899" },
+            { name: "Electronics & Tech", type: "EXPENSE", icon: "Cpu", color: "#8B5CF6" },
+            { name: "Electricity & Utilities", type: "EXPENSE", icon: "Zap", color: "#06B6D4" },
+            { name: "Movies & Entertainment", type: "EXPENSE", icon: "Film", color: "#A855F7" },
           ],
         },
       },
@@ -85,12 +85,12 @@ export async function POST(req: NextRequest) {
         accountId: checking ? checking.id : null,
         cardholderName: newUser.name.toUpperCase(),
         cardNumberMasked: "•••• •••• •••• 5120",
-        fullNumber: "4242 5100 8820 5120",
+        fullNumber: "6521 5100 8820 5120",
         cardExpiry: "09/30",
         cardCvv: "891",
-        cardType: "VISA",
+        cardType: "RUPAY",
         cardStyle: "PURPLE_CYAN",
-        spendingLimitCents: 500000,
+        spendingLimitCents: 10000000, // ₹1,00,000
       },
     });
 

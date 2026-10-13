@@ -11,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function formatCurrency(
   cents: number,
-  currencyCode: string = "USD",
+  currencyCode: string = "INR",
   hideBalance: boolean = false
 ): string {
   if (hideBalance) {
@@ -19,25 +19,26 @@ export function formatCurrency(
   }
 
   const symbols: Record<string, string> = {
+    INR: "₹",
     USD: "$",
     EUR: "€",
     GBP: "£",
     JPY: "¥",
-    INR: "₹",
     CAD: "CA$",
     AUD: "AU$",
   };
 
-  const symbol = symbols[currencyCode] || "$";
-  const dollars = cents / 100;
+  const symbol = symbols[currencyCode] || "₹";
+  const amount = cents / 100;
+  const locale = currencyCode === "INR" ? "en-IN" : "en-US";
 
-  // Format with commas and 2 decimals
-  const formatted = Math.abs(dollars).toLocaleString("en-US", {
+  // Format with commas and 2 decimals (supports Indian numbering system: lakhs and crores)
+  const formatted = Math.abs(amount).toLocaleString(locale, {
     minimumFractionDigits: currencyCode === "JPY" ? 0 : 2,
     maximumFractionDigits: currencyCode === "JPY" ? 0 : 2,
   });
 
-  const sign = dollars < 0 ? "-" : "";
+  const sign = amount < 0 ? "-" : "";
   return `${sign}${symbol}${formatted}`;
 }
 

@@ -41,9 +41,9 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
     ? showFullNumber && card.fullNumber
       ? card.fullNumber
       : card.cardNumberMasked
-    : "•••• •••• •••• 4289";
+    : "•••• •••• •••• 8291";
 
-  const cardholder = card?.cardholderName || "ALEX STERLING";
+  const cardholder = card?.cardholderName || "AARAV SHARMA";
   const expiry = card?.cardExpiry || "08/29";
   const cvv = showCvv ? card?.cardCvv || "739" : "•••";
 
@@ -103,9 +103,14 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
             <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/20">
               <CardIcon className="w-4 h-4 text-cyan-300" />
             </div>
-            <span className="font-bold tracking-wider text-xs sm:text-sm text-slate-100">
-              NOVA <span className="text-cyan-300 font-light">BLACK</span>
-            </span>
+            <div>
+              <span className="font-bold tracking-wider text-xs sm:text-sm text-slate-100 flex items-center gap-1">
+                NOVA <span className="text-cyan-300 font-light">BHARAT</span>
+              </span>
+              <span className="text-[8px] text-orange-400 font-semibold tracking-widest block uppercase">
+                UPI ENABLED
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 text-slate-300">
@@ -174,14 +179,36 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
             </button>
           </div>
 
-          {/* Visa/Mastercard badge */}
+          {/* RuPay / Visa / Mastercard badge */}
           <div className="flex flex-col items-end">
-            <span className="font-black italic text-lg sm:text-xl tracking-tighter text-white drop-shadow">
-              VISA
-            </span>
-            <span className="text-[8px] uppercase tracking-widest text-cyan-200">
-              Infinite
-            </span>
+            {card?.cardType === "VISA" ? (
+              <>
+                <span className="font-black italic text-lg sm:text-xl tracking-tighter text-white drop-shadow">
+                  VISA
+                </span>
+                <span className="text-[8px] uppercase tracking-widest text-cyan-200">
+                  Signature
+                </span>
+              </>
+            ) : card?.cardType === "MASTERCARD" ? (
+              <>
+                <span className="font-black italic text-base sm:text-lg tracking-tighter text-white drop-shadow">
+                  Mastercard
+                </span>
+                <span className="text-[8px] uppercase tracking-widest text-cyan-200">
+                  World
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="font-black italic text-lg sm:text-xl tracking-tighter text-white drop-shadow flex items-center">
+                  RuPay<span className="text-orange-400 not-italic font-black text-sm ml-0.5">❯</span>
+                </span>
+                <span className="text-[8px] uppercase tracking-widest text-cyan-200">
+                  Platinum
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>

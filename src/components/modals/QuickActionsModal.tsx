@@ -243,7 +243,7 @@ export function QuickActionsModal({
             </label>
             <div className="relative">
               <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
-                $
+                ₹
               </span>
               <input
                 type="number"
@@ -266,10 +266,10 @@ export function QuickActionsModal({
               type="text"
               placeholder={
                 activeTab === "EXPENSE"
-                  ? "e.g. Grocery store, Uber, Netflix"
+                  ? "e.g. Blinkit groceries, Swiggy, Zepto, Uber"
                   : activeTab === "INCOME"
-                  ? "e.g. Client invoice, Salary bonus"
-                  : "e.g. Savings deposit"
+                  ? "e.g. Tech salary credit, Client UPI payout"
+                  : "e.g. Transfer to SBI Savings Vault"
               }
               value={description}
               onChange={(e) => setDescription(e.target.value)}

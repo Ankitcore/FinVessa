@@ -40,7 +40,7 @@ async function main() {
   const accRes = await fetch("http://localhost:3000/api/accounts", { headers });
   const accData = await accRes.json();
   console.log("4. Accounts API Status:", accRes.status);
-  console.log("   Accounts:", accData.accounts.map((a) => `${a.name} ($${(a.balanceCents/100).toFixed(2)})`).join(", "));
+  console.log("   Accounts:", accData.accounts.map((a) => `${a.name} (₹${(a.balanceCents/100).toFixed(2)})`).join(", "));
 
   // 5. Test Analytics API
   const anaRes = await fetch("http://localhost:3000/api/analytics?months=6", { headers });
@@ -54,8 +54,8 @@ async function main() {
   const budData = await budRes.json();
   console.log("6. Budgets API Status:", budRes.status);
   console.log("   Budgets active:", budData.budgets.length);
-  console.log("   Total Budget Cap:", `$${(budData.summary.totalBudgetLimitCents/100).toFixed(2)}`);
-  console.log("   Total Budget Spent:", `$${(budData.summary.totalSpentCents/100).toFixed(2)}`);
+  console.log("   Total Budget Cap:", `₹${(budData.summary.totalBudgetLimitCents/100).toFixed(2)}`);
+  console.log("   Total Budget Spent:", `₹${(budData.summary.totalSpentCents/100).toFixed(2)}`);
 
   // 7. Test Bills API
   const billRes = await fetch("http://localhost:3000/api/bills", { headers });

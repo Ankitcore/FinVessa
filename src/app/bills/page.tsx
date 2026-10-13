@@ -352,7 +352,7 @@ export default function BillsPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. AWS Cloud Hosting, Electric Utility"
+                  placeholder="e.g. Tata Power Electricity, Airtel Fiber, HDFC EMI"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"
@@ -361,13 +361,13 @@ export default function BillsPage() {
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Amount ($)
+                  Amount (₹)
                 </label>
                 <input
                   type="number"
                   step="0.01"
                   required
-                  placeholder="89.40"
+                  placeholder="3420.00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white outline-none"

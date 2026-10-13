@@ -4,9 +4,15 @@ import { signToken, AUTH_COOKIE_NAME } from "@/lib/auth";
 
 export async function POST() {
   try {
-    const demoUser = await prisma.user.findUnique({
-      where: { email: "demo@novafinance.com" },
-    });
+    const demoUser =
+      (await prisma.user.findFirst({
+        where: {
+          OR: [
+            { email: "aarav@novafinance.in" },
+            { email: "demo@novafinance.com" },
+          ],
+        },
+      })) || (await prisma.user.findFirst());
 
     if (!demoUser) {
       return NextResponse.json(
@@ -19,7 +25,7 @@ export async function POST() {
       id: demoUser.id,
       email: demoUser.email,
       name: demoUser.name,
-      currency: demoUser.currency,
+      currency: demoUser.currency || "INR",
     };
 
     const token = signToken(sessionUser);
