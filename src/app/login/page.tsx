@@ -66,25 +66,22 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute w-[500px] h-[500px] rounded-full bg-purple-700/10 blur-[130px] pointer-events-none -top-40 -left-40" />
-      <div className="absolute w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none -bottom-40 -right-40" />
-
+    <div className="min-h-screen bg-transparent text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <div className="glass-card max-w-md w-full rounded-3xl p-7 sm:p-9 border border-white/10 relative z-10 shadow-2xl">
         {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl overflow-hidden bg-[#0d1424] border border-white/10 p-1 mb-4 shadow-glow">
             <Image
-              src="/finvessa-icon.png"
+              src="/favicon.svg"
               alt="FINVESSA Logo"
               width={56}
               height={56}
+              unoptimized
               className="w-full h-full object-cover rounded-[12px]"
             />
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight text-white">
-            Welcome to <span className="text-gradient-purple-cyan">FINVESSA</span>
+            Welcome to <span className="text-gradient-cyan">FINVESSA</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1 font-medium">
             See your money. Shape your future
@@ -97,7 +94,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleDemoLogin}
             disabled={demoLoading || loading}
-            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600/30 via-indigo-600/30 to-cyan-500/30 hover:from-purple-600/50 hover:to-cyan-500/50 border border-purple-500/40 text-slate-100 font-semibold text-xs transition-all shadow-glow active:scale-[0.98]"
+            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 hover:text-white font-semibold text-xs transition-colors shadow-glow"
           >
             {demoLoading ? (
               <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
@@ -135,7 +132,7 @@ export default function LoginPage() {
                 placeholder="spershika@finvessa.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl pl-10 pr-3.5 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
               />
             </div>
           </div>
@@ -152,7 +149,7 @@ export default function LoginPage() {
                 placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-10 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl pl-10 pr-10 py-2.5 text-base sm:text-xs text-white placeholder-slate-400 outline-none transition-all"
               />
               <button
                 type="button"
@@ -167,10 +164,10 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading || demoLoading}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-glow transition-all active:scale-[0.98] disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-glow transition-colors disabled:opacity-50"
           >
             {loading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
             ) : (
               <>
                 <span>Sign In to Dashboard</span>

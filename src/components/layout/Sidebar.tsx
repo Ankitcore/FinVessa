@@ -19,6 +19,7 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
+  HelpCircle,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -32,6 +33,7 @@ const navItems = [
   { name: "Budgets", href: "/budgets", icon: PieChart },
   { name: "Bills & Payments", href: "/bills", icon: CalendarCheck },
   { name: "Cards", href: "/cards", icon: CreditCard },
+  { name: "How It Works", href: "/how-it-works", icon: HelpCircle },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
@@ -56,21 +58,22 @@ export function Sidebar() {
             isCollapsed ? "justify-center w-full px-0" : "px-2"
           }`}
           aria-label="FINVESSA Dashboard"
-          title="FINVESSA — See your money. Shape your future"
+          title="FINVESSA - See your money. Shape your future"
         >
           <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0 flex items-center justify-center">
             <Image
-              src="/finvessa-icon.png"
+              src="/favicon.svg"
               alt="FINVESSA Logo"
               width={40}
               height={40}
+              unoptimized
               className="w-full h-full object-cover rounded-[10px] group-hover:scale-105 transition-transform"
             />
           </div>
           {!isCollapsed && (
             <div className="overflow-hidden transition-all duration-300">
               <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
-                FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                FIN<span className="text-gradient-cyan font-black">VESSA</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold ml-1">
                   IN
                 </span>
@@ -120,7 +123,7 @@ export function Sidebar() {
                   : "gap-3.5 px-3.5 py-2.5"
               } ${
                 isActive
-                  ? "bg-gradient-to-r from-purple-600/20 to-cyan-500/10 text-white border border-purple-500/30 shadow-glow"
+                  ? "bg-gradient-to-r from-blue-600/20 to-cyan-500/10 text-white border border-cyan-500/30 shadow-glow-cyan"
                   : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]"
               }`}
             >
@@ -128,7 +131,7 @@ export function Sidebar() {
                 className={`w-4 h-4 shrink-0 transition-colors ${
                   isActive
                     ? "text-cyan-400"
-                    : "text-slate-400 group-hover:text-purple-400"
+                    : "text-slate-400 group-hover:text-cyan-400"
                 }`}
               />
               {!isCollapsed && (
@@ -172,8 +175,8 @@ export function Sidebar() {
           }`}
           title={
             isBalanceHidden
-              ? "Balances Hidden — Click to Reveal"
-              : "Balances Visible — Click to Conceal"
+              ? "Balances Hidden - Click to Reveal"
+              : "Balances Visible - Click to Conceal"
           }
         >
           <span className="flex items-center gap-2">
@@ -206,7 +209,7 @@ export function Sidebar() {
             className="flex items-center gap-2.5 min-w-0 group"
             title={user?.name || "Spershika Sharma"}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20 shrink-0 overflow-hidden">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold text-xs ring-1 ring-white/20 shrink-0 overflow-hidden">
               {user?.avatar ? (
                 <img
                   src={user.avatar}
@@ -219,7 +222,7 @@ export function Sidebar() {
             </div>
             {!isCollapsed && (
               <div className="min-w-0 overflow-hidden">
-                <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-purple-300 transition-colors">
+                <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-cyan-300 transition-colors">
                   {user?.name || "Spershika Sharma"}
                 </p>
                 <p className="text-[10px] text-slate-300 truncate">

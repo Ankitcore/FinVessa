@@ -16,6 +16,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
 import { motion } from "framer-motion";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 
 export default function BudgetsPage() {
   const { formatAmount } = useCurrency();
@@ -137,7 +138,7 @@ export default function BudgetsPage() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow transition-all active:scale-95 self-start sm:self-auto"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all self-start sm:self-auto"
           >
             <Plus className="w-4 h-4" />
             <span>Create Budget</span>
@@ -155,20 +156,20 @@ export default function BudgetsPage() {
             </span>
           </div>
 
-          <div className="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden p-0.5 border border-white/[0.05]">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${Math.min(100, summary.percentageUsed || 0)}%` }}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              className={`h-full rounded-full ${
-                (summary.percentageUsed || 0) > 100
-                  ? "bg-rose-500 shadow-glow"
-                  : (summary.percentageUsed || 0) > 80
-                  ? "bg-amber-400"
-                  : "bg-gradient-to-r from-purple-500 to-cyan-400"
-              }`}
-            />
-          </div>
+          <ProgressBar
+            value={summary.percentageUsed || 0}
+            max={100}
+            size="lg"
+            delay={0.25}
+            duration={1.05}
+            colorClassName={
+              (summary.percentageUsed || 0) > 100
+                ? "bg-rose-500 shadow-glow"
+                : (summary.percentageUsed || 0) > 80
+                ? "bg-amber-400"
+                : "bg-gradient-to-r from-cyan-500 via-sky-400 to-blue-500"
+            }
+          />
 
           <div className="flex items-center justify-between text-[11px] text-slate-400">
             <span>
@@ -194,7 +195,7 @@ export default function BudgetsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {loading ? (
           <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-2" />
+            <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-2" />
             <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
             <p className="text-xs text-slate-400 mt-0.5">Calculating live category thresholds & limits...</p>
           </div>
@@ -268,24 +269,21 @@ export default function BudgetsPage() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden mb-3">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, b.percentageUsed)}%` }}
-                    transition={{
-                      duration: 0.75,
-                      delay: Math.min(index * 0.05 + 0.1, 0.5),
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className={`h-full rounded-full ${
-                      isExceeded
-                        ? "bg-rose-500"
-                        : isWarning
-                        ? "bg-amber-400"
-                        : "bg-gradient-to-r from-purple-500 to-cyan-400"
-                    }`}
-                  />
-                </div>
+                <ProgressBar
+                  value={b.percentageUsed}
+                  max={100}
+                  size="sm"
+                  delay={Math.min(index * 0.05 + 0.15, 0.5)}
+                  duration={0.85}
+                  className="mb-3"
+                  colorClassName={
+                    isExceeded
+                      ? "bg-rose-500"
+                      : isWarning
+                      ? "bg-amber-400"
+                      : "bg-gradient-to-r from-cyan-500 to-blue-500"
+                  }
+                />
 
                 <div className="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-white/[0.05]">
                   <span>{b.category?.name || "General"}</span>
@@ -337,7 +335,7 @@ export default function BudgetsPage() {
                   placeholder="e.g. Dining & Restaurants"
                   value={budgetName}
                   onChange={(e) => setBudgetName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -348,7 +346,7 @@ export default function BudgetsPage() {
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="">All Categories (General)</option>
                   {categories.map((c) => (
@@ -370,7 +368,7 @@ export default function BudgetsPage() {
                   placeholder="15000"
                   value={budgetLimit}
                   onChange={(e) => setBudgetLimit(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -385,7 +383,7 @@ export default function BudgetsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all min-h-[44px]"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Save Budget

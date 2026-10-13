@@ -20,6 +20,7 @@ import { VirtualCardWidget } from "@/components/cards/VirtualCardWidget";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
 
 export default function CardsPage() {
   const { formatAmount } = useCurrency();
@@ -36,7 +37,7 @@ export default function CardsPage() {
   const [cardholderName, setCardholderName] = useState("Spershika Sharma");
   const [accountId, setAccountId] = useState("");
   const [cardType, setCardType] = useState("RUPAY");
-  const [cardStyle, setCardStyle] = useState("PURPLE_CYAN");
+  const [cardStyle, setCardStyle] = useState("SAPPHIRE_CYAN");
   const [newLimit, setNewLimit] = useState("50000");
   const [submitting, setSubmitting] = useState(false);
 
@@ -139,7 +140,7 @@ export default function CardsPage() {
 
         <button
           onClick={() => setIsAddOpen(true)}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow transition-all active:scale-95"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all"
         >
           <Plus className="w-4 h-4" />
           <span>Issue New Card</span>
@@ -150,12 +151,19 @@ export default function CardsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         {loading ? (
           <div className="col-span-full py-16 flex justify-center text-slate-400">
-            <Loader2 className="w-6 h-6 animate-spin text-purple-400" />
+            <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
           </div>
         ) : (
-          cards.map((card) => (
-            <div
+          cards.map((card, index) => (
+            <motion.div
               key={card.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.45,
+                delay: Math.min(index * 0.08, 0.4),
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="space-y-4"
               onClick={() => setSelectedCard(card)}
             >
@@ -176,7 +184,7 @@ export default function CardsPage() {
                   <Sliders className="w-3.5 h-3.5" /> Adjust Limit
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))
         )}
       </div>
@@ -221,7 +229,7 @@ export default function CardsPage() {
                   required
                   value={cardholderName}
                   onChange={(e) => setCardholderName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -232,7 +240,7 @@ export default function CardsPage() {
                 <select
                   value={accountId}
                   onChange={(e) => setAccountId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="">No Account (Standalone Virtual)</option>
                   {accounts.map((a) => (
@@ -251,7 +259,7 @@ export default function CardsPage() {
                   <select
                     value={cardType}
                     onChange={(e) => setCardType(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   >
                     <option value="RUPAY">RuPay Platinum</option>
                     <option value="VISA">Visa Infinite</option>
@@ -269,7 +277,7 @@ export default function CardsPage() {
                     required
                     value={newLimit}
                     onChange={(e) => setNewLimit(e.target.value)}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -285,7 +293,7 @@ export default function CardsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all min-h-[44px]"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Issue Card

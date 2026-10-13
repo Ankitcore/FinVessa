@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
         cardExpiry: "09/30",
         cardCvv: "891",
         cardType: "RUPAY",
-        cardStyle: "PURPLE_CYAN",
+        cardStyle: "SAPPHIRE_CYAN",
         spendingLimitCents: 10000000, // ₹1,00,000
       },
     });

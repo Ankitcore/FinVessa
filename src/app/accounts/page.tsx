@@ -22,6 +22,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
 
 export default function AccountsPage() {
   const { formatAmount } = useCurrency();
@@ -218,14 +219,14 @@ export default function AccountsPage() {
               }
               setIsTransferOpen(true);
             }}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold shadow-glow-cyan transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold shadow-glow-cyan transition-all"
           >
             <ArrowLeftRight className="w-4 h-4" />
             <span>Transfer Money</span>
           </button>
           <button
             onClick={() => setIsCreateOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all"
           >
             <Plus className="w-4 h-4" />
             <span>New Account</span>
@@ -237,18 +238,26 @@ export default function AccountsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         {loading ? (
           <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-2" />
+            <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-2" />
             <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
             <p className="text-xs text-slate-400 mt-0.5">Syncing account balances & Bharat banking...</p>
           </div>
         ) : (
-          accounts.map((acc) => {
+          accounts.map((acc, index) => {
             const Icon = getAccountIcon(acc.type);
             const isSelected = selectedAccount?.id === acc.id;
 
             return (
-              <div
+              <motion.div
                 key={acc.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.45,
+                  delay: Math.min(index * 0.06, 0.35),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
                 onClick={() => setSelectedAccount(acc)}
                 className={`glass-card glass-card-hover rounded-2xl p-5 border cursor-pointer transition-all relative overflow-hidden ${
                   isSelected
@@ -259,7 +268,7 @@ export default function AccountsPage() {
                 {/* Decorative glow */}
                 <div
                   className="absolute -right-6 -bottom-6 w-20 h-20 rounded-full blur-xl opacity-20 pointer-events-none"
-                  style={{ backgroundColor: acc.color || "#8B5CF6" }}
+                  style={{ backgroundColor: acc.color || "#0284C7" }}
                 />
 
                 <div className="flex items-center justify-between mb-4">
@@ -304,7 +313,7 @@ export default function AccountsPage() {
                     {isSelected ? "Inspecting" : "Click to view"}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             );
           })
         )}
@@ -392,7 +401,7 @@ export default function AccountsPage() {
                   placeholder="e.g. HDFC Bank Salary, SBI Wealth Vault, Zerodha"
                   value={createName}
                   onChange={(e) => setCreateName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -403,7 +412,7 @@ export default function AccountsPage() {
                 <select
                   value={createType}
                   onChange={(e) => setCreateType(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   <option value="CHECKING">Salary / Current Account</option>
                   <option value="SAVINGS">High Yield Savings</option>
@@ -422,7 +431,7 @@ export default function AccountsPage() {
                   step="0.01"
                   value={createBalance}
                   onChange={(e) => setCreateBalance(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -431,7 +440,7 @@ export default function AccountsPage() {
                   Accent Color
                 </label>
                 <div className="flex items-center gap-2">
-                  {["#8B5CF6", "#06B6D4", "#10B981", "#EC4899", "#F59E0B"].map(
+                  {["#0284C7", "#06B6D4", "#10B981", "#EC4899", "#F59E0B"].map(
                     (color) => (
                       <button
                         key={color}
@@ -460,7 +469,7 @@ export default function AccountsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all"
+                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow-cyan transition-all"
                 >
                   {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   Create Account

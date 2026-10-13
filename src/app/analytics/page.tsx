@@ -30,8 +30,9 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { formatCurrency } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { motion } from "framer-motion";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 
-const COLORS = ["#8B5CF6", "#06B6D4", "#EC4899", "#F59E0B", "#10B981", "#3B82F6", "#F43F5E"];
+const COLORS = ["#0284C7", "#06B6D4", "#10B981", "#F59E0B", "#3B82F6", "#EC4899", "#F43F5E"];
 
 export default function AnalyticsPage() {
   const { formatAmount, currency } = useCurrency();
@@ -100,7 +101,7 @@ export default function AnalyticsPage() {
               onClick={() => setMonthsBack(6)}
               className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 monthsBack === 6
-                  ? "bg-purple-600/30 text-white border border-purple-500/40 shadow-glow"
+                  ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-glow-cyan"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -110,7 +111,7 @@ export default function AnalyticsPage() {
               onClick={() => setMonthsBack(12)}
               className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 monthsBack === 12
-                  ? "bg-purple-600/30 text-white border border-purple-500/40 shadow-glow"
+                  ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-glow-cyan"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -126,7 +127,7 @@ export default function AnalyticsPage() {
           { label: "Period Income", val: formatAmount(summary.totalIncomeCents), border: "border-emerald-500/20", text: "text-emerald-400" },
           { label: "Period Expenses", val: formatAmount(summary.totalExpenseCents), border: "border-rose-500/20", text: "text-rose-400" },
           { label: "Net Savings", val: formatAmount(summary.netCashFlowCents), border: "border-cyan-500/20", text: "text-cyan-400" },
-          { label: "Average Savings Rate", val: `${summary.overallSavingsRate}%`, border: "border-purple-500/20", text: "text-purple-400" },
+          { label: "Average Savings Rate", val: `${summary.overallSavingsRate}%`, border: "border-blue-500/20", text: "text-blue-400" },
         ].map((badge, i) => (
           <motion.div
             key={badge.label}
@@ -199,7 +200,7 @@ export default function AnalyticsPage() {
           className="glass-card rounded-2xl p-6 border border-white/[0.08]"
         >
           <h3 className="text-base font-bold text-white mb-1 flex items-center gap-2">
-            <PieIcon className="w-4 h-4 text-purple-400" /> Spending Distribution
+            <PieIcon className="w-4 h-4 text-cyan-400" /> Spending Distribution
           </h3>
           <p className="text-xs text-slate-400 mb-4">
             Percentage allocation across categories
@@ -207,7 +208,7 @@ export default function AnalyticsPage() {
 
           <div className="w-full h-64 flex items-center justify-center">
             {loading ? (
-              <Loader2 className="w-6 h-6 animate-spin text-purple-400" />
+              <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
             ) : data?.spendingByCategory?.length === 0 ? (
               <div className="text-xs text-slate-400">No expenses recorded</div>
             ) : (
@@ -272,8 +273,21 @@ export default function AnalyticsPage() {
                   <td className="py-3 px-4 text-right font-bold text-white">
                     {formatAmount(cat.amountCents)}
                   </td>
-                  <td className="py-3 px-4 text-right text-slate-300 font-semibold">
-                    {cat.percentage}%
+                  <td className="py-3 px-4 text-right">
+                    <div className="flex items-center justify-end gap-3">
+                      <div className="w-20 hidden sm:block">
+                        <ProgressBar
+                          value={cat.percentage || 0}
+                          max={100}
+                          size="sm"
+                          delay={0.2 + i * 0.05}
+                          colorClassName="bg-gradient-to-r from-cyan-500 to-blue-500"
+                        />
+                      </div>
+                      <span className="text-slate-300 font-semibold w-9 text-right">
+                        {cat.percentage}%
+                      </span>
+                    </div>
                   </td>
                 </tr>
               ))}

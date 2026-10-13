@@ -1,23 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500" role="img" aria-labelledby="title desc">
   <title id="title">FINVESSA</title>
-  <desc id="desc">FINVESSA finance brand logo for light backgrounds.</desc>
+  <desc id="desc">FINVESSA finance brand logo with a flowing purple-to-cyan F symbol and the tagline See your money. Shape your future.</desc>
   <defs>
-    <linearGradient id="ribbonTop" x1="0" y1="0" x2="1" y2="0.75"><stop offset="0" stop-color="#7C3AED"/><stop offset="0.48" stop-color="#4F7BFF"/><stop offset="1" stop-color="#55F2D0"/></linearGradient>
-    <linearGradient id="ribbonBottom" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#3979FF"/><stop offset="1" stop-color="#39E6D0"/></linearGradient>
-    <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6D35F5"/><stop offset="0.55" stop-color="#4F8DFF"/><stop offset="1" stop-color="#36E5D2"/></linearGradient>
-    <linearGradient id="barFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6C54FF" stop-opacity="0.9"/><stop offset="1" stop-color="#36DCCB" stop-opacity="0.08"/></linearGradient>
-    <linearGradient id="wordmarkGradient" gradientUnits="userSpaceOnUse" x1="735" y1="0" x2="1205" y2="0"><stop offset="0" stop-color="#C05CFF"/><stop offset="0.34" stop-color="#9864FF"/><stop offset="0.66" stop-color="#5D7DFF"/><stop offset="1" stop-color="#38C8F4"/></linearGradient>
+    <linearGradient id="ribbonTop" x1="0" y1="0" x2="1" y2="0.75">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="0.48" stop-color="#4F7BFF"/>
+      <stop offset="1" stop-color="#55F2D0"/>
+    </linearGradient>
+    <linearGradient id="ribbonBottom" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="0.5" stop-color="#3979FF"/>
+      <stop offset="1" stop-color="#39E6D0"/>
+    </linearGradient>
+    <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6D35F5"/>
+      <stop offset="0.55" stop-color="#4F8DFF"/>
+      <stop offset="1" stop-color="#36E5D2"/>
+    </linearGradient>
+    <linearGradient id="wordmark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D8DEFF"/>
+    </linearGradient>
+    <linearGradient id="barFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6C54FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#36DCCB" stop-opacity="0.08"/>
+    </linearGradient>
   </defs>
   <g transform="translate(38 24)">
     <path d="M100 365 C48 299 47 207 91 135 C132 68 204 33 281 35" fill="none" stroke="url(#orbit)" stroke-width="8" stroke-linecap="round" opacity="0.95"/>
-    <g opacity="0.68"><rect x="235" y="350" width="26" height="58" rx="8" fill="url(#barFade)"/><rect x="274" y="321" width="26" height="87" rx="8" fill="url(#barFade)"/><rect x="313" y="289" width="26" height="119" rx="8" fill="url(#barFade)"/><rect x="352" y="252" width="26" height="156" rx="8" fill="url(#barFade)"/></g>
+    <g opacity="0.68">
+      <rect x="235" y="350" width="26" height="58" rx="8" fill="url(#barFade)"/>
+      <rect x="274" y="321" width="26" height="87" rx="8" fill="url(#barFade)"/>
+      <rect x="313" y="289" width="26" height="119" rx="8" fill="url(#barFade)"/>
+      <rect x="352" y="252" width="26" height="156" rx="8" fill="url(#barFade)"/>
+    </g>
     <path d="M115 226 C112 159 148 113 214 96 L405 50 C405 99 377 135 331 148 L216 179 C189 187 174 207 174 239 L174 289 C139 275 117 253 115 226Z" fill="url(#ribbonTop)"/>
     <path d="M116 307 C119 265 145 238 190 226 L314 194 C316 235 294 264 255 276 L184 298 C162 305 150 324 150 350 L150 370 C127 354 114 333 116 307Z" fill="url(#ribbonBottom)"/>
     <path d="M151 370 C169 338 196 317 232 305 C225 343 204 378 171 402 C154 414 137 403 140 387 C142 381 146 375 151 370Z" fill="url(#ribbonTop)"/>
     <path d="M115 226 C112 159 148 113 214 96 L405 50" fill="none" stroke="#FFFFFF" stroke-opacity="0.58" stroke-width="3" stroke-linecap="round"/>
     <path d="M116 307 C119 265 145 238 190 226 L314 194" fill="none" stroke="#DDFEFF" stroke-opacity="0.35" stroke-width="2.5" stroke-linecap="round"/>
   </g>
-  <text x="500" y="260" font-family="Montserrat, Inter, Arial, sans-serif" font-size="142" font-weight="750" letter-spacing="5"><tspan fill="#FFFFFF">FIN</tspan><tspan fill="url(#wordmarkGradient)">VESSA</tspan></text>
-  <text x="505" y="329" fill="#E5E9F8" font-family="Inter, Montserrat, Arial, sans-serif" font-size="36" font-weight="400" letter-spacing="7">See your money.</text>
-  <text x="1016" y="329" fill="#36D9D5" font-family="Inter, Montserrat, Arial, sans-serif" font-size="36" font-weight="400" letter-spacing="7">Shape your future.</text>
+  <g>
+    <text x="500" y="260" fill="url(#wordmark)" font-family="Montserrat, Inter, Arial, sans-serif" font-size="142" font-weight="750" letter-spacing="5">FINVESSA</text>
+    <text x="505" y="329" fill="#E9EAF8" font-family="Inter, Montserrat, Arial, sans-serif" font-size="36" font-weight="400" letter-spacing="7">See your money.</text>
+    <text x="1016" y="329" fill="#38E1D4" font-family="Inter, Montserrat, Arial, sans-serif" font-size="36" font-weight="400" letter-spacing="7">Shape your future.</text>
+  </g>
 </svg>

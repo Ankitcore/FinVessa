@@ -110,10 +110,14 @@ export default function DashboardPage() {
             <span>Bharat RuPay & Banking Connected</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            See your money. <span className="text-gradient-purple-cyan">Shape your future</span>
+            See your money. <span className="text-gradient-cyan">Shape your future</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Welcome back, <span className="text-slate-200 font-semibold">{user?.name || "Spershika Sharma"}</span>. Unified overview of your wealth, liquid cash flows, and investments.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
+            Welcome back,{" "}
+            <strong className="font-extrabold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-md shadow-[0_0_12px_rgba(6,182,212,0.15)] inline-flex items-center text-sm sm:text-base tracking-tight text-white font-bold">
+              <span className="text-gradient-cyan font-black">{user?.name || "Spershika Sharma"}</span>
+            </strong>
+            . Unified overview of your wealth, liquid cash flows, and investments.
           </p>
         </div>
 
@@ -127,16 +131,21 @@ export default function DashboardPage() {
         </div>
 
         {/* Ambient decorative gradient blur */}
-        <div className="absolute -right-16 -top-16 w-56 h-56 bg-gradient-to-br from-purple-600/20 to-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-16 -top-16 w-56 h-56 bg-gradient-to-br from-blue-600/15 to-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
       </motion.div>
 
       {/* Filters & Quick Actions Header Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8"
+      >
         {/* Left: Account & Date Range Filters */}
         <div className="flex flex-wrap items-center gap-2.5">
           {/* Account Filter */}
           <div className="flex items-center gap-1.5 bg-[#0f1626] border border-white/[0.08] px-3 py-1.5 rounded-xl text-xs text-slate-300">
-            <Filter className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+            <Filter className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
             <select
               value={accountFilter}
               onChange={(e) => setAccountFilter(e.target.value)}
@@ -195,27 +204,27 @@ export default function DashboardPage() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => openAction("EXPENSE")}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold transition-all min-h-[38px]"
           >
             <ArrowDownLeft className="w-3.5 h-3.5" />
             <span>Add Expense</span>
           </button>
           <button
             onClick={() => openAction("INCOME")}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-all min-h-[38px]"
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>Add Income</span>
           </button>
           <button
             onClick={() => openAction("TRANSFER")}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition-all active:scale-95 min-h-[38px]"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition-all min-h-[38px]"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Transfer</span>
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* 4 Financial Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
@@ -224,7 +233,7 @@ export default function DashboardPage() {
           amountCents={metrics.totalBalanceCents}
           icon={Wallet}
           trendPercentage={12.4}
-          gradient="purple"
+          gradient="blue"
           isBalanceCard={true}
           index={0}
         />

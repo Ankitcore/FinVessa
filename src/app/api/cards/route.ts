@@ -7,7 +7,7 @@ const createCardSchema = z.object({
   cardholderName: z.string().min(2, "Cardholder name is required"),
   accountId: z.string().nullable().optional(),
   cardType: z.enum(["VISA", "MASTERCARD"]).default("VISA"),
-  cardStyle: z.enum(["PURPLE_CYAN", "MIDNIGHT_DARK", "NEON_EMERALD"]).default("PURPLE_CYAN"),
+  cardStyle: z.enum(["PURPLE_CYAN", "SAPPHIRE_CYAN", "MIDNIGHT_DARK", "NEON_EMERALD"]).default("SAPPHIRE_CYAN"),
   spendingLimitCents: z.number().int().positive().default(500000),
 });
 

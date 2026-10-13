@@ -119,7 +119,7 @@ export function RecentTransactionsWidget({
                         ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                         : isTransfer
                         ? "bg-cyan-500/10 border-cyan-500/20 text-cyan-400"
-                        : "bg-purple-500/10 border-purple-500/20 text-purple-400"
+                        : "bg-rose-500/10 border-rose-500/20 text-rose-400"
                     }`}
                   >
                     <Icon className="w-4 h-4" />

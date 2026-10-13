@@ -26,7 +26,7 @@ export function AppLayout({
   const [quickActionOpen, setQuickActionOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex">
+    <div className="min-h-screen bg-transparent text-slate-100 flex">
       {/* Desktop Sidebar */}
       <Sidebar />
 

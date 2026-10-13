@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { LucideIcon, ArrowUpRight, ArrowDownRight, Eye, EyeOff } from "lucide-react";
 import { useCurrency } from "@/context/CurrencyContext";
 
@@ -11,7 +11,7 @@ interface SummaryCardProps {
   icon: LucideIcon;
   trendPercentage?: number;
   trendLabel?: string;
-  gradient: "purple" | "cyan" | "emerald" | "rose";
+  gradient: "blue" | "cyan" | "emerald" | "rose";
   isBalanceCard?: boolean;
   index?: number;
 }
@@ -27,27 +27,32 @@ export function SummaryCard({
   index = 0,
 }: SummaryCardProps) {
   const { formatAmount, isBalanceHidden, toggleBalanceVisibility } = useCurrency();
+  const shouldReduceMotion = useReducedMotion();
 
   const gradientStyles = {
-    purple: {
-      border: "border-purple-500/20 hover:border-purple-500/40",
-      iconBg: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
-      glow: "hover:shadow-glow",
+    blue: {
+      border: "border-blue-500/20 hover:border-blue-500/40",
+      iconBg: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+      glow: "hover:shadow-glow-cyan",
+      blurColor: "bg-cyan-500/10",
     },
     cyan: {
       border: "border-cyan-500/20 hover:border-cyan-500/40",
       iconBg: "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20",
       glow: "hover:shadow-glow-cyan",
+      blurColor: "bg-cyan-500/10",
     },
     emerald: {
       border: "border-emerald-500/20 hover:border-emerald-500/40",
       iconBg: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
       glow: "hover:shadow-emerald-500/20",
+      blurColor: "bg-emerald-500/10",
     },
     rose: {
       border: "border-rose-500/20 hover:border-rose-500/40",
       iconBg: "bg-rose-500/10 text-rose-400 border border-rose-500/20",
       glow: "hover:shadow-rose-500/20",
+      blurColor: "bg-rose-500/10",
     },
   }[gradient];
 
@@ -55,18 +60,36 @@ export function SummaryCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.45,
-        delay: index * 0.08,
+        duration: shouldReduceMotion ? 0.01 : 0.5,
+        delay: shouldReduceMotion ? 0 : index * 0.07,
         ease: [0.16, 1, 0.3, 1],
       }}
-      whileHover={{ y: -3, transition: { duration: 0.2 } }}
+      whileHover={{ y: -2, transition: { duration: 0.2 } }}
       className={`glass-card rounded-2xl p-5 sm:p-6 transition-all duration-300 relative group overflow-hidden ${gradientStyles.border} ${gradientStyles.glow}`}
     >
-      {/* Subtle background light blur */}
-      <div className="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-white/[0.02] group-hover:bg-white/[0.04] blur-xl pointer-events-none transition-all" />
+      {/* Delicate on-load optical sheen sweep across card */}
+      {!shouldReduceMotion && (
+        <motion.div
+          initial={{ x: "-120%" }}
+          animate={{ x: "240%" }}
+          transition={{
+            duration: 1.15,
+            delay: 0.35 + index * 0.09,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/[0.05] to-transparent pointer-events-none"
+        />
+      )}
+
+      {/* Subtle ambient breathing background light */}
+      <motion.div
+        animate={shouldReduceMotion ? undefined : { opacity: [0.25, 0.55, 0.25] }}
+        transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute -right-8 -bottom-8 w-28 h-28 rounded-full ${gradientStyles.blurColor} blur-xl pointer-events-none transition-all`}
+      />
 
       {/* Card Header: Title & Icon */}
       <div className="flex items-center justify-between mb-3">

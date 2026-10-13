@@ -70,7 +70,7 @@ export function UpcomingPaymentsWidget({
         </div>
         <Link
           href="/bills"
-          className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors group"
+          className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors group"
         >
           Manage bills{" "}
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -132,7 +132,7 @@ export function UpcomingPaymentsWidget({
                   <button
                     onClick={() => handlePayNow(bill.id, bill.name)}
                     disabled={isPaying}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-600/20 hover:bg-purple-600/40 border border-purple-500/40 text-purple-300 hover:text-white text-xs font-semibold transition-all active:scale-95 disabled:opacity-50"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold transition-colors disabled:opacity-50"
                   >
                     {isPaying ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin" />

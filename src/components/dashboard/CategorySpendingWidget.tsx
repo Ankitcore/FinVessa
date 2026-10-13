@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useCurrency } from "@/context/CurrencyContext";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 
 interface CategoryBreakdownItem {
   name: string;
@@ -63,12 +64,12 @@ export function CategorySpendingWidget({
             const safePercentage = isNaN(percentage) ? 0 : Math.max(0, percentage);
 
             const barColors = [
-              "bg-purple-500",
+              "bg-blue-500",
               "bg-cyan-400",
               "bg-pink-500",
               "bg-amber-400",
               "bg-emerald-400",
-              "bg-indigo-400",
+              "bg-teal-400",
             ];
             const colorClass = barColors[idx % barColors.length];
 
@@ -103,21 +104,14 @@ export function CategorySpendingWidget({
                 </div>
 
                 {/* Animated Progress bar */}
-                <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden relative">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, Math.max(2, safePercentage))}%` }}
-                    transition={{
-                      duration: 0.85,
-                      delay: 0.15 + idx * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className={`h-full rounded-full relative overflow-hidden ${colorClass}`}
-                    style={{
-                      backgroundColor: cat.color || undefined,
-                    }}
-                  />
-                </div>
+                <ProgressBar
+                  value={safePercentage}
+                  max={100}
+                  size="sm"
+                  delay={0.15 + idx * 0.08}
+                  duration={0.85}
+                  colorClassName={colorClass}
+                />
               </motion.div>
             );
           })

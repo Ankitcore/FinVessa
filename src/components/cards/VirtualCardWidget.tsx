@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/components/ui/Toast";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 
 interface VirtualCardData {
   id: string;
@@ -89,7 +90,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600/40 via-cyan-500/30 to-purple-800/40 blur-xl pointer-events-none"
+        className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/30 via-cyan-500/25 to-blue-800/30 blur-xl pointer-events-none"
       />
 
       {/* Main Virtual Card Element */}
@@ -98,7 +99,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
         className={`relative w-full rounded-2xl p-6 sm:p-7 text-white shadow-2xl transition-all duration-300 overflow-hidden border ${
           isFrozen
             ? "bg-slate-900/90 border-cyan-500/30 saturate-50"
-            : "bg-gradient-to-br from-[#4c1d95]/90 via-[#1e1b4b]/95 to-[#064e3b]/80 border-white/20"
+            : "bg-gradient-to-br from-[#0a1428] via-[#091b35] to-[#041d2e] border-white/20"
         }`}
         style={{
           minHeight: "220px",
@@ -107,7 +108,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
       >
         {/* Decorative holographic gradient mesh */}
         <div className="absolute -right-16 -top-16 w-52 h-52 rounded-full bg-cyan-400/20 blur-3xl pointer-events-none" />
-        <div className="absolute -left-16 -bottom-16 w-52 h-52 rounded-full bg-purple-500/20 blur-3xl pointer-events-none" />
+        <div className="absolute -left-16 -bottom-16 w-52 h-52 rounded-full bg-blue-500/20 blur-3xl pointer-events-none" />
 
         {/* Frozen Overlay Badge if Frozen */}
         {isFrozen && (
@@ -121,10 +122,11 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg overflow-hidden bg-black/40 border border-white/20 p-0.5 shrink-0 flex items-center justify-center">
               <Image
-                src="/finvessa-icon.png"
+                src="/favicon.svg"
                 alt="FINVESSA"
                 width={28}
                 height={28}
+                unoptimized
                 className="w-full h-full object-cover rounded"
               />
             </div>
@@ -257,6 +259,21 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
           <span>Limit: {formatCurrency(card?.spendingLimitCents || 500000)}</span>
         </div>
+      </div>
+
+      {/* Monthly Limit Progress Bar */}
+      <div className="mt-3 px-2 pt-2 border-t border-white/[0.05]">
+        <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1.5">
+          <span>Card Utilization</span>
+          <span className="font-semibold text-slate-200">28% of monthly cap</span>
+        </div>
+        <ProgressBar
+          value={28}
+          max={100}
+          size="sm"
+          delay={0.35}
+          colorClassName="bg-gradient-to-r from-cyan-500 to-blue-500"
+        />
       </div>
     </motion.div>
   );

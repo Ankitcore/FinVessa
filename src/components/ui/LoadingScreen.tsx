@@ -33,7 +33,7 @@ export function LoadingScreen({
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 blur-xl opacity-50"
+          className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-blue-600 via-cyan-600 to-cyan-400 blur-xl opacity-40"
         />
 
         {/* Logo box */}
@@ -44,10 +44,11 @@ export function LoadingScreen({
           className="relative w-16 h-16 rounded-2xl overflow-hidden border border-white/20 bg-[#0b101c] shadow-2xl p-0.5 flex items-center justify-center"
         >
           <Image
-            src="/finvessa-icon.png"
+            src="/favicon.svg"
             alt="FINVESSA"
             width={64}
             height={64}
+            unoptimized
             className="w-full h-full object-cover"
             priority
           />
@@ -56,7 +57,7 @@ export function LoadingScreen({
 
       {/* Rotating gradient loader */}
       <div className="relative w-7 h-7 mb-4">
-        <div className="w-full h-full rounded-full border-2 border-purple-500/20 border-t-cyan-400 border-r-purple-500 animate-spin" />
+        <div className="w-full h-full rounded-full border-2 border-cyan-500/20 border-t-cyan-400 border-r-blue-500 animate-spin" />
       </div>
 
       {/* Primary loading message */}

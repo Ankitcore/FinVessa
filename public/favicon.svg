@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">FINVESSA favicon</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19172B"/><stop offset="1" stop-color="#080D1D"/></linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B5CFF"/><stop offset="0.48" stop-color="#4A7DFF"/><stop offset="1" stop-color="#4CF0D2"/></linearGradient>
+    <linearGradient id="bottom" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A15BFF"/><stop offset="0.55" stop-color="#476DFF"/><stop offset="1" stop-color="#39E8D1"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="126" fill="url(#bg)"/>
+  <path d="M115 247 C78 190 101 116 159 79 C202 51 259 48 306 67" fill="none" stroke="url(#top)" stroke-width="13" stroke-linecap="round" opacity="0.95"/>
+  <path d="M135 220 C132 163 164 121 216 108 L391 69 C389 114 365 143 324 155 L220 183 C196 189 183 208 183 237 L183 288 C153 275 137 251 135 220Z" fill="url(#top)"/>
+  <path d="M136 306 C139 268 161 243 201 231 L316 202 C318 239 298 266 263 277 L196 296 C176 302 165 319 165 342 L165 365 C145 350 134 329 136 306Z" fill="url(#bottom)"/>
+  <path d="M166 365 C184 334 208 316 241 305 C235 340 215 369 185 391 C169 402 153 392 156 378 C158 373 161 369 166 365Z" fill="url(#top)"/>
+  <path d="M135 220 C132 163 164 121 216 108 L391 69" fill="none" stroke="#FFFFFF" stroke-opacity="0.58" stroke-width="4" stroke-linecap="round"/>
+</svg>

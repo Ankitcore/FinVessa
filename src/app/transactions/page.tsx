@@ -22,6 +22,7 @@ import { QuickActionsModal } from "@/components/modals/QuickActionsModal";
 import { formatDate, formatCurrency } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
 
 export default function TransactionsPage() {
   const { formatAmount, currency } = useCurrency();
@@ -177,7 +178,12 @@ export default function TransactionsPage() {
       onRefreshData={loadTransactions}
     >
       {/* Top Controls Bar */}
-      <div className="glass-card rounded-2xl p-4 sm:p-5 border border-white/[0.08] mb-6 space-y-4">
+      <motion.div
+        initial={{ opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-card rounded-2xl p-4 sm:p-5 border border-white/[0.08] mb-6 space-y-4"
+      >
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           {/* Search Box */}
           <div className="relative flex-1">
@@ -190,14 +196,14 @@ export default function TransactionsPage() {
                 setSearch(e.target.value);
                 setPagination((p) => ({ ...p, page: 1 }));
               }}
-              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm text-white placeholder-slate-400 outline-none transition-all"
+              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm text-white placeholder-slate-400 outline-none transition-all"
             />
           </div>
 
           {/* Add Transaction Button */}
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-glow transition-all active:scale-95 shrink-0"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm shadow-glow-cyan transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Add Transaction</span>
@@ -296,13 +302,18 @@ export default function TransactionsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Transactions Table / List */}
-      <div className="glass-card rounded-2xl border border-white/[0.08] overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-card rounded-2xl border border-white/[0.08] overflow-hidden"
+      >
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-3" />
+            <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mb-3" />
             <p className="text-sm font-semibold text-slate-200">Your money, in perspective.</p>
             <p className="text-xs text-slate-400 mt-0.5">Fetching transaction ledger & RuPay records...</p>
           </div>
@@ -337,7 +348,7 @@ export default function TransactionsPage() {
                               ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
                               : isTransfer
                               ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
-                              : "bg-purple-500/10 border-purple-500/30 text-purple-400"
+                              : "bg-rose-500/10 border-rose-500/30 text-rose-400"
                           }`}
                         >
                           {isIncome ? (
@@ -447,7 +458,7 @@ export default function TransactionsPage() {
                                   ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
                                   : isTransfer
                                   ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
-                                  : "bg-purple-500/10 border-purple-500/30 text-purple-400"
+                                  : "bg-rose-500/10 border-rose-500/30 text-rose-400"
                               }`}
                             >
                               {isIncome ? (
@@ -583,7 +594,7 @@ export default function TransactionsPage() {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Delete Confirmation Modal */}
       {deletingTx && (

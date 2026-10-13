@@ -13,6 +13,7 @@ import {
   Calendar,
   AlertTriangle,
   ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -112,37 +113,37 @@ export function Header({
       <div
         className={`w-full transition-all duration-300 ease-out relative ${
           isScrolled
-            ? "pointer-events-auto max-w-7xl mx-auto rounded-2xl bg-[#090e1a]/92 backdrop-blur-xl border border-white/[0.14] shadow-2xl shadow-black/80 shadow-purple-950/40 ring-1 ring-purple-500/20 px-4 sm:px-6 py-2.5 sm:py-3 scale-[0.995] sm:scale-100 overflow-hidden"
+            ? "pointer-events-auto max-w-7xl mx-auto rounded-2xl bg-[#090e1a]/95 backdrop-blur-xl border border-white/[0.12] shadow-2xl shadow-black/80 ring-1 ring-cyan-500/20 px-4 sm:px-6 py-2.5 sm:py-3 overflow-hidden"
             : "bg-[#080c14]/80 backdrop-blur-md border-b border-white/[0.07] px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 rounded-none shadow-none"
         }`}
       >
         {/* Subtle top glow line when floating with rounded corners */}
         {isScrolled && (
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 via-purple-400/40 to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent pointer-events-none" />
         )}
 
-        <div className="flex items-center justify-between gap-4">
-        {/* Left side: Hamburger (mobile) + Page Titles */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={onOpenMobileMenu}
-            className="w-10 h-10 lg:hidden text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.08] transition-colors flex items-center justify-center shrink-0"
-            aria-label="Open mobile navigation menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+        <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
+          {/* Left side: Hamburger (mobile) + Page Titles */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <button
+              onClick={onOpenMobileMenu}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:hidden text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.08] transition-colors flex items-center justify-center shrink-0"
+              aria-label="Open mobile navigation menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
 
-          <div className="min-w-0">
-            <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2 truncate">
-              {title}
-            </h1>
-            {subtitle && (
-              <p className="text-xs sm:text-sm text-slate-400 hidden sm:block truncate">
-                {subtitle}
-              </p>
-            )}
+            <div className="min-w-0 flex-1">
+              <h1 className="text-base sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2 truncate">
+                {title}
+              </h1>
+              {subtitle && (
+                <p className="text-xs sm:text-sm text-slate-400 hidden sm:block truncate">
+                  {subtitle}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
 
         {/* Right side controls: Search, Quick Add, Visibility, Notifications, User */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
@@ -161,18 +162,28 @@ export function Header({
                   )}`;
                 }
               }}
-              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 outline-none transition-all focus:bg-white/[0.07]"
+              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 outline-none transition-all focus:bg-white/[0.07]"
             />
           </div>
 
           {/* Quick Action Button */}
           <button
             onClick={onOpenQuickAction}
-            className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs sm:text-sm font-semibold shadow-glow transition-all active:scale-95 shrink-0 min-h-[40px]"
+            className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold shadow-glow transition-colors shrink-0 min-h-[40px]"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden xs:inline">New Action</span>
           </button>
+
+          {/* How It Works Guide Pill */}
+          <Link
+            href="/how-it-works"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 hover:text-cyan-300 text-xs font-medium transition-colors shrink-0 min-h-[40px]"
+            title="Interactive Platform Walkthrough & Architecture Deck"
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden md:inline">How It Works</span>
+          </Link>
 
           {/* Eye Icon for Balance Visibility */}
           <button
@@ -229,7 +240,7 @@ export function Header({
                       <div
                         key={n.id}
                         className={`p-3.5 transition-colors ${
-                          n.isRead ? "bg-transparent" : "bg-purple-950/20"
+                          n.isRead ? "bg-transparent" : "bg-cyan-950/20"
                         }`}
                       >
                         <div className="flex items-start gap-2.5">
@@ -258,7 +269,7 @@ export function Header({
                   <Link
                     href="/bills"
                     onClick={() => setIsNotifOpen(false)}
-                    className="text-xs text-purple-400 hover:text-purple-300 font-medium inline-flex items-center gap-1"
+                    className="text-xs text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center gap-1"
                   >
                     Manage upcoming bills & alerts <ArrowRight className="w-3 h-3" />
                   </Link>
@@ -270,7 +281,7 @@ export function Header({
           {/* User profile avatar */}
           <Link
             href="/settings"
-            className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 p-[1.5px] transition-transform hover:scale-105 shrink-0"
+            className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 p-[1.5px] transition-transform hover:scale-105 shrink-0"
             title="User Profile & Settings"
           >
             <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-xs font-bold text-white overflow-hidden">

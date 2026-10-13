@@ -252,7 +252,7 @@ export function QuickActionsModal({
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 required
-                className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-purple-500/60 rounded-xl pl-8 pr-4 py-2.5 text-lg font-bold text-white placeholder-slate-400 outline-none transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl pl-8 pr-4 py-2.5 text-lg font-bold text-white placeholder-slate-400 outline-none transition-all"
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ export function QuickActionsModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white placeholder-slate-400 outline-none transition-all"
+              className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white placeholder-slate-400 outline-none transition-all"
             />
           </div>
 
@@ -287,7 +287,7 @@ export function QuickActionsModal({
               <select
                 value={accountId}
                 onChange={(e) => setAccountId(e.target.value)}
-                className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
+                className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
               >
                 {accounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
@@ -305,7 +305,7 @@ export function QuickActionsModal({
                 <select
                   value={transferAccountId}
                   onChange={(e) => setTransferAccountId(e.target.value)}
-                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
+                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
                 >
                   {accounts.map((acc) => (
                     <option key={acc.id} value={acc.id}>
@@ -322,7 +322,7 @@ export function QuickActionsModal({
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
+                  className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
                 >
                   <option value="">Uncategorized</option>
                   {filteredCategories.map((cat) => (
@@ -344,7 +344,7 @@ export function QuickActionsModal({
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-purple-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
+              className="w-full bg-[#131b2e] border border-white/[0.09] focus:border-cyan-500/60 rounded-xl px-3.5 py-2.5 text-base sm:text-xs text-white outline-none min-h-[44px]"
             />
           </div>
 
@@ -361,9 +361,9 @@ export function QuickActionsModal({
             <button
               type="submit"
               disabled={submitting}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-medium text-xs shadow-glow transition-all disabled:opacity-50 min-h-[44px]"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-glow transition-colors disabled:opacity-50 min-h-[44px]"
             >
-              {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+              {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-950" />}
               {activeTab === "INCOME"
                 ? "Add Income"
                 : activeTab === "EXPENSE"

@@ -18,6 +18,8 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { formatDate } from "@/lib/utils";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
+import { motion } from "framer-motion";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 
 export default function BillsPage() {
   const { formatAmount } = useCurrency();
@@ -176,12 +178,36 @@ export default function BillsPage() {
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-glow transition-all active:scale-95 self-start sm:self-auto"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Bill</span>
         </button>
       </div>
+
+      {/* Monthly Obligations Settlement Progress Bar */}
+      {bills.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-card rounded-2xl p-5 border border-white/[0.08] mb-6"
+        >
+          <div className="flex items-center justify-between text-xs mb-2.5">
+            <span className="text-slate-300 font-medium">Monthly Obligations Settled</span>
+            <span className="text-slate-200 font-bold">
+              {paid.length} of {bills.length} Bills ({Math.round((paid.length / bills.length) * 100)}%)
+            </span>
+          </div>
+          <ProgressBar
+            value={Math.round((paid.length / bills.length) * 100)}
+            max={100}
+            size="md"
+            delay={0.2}
+            colorClassName="bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400"
+          />
+        </motion.div>
+      )}
 
       {/* Overdue Section (if any) */}
       {overdue.length > 0 && (
@@ -210,7 +236,7 @@ export default function BillsPage() {
                   <button
                     onClick={() => handleMarkPaid(bill.id, bill.name)}
                     disabled={payingId === bill.id}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold transition-all active:scale-95"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold transition-all"
                   >
                     {payingId === bill.id ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -269,7 +295,7 @@ export default function BillsPage() {
                   <button
                     onClick={() => handleMarkPaid(bill.id, bill.name)}
                     disabled={payingId === bill.id}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-600/20 hover:bg-purple-600/40 border border-purple-500/40 text-purple-300 hover:text-white text-xs font-semibold transition-all active:scale-95"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold transition-colors"
                   >
                     {payingId === bill.id ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -355,7 +381,7 @@ export default function BillsPage() {
                   placeholder="e.g. Tata Power Electricity, Airtel Fiber, HDFC EMI"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -370,7 +396,7 @@ export default function BillsPage() {
                   placeholder="3420.00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all"
                 />
               </div>
 
@@ -384,7 +410,7 @@ export default function BillsPage() {
                     required
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   />
                 </div>
 
@@ -395,7 +421,7 @@ export default function BillsPage() {
                   <select
                     value={recurrence}
                     onChange={(e) => setRecurrence(e.target.value)}
-                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                    className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                   >
                     <option value="MONTHLY">Monthly</option>
                     <option value="WEEKLY">Weekly</option>
@@ -412,7 +438,7 @@ export default function BillsPage() {
                 <select
                   value={accountId}
                   onChange={(e) => setAccountId(e.target.value)}
-                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-purple-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
+                  className="w-full bg-[#0f1626] border border-white/[0.08] focus:border-cyan-500/50 rounded-xl px-3.5 py-2.5 sm:py-2 text-base sm:text-xs text-white outline-none transition-all min-h-[44px]"
                 >
                   {accounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -428,7 +454,7 @@ export default function BillsPage() {
                   id="autoPayCheck"
                   checked={autoPay}
                   onChange={(e) => setAutoPay(e.target.checked)}
-                  className="w-4 h-4 rounded bg-white/[0.06] border-white/20 text-purple-600 focus:ring-0 cursor-pointer"
+                  className="w-4 h-4 rounded bg-white/[0.06] border-white/20 text-cyan-500 focus:ring-0 cursor-pointer"
                 />
                 <label htmlFor="autoPayCheck" className="text-xs text-slate-300 cursor-pointer select-none">
                   Enable automatic payment reminder badge
@@ -446,9 +472,9 @@ export default function BillsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-glow transition-all min-h-[44px]"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-glow transition-colors min-h-[44px]"
                 >
-                  {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                  {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-950" />}
                   Schedule Bill
                 </button>
               </div>

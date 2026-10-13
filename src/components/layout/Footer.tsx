@@ -43,7 +43,7 @@ export function Footer({ variant = "full" }: FooterProps) {
     <>
       {variant === "compact" ? (
         <footer className="w-full bg-[#060a12]/90 backdrop-blur-md border-t border-white/[0.08] text-xs text-slate-400 mt-auto relative">
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 via-cyan-500/30 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
             {/* Left: Live status & Version */}
             <div className="flex items-center gap-3">
@@ -64,19 +64,26 @@ export function Footer({ variant = "full" }: FooterProps) {
 
             {/* Right: Quick Legal Links & Scroll to top */}
             <div className="flex items-center gap-3 text-xs">
-              <button
-                onClick={() => setActiveModal("privacy")}
+              <Link
+                href="/how-it-works"
+                className="hover:text-cyan-400 transition-colors text-slate-400"
+              >
+                How It Works
+              </Link>
+              <span className="text-slate-600">•</span>
+              <Link
+                href="/privacy"
                 className="hover:text-cyan-400 transition-colors text-slate-400"
               >
                 Privacy
-              </button>
+              </Link>
               <span className="text-slate-600">•</span>
-              <button
-                onClick={() => setActiveModal("terms")}
+              <Link
+                href="/terms"
                 className="hover:text-cyan-400 transition-colors text-slate-400"
               >
                 Terms
-              </button>
+              </Link>
               <span className="text-slate-600">•</span>
               <button
                 onClick={() => setActiveModal("security")}
@@ -99,7 +106,7 @@ export function Footer({ variant = "full" }: FooterProps) {
       ) : (
         <footer className="w-full bg-[#060a12]/95 border-t border-white/[0.08] text-xs text-slate-400 mt-auto relative overflow-hidden">
           {/* Subtle top glow line */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 via-cyan-500/40 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 via-blue-500/40 to-transparent" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
           {/* ===================== MOBILE VIEW (Optimized Accordion & Quick Actions) ===================== */}
@@ -110,16 +117,17 @@ export function Footer({ variant = "full" }: FooterProps) {
                 <Link href="/dashboard" className="inline-flex items-center gap-2 group">
                   <div className="w-8 h-8 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0">
                     <Image
-                      src="/finvessa-icon.png"
+                      src="/favicon.svg"
                       alt="FINVESSA"
                       width={32}
                       height={32}
+                      unoptimized
                       className="w-full h-full object-cover rounded-[9px]"
                     />
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="font-extrabold text-base tracking-tight text-white">
-                      FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                      FIN<span className="text-gradient-cyan font-black">VESSA</span>
                     </span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold">
                       IN
@@ -149,7 +157,7 @@ export function Footer({ variant = "full" }: FooterProps) {
                   <span className="truncate">256-Bit SSL</span>
                 </div>
                 <div className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
-                  <Lock className="w-3 h-3 text-purple-400 shrink-0" />
+                  <Lock className="w-3 h-3 text-blue-400 shrink-0" />
                   <span className="truncate">Atomic Ledger</span>
                 </div>
                 <div className="flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
@@ -170,10 +178,10 @@ export function Footer({ variant = "full" }: FooterProps) {
                   aria-expanded={openMobileSection === "platform"}
                 >
                   <span className="flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-purple-400" />
+                    <Layers className="w-4 h-4 text-cyan-400" />
                     <span>Platform</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-slate-400 font-mono">
-                      7
+                      8
                     </span>
                   </span>
                   <ChevronDown
@@ -185,6 +193,12 @@ export function Footer({ variant = "full" }: FooterProps) {
                 {openMobileSection === "platform" && (
                   <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
                     <ul className="space-y-2.5 text-xs text-slate-400">
+                      <li>
+                        <Link href="/how-it-works" className="block py-1 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center justify-between">
+                          <span>How It Works & Guide</span>
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono">NEW</span>
+                        </Link>
+                      </li>
                       <li>
                         <Link href="/dashboard" className="block py-1 hover:text-cyan-400 transition-colors">
                           Dashboard Overview
@@ -251,19 +265,19 @@ export function Footer({ variant = "full" }: FooterProps) {
                     <ul className="space-y-2.5 text-xs text-slate-400">
                       <li className="flex items-center justify-between py-1">
                         <span>HDFC Bank Salary</span>
-                        <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                        <span className="text-[10px] text-cyan-400 font-mono">Linked</span>
                       </li>
                       <li className="flex items-center justify-between py-1">
                         <span>SBI Wealth Savings</span>
-                        <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                        <span className="text-[10px] text-cyan-400 font-mono">Linked</span>
                       </li>
                       <li className="flex items-center justify-between py-1">
                         <span>ICICI Sapphiro RuPay</span>
-                        <span className="text-[10px] text-purple-400 font-mono">Active</span>
+                        <span className="text-[10px] text-cyan-400 font-mono">Active</span>
                       </li>
                       <li className="flex items-center justify-between py-1">
                         <span>Zerodha & Groww</span>
-                        <span className="text-[10px] text-purple-400 font-mono">Synced</span>
+                        <span className="text-[10px] text-cyan-400 font-mono">Synced</span>
                       </li>
                       <li>
                         <Link href="/accounts" className="flex items-center justify-between py-1 hover:text-cyan-400 transition-colors">
@@ -365,22 +379,20 @@ export function Footer({ variant = "full" }: FooterProps) {
                   <div className="px-4 pb-3 pt-1 border-t border-white/[0.04]">
                     <ul className="space-y-2.5 text-xs text-slate-400">
                       <li>
-                        <button
-                          type="button"
-                          onClick={() => setActiveModal("privacy")}
+                        <Link
+                          href="/privacy"
                           className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
                         >
                           Privacy Policy
-                        </button>
+                        </Link>
                       </li>
                       <li>
-                        <button
-                          type="button"
-                          onClick={() => setActiveModal("terms")}
+                        <Link
+                          href="/terms"
                           className="block w-full text-left py-1 hover:text-cyan-400 transition-colors"
                         >
                           Terms of Service
-                        </button>
+                        </Link>
                       </li>
                       <li>
                         <button
@@ -407,24 +419,28 @@ export function Footer({ variant = "full" }: FooterProps) {
 
             {/* Quick 1-Tap Legal Pills on Mobile */}
             <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveModal("privacy")}
-                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+              <Link
+                href="/how-it-works"
+                className="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/25 text-cyan-300 text-[11px] font-medium transition-colors"
+              >
+                How It Works
+              </Link>
+              <Link
+                href="/privacy"
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors"
               >
                 Privacy Policy
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveModal("terms")}
-                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+              </Link>
+              <Link
+                href="/terms"
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors"
               >
                 Terms of Service
-              </button>
+              </Link>
               <button
                 type="button"
                 onClick={() => setActiveModal("security")}
-                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors active:scale-95"
+                className="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-[11px] font-medium transition-colors"
               >
                 Security Specs
               </button>
@@ -436,18 +452,19 @@ export function Footer({ variant = "full" }: FooterProps) {
             {/* Left Column: Brand & Trust Badges (Spans 2 cols on LG) */}
             <div className="lg:col-span-2 space-y-4">
               <Link href="/dashboard" className="inline-flex items-center gap-2.5 group">
-                <div className="w-8 h-8 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0 group-hover:border-purple-500/40 transition-colors">
+                <div className="w-8 h-8 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow-cyan shrink-0 group-hover:border-cyan-500/40 transition-colors">
                   <Image
-                    src="/finvessa-icon.png"
+                    src="/favicon.svg"
                     alt="FINVESSA"
                     width={32}
                     height={32}
+                    unoptimized
                     className="w-full h-full object-cover rounded-[9px]"
                   />
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-extrabold text-base tracking-tight text-white">
-                    FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                    FIN<span className="text-gradient-cyan font-black">VESSA</span>
                   </span>
                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold">
                     IN
@@ -477,7 +494,7 @@ export function Footer({ variant = "full" }: FooterProps) {
                   <ShieldCheck className="w-3 h-3 text-cyan-400" /> 256-Bit SSL
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
-                  <Lock className="w-3 h-3 text-purple-400" /> Atomic Ledger
+                  <Lock className="w-3 h-3 text-blue-400" /> Atomic Ledger
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[10px] text-slate-300">
                   <CheckCircle2 className="w-3 h-3 text-emerald-400" /> RBI & NPCI Compliant
@@ -488,9 +505,15 @@ export function Footer({ variant = "full" }: FooterProps) {
             {/* Column 1: Core Navigation */}
             <div className="space-y-3">
               <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-purple-400" /> Platform
+                <Layers className="w-3.5 h-3.5 text-cyan-400" /> Platform
               </h3>
               <ul className="space-y-2">
+                <li>
+                  <Link href="/how-it-works" className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors flex items-center justify-between">
+                    <span>How It Works & Guide</span>
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">Interactive</span>
+                  </Link>
+                </li>
                 <li>
                   <Link href="/dashboard" className="hover:text-cyan-400 transition-colors">
                     Dashboard Overview
@@ -537,19 +560,19 @@ export function Footer({ variant = "full" }: FooterProps) {
               <ul className="space-y-2 text-slate-400">
                 <li className="flex items-center justify-between">
                   <span>HDFC Bank Salary</span>
-                  <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                  <span className="text-[10px] text-cyan-400 font-mono">Linked</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span>SBI Wealth Savings</span>
-                  <span className="text-[10px] text-purple-400 font-mono">Linked</span>
+                  <span className="text-[10px] text-cyan-400 font-mono">Linked</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span>ICICI Sapphiro RuPay</span>
-                  <span className="text-[10px] text-purple-400 font-mono">Active</span>
+                  <span className="text-[10px] text-cyan-400 font-mono">Active</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span>Zerodha & Groww</span>
-                  <span className="text-[10px] text-purple-400 font-mono">Synced</span>
+                  <span className="text-[10px] text-cyan-400 font-mono">Synced</span>
                 </li>
                 <li>
                   <Link href="/accounts" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
@@ -608,20 +631,20 @@ export function Footer({ variant = "full" }: FooterProps) {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <button
-                    onClick={() => setActiveModal("privacy")}
-                    className="hover:text-cyan-400 transition-colors text-left"
+                  <Link
+                    href="/privacy"
+                    className="hover:text-cyan-400 transition-colors block text-slate-400"
                   >
                     Privacy Policy
-                  </button>
+                  </Link>
                 </li>
                 <li>
-                  <button
-                    onClick={() => setActiveModal("terms")}
-                    className="hover:text-cyan-400 transition-colors text-left"
+                  <Link
+                    href="/terms"
+                    className="hover:text-cyan-400 transition-colors block text-slate-400"
                   >
                     Terms of Service
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <button
@@ -690,7 +713,7 @@ export function Footer({ variant = "full" }: FooterProps) {
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
               <div className="flex items-center gap-2">
                 {activeModal === "privacy" && <ShieldCheck className="w-5 h-5 text-cyan-400" />}
-                {activeModal === "terms" && <FileText className="w-5 h-5 text-purple-400" />}
+                {activeModal === "terms" && <FileText className="w-5 h-5 text-cyan-400" />}
                 {activeModal === "security" && <Lock className="w-5 h-5 text-emerald-400" />}
                 <h3 className="text-base font-bold text-white capitalize">
                   {activeModal === "privacy" && "FINVESSA Privacy Policy"}
@@ -773,7 +796,7 @@ export function Footer({ variant = "full" }: FooterProps) {
             <div className="pt-4 border-t border-white/[0.08] flex justify-end">
               <button
                 onClick={() => setActiveModal(null)}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-colors"
+                className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-colors"
               >
                 Understood & Close
               </button>

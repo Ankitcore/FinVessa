@@ -48,8 +48,8 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
               </span>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <span className="flex items-center gap-1.5 text-purple-400">
-                <span className="w-2 h-2 rounded-full bg-purple-400" /> Expense:
+              <span className="flex items-center gap-1.5 text-rose-400">
+                <span className="w-2 h-2 rounded-full bg-rose-400" /> Expense:
               </span>
               <span className="font-bold text-white">
                 {formatCurrency((payload[1]?.value || 0) * 100, currency)}
@@ -86,7 +86,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
             onClick={() => setChartType("bar")}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium transition-all ${
               chartType === "bar"
-                ? "bg-purple-600/30 text-white border border-purple-500/40 shadow-glow"
+                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-glow-cyan"
                 : "text-slate-400 hover:text-white"
             }`}
           >
@@ -116,8 +116,8 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
                   <stop offset="100%" stopColor="#0891b2" stopOpacity={0.6} />
                 </linearGradient>
                 <linearGradient id="expenseBarGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#a855f7" stopOpacity={1} />
-                  <stop offset="100%" stopColor="#7c3aed" stopOpacity={0.6} />
+                  <stop offset="0%" stopColor="#f43f5e" stopOpacity={1} />
+                  <stop offset="100%" stopColor="#e11d48" stopOpacity={0.6} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -147,8 +147,8 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
                   <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="expenseArea" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#a855f7" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -168,7 +168,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
                 wrapperStyle={{ paddingBottom: 15, fontSize: "11px", color: "#94a3b8" }}
               />
               <Area type="monotone" dataKey="income" name="Income" stroke="#06b6d4" strokeWidth={2} fillOpacity={1} fill="url(#incomeArea)" />
-              <Area type="monotone" dataKey="expense" name="Expense" stroke="#a855f7" strokeWidth={2} fillOpacity={1} fill="url(#expenseArea)" />
+              <Area type="monotone" dataKey="expense" name="Expense" stroke="#f43f5e" strokeWidth={2} fillOpacity={1} fill="url(#expenseArea)" />
             </AreaChart>
           )}
         </ResponsiveContainer>

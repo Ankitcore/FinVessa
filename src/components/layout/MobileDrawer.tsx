@@ -18,6 +18,7 @@ import {
   Sparkles,
   Eye,
   EyeOff,
+  HelpCircle,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -30,6 +31,7 @@ const navItems = [
   { name: "Budgets", href: "/budgets", icon: PieChart },
   { name: "Bills & Payments", href: "/bills", icon: CalendarCheck },
   { name: "Cards", href: "/cards", icon: CreditCard },
+  { name: "How It Works", href: "/how-it-works", icon: HelpCircle },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
@@ -108,16 +110,17 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
           >
             <div className="w-9 h-9 rounded-xl overflow-hidden bg-[#090d16] border border-white/10 p-0.5 shadow-glow shrink-0 flex items-center justify-center">
               <Image
-                src="/finvessa-icon.png"
+                src="/favicon.svg"
                 alt="FINVESSA Logo"
                 width={36}
                 height={36}
+                unoptimized
                 className="w-full h-full object-cover rounded-[9px]"
               />
             </div>
             <div>
               <span className="font-extrabold text-base text-white flex items-center gap-1">
-                FIN<span className="text-gradient-purple-cyan font-black">VESSA</span>
+                FIN<span className="text-gradient-cyan font-black">VESSA</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold ml-1">
                   IN
                 </span>
@@ -148,9 +151,9 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl font-medium text-sm transition-colors min-h-[48px] active:scale-[0.98] ${
+                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl font-medium text-sm transition-colors min-h-[48px] ${
                   isActive
-                    ? "bg-gradient-to-r from-purple-600/25 to-cyan-500/15 text-white border border-purple-500/30 font-semibold shadow-glow"
+                    ? "bg-gradient-to-r from-blue-600/25 to-cyan-500/15 text-white border border-cyan-500/30 font-semibold shadow-glow-cyan"
                     : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
                 }`}
               >
@@ -195,7 +198,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               onClick={onClose}
               className="flex items-center gap-2.5 min-w-0 flex-1 py-1"
             >
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-1 ring-white/20 overflow-hidden">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-1 ring-white/20 overflow-hidden">
                 {user?.avatar ? (
                   <img
                     src={user.avatar}
