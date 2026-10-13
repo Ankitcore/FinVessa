@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  passwordHash   String
+  avatar         String?
+  currency       String          @default("USD")
+  theme          String          @default("dark")
+  balanceHidden  Boolean         @default(false)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  accounts       Account[]
+  transactions   Transaction[]
+  budgets        Budget[]
+  bills          Bill[]
+  cards          VirtualCard[]
+  notifications  Notification[]
+  categories     Category[]
+}
+
+model Account {
+  id             String        @id @default(cuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  type           String        // CHECKING, SAVINGS, CREDIT_CARD, INVESTMENT, CASH
+  balanceCents   Int           @default(0) // Stored in minor units (cents)
+  currency       String        @default("USD")
+  color          String        @default("#8B5CF6")
+  isArchived     Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  transactions   Transaction[]
+  bills          Bill[]
+  cards          VirtualCard[]
+
+  @@index([userId])
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  userId       String?       // null for global default categories
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  type         String        // INCOME, EXPENSE
+  icon         String        @default("Tag")
+  color        String        @default("#8B5CF6")
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+  budgets      Budget[]
+
+  @@index([userId])
+}
+
+model Transaction {
+  id                 String    @id @default(cuid())
+  userId             String
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId          String
+  account            Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  categoryId         String?
+  category           Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  type               String    // INCOME, EXPENSE, TRANSFER
+  amountCents        Int       // In minor units (cents). Always positive authoritative value.
+  date               DateTime  @default(now())
+  description        String
+  status             String    @default("COMPLETED") // COMPLETED, PENDING
+  transferAccountId  String?   // Linked account if transfer
+  relatedTransactionId String? // If paired transfer transaction
+  notes              String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([accountId])
+  @@index([date])
+}
+
+model Budget {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId   String?
+  category     Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  name         String
+  limitCents   Int       // In cents
+  period       String    @default("MONTHLY") // MONTHLY, YEARLY
+  month        Int?      // 1-12
+  year         Int?      // e.g. 2026
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Bill {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId      String?
+  account        Account?  @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  name           String
+  amountCents    Int       // In cents
+  dueDate        DateTime
+  recurrence     String    @default("MONTHLY") // ONCE, WEEKLY, MONTHLY, YEARLY
+  category       String    @default("Utilities")
+  status         String    @default("UNPAID") // UNPAID, PAID, OVERDUE
+  autoPay        Boolean   @default(false)
+  reminderDays   Int       @default(3)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model VirtualCard {
+  id                 String    @id @default(cuid())
+  userId             String
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId          String?
+  account            Account?  @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  cardholderName     String
+  cardNumberMasked   String    // e.g. "•••• •••• •••• 4289"
+  fullNumber         String?   // Demo purposes
+  cardExpiry         String    // e.g. "08/29"
+  cardCvv            String    @default("739")
+  cardType           String    @default("VISA") // VISA, MASTERCARD
+  cardStyle          String    @default("PURPLE_CYAN") // PURPLE_CYAN, MIDNIGHT_DARK, NEON_EMERALD
+  isFrozen           Boolean   @default(false)
+  spendingLimitCents Int       @default(500000) // Default $5,000.00
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO") // INFO, WARNING, SUCCESS, BILL_DUE
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
