@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="public/finvessa-icon.png" alt="FINVESSA Logo" width="88" height="88" style="border-radius: 20px; box-shadow: 0 8px 30px rgba(139, 92, 246, 0.35);" />
+  <img src="public/finvessa-banner.png" alt="FINVESSA - See your money. Shape your future" width="100%" style="max-width: 780px; border-radius: 16px; margin-bottom: 12px;" />
 
   # ⚡ FINVESSA
   ### *See your money. Shape your future*
