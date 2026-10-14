@@ -13,6 +13,7 @@ import {
   EyeOff,
   Loader2,
   CheckCircle2,
+  X,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/components/ui/Toast";
@@ -53,6 +54,16 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen bg-transparent text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <div className="glass-card max-w-md w-full rounded-3xl p-7 sm:p-9 border border-white/10 relative z-10 shadow-2xl">
+        {/* Cancel / Close Button */}
+        <Link
+          href="/"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-white/[0.04] hover:bg-white/[0.1] active:bg-white/[0.15] border border-white/[0.08] flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer touch-manipulation"
+          aria-label="Close and return to home"
+          title="Cancel and return to home"
+        >
+          <X className="w-4 h-4" />
+        </Link>
+
         {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl overflow-hidden bg-[#0d1424] border border-white/10 p-1 mb-4 shadow-glow">

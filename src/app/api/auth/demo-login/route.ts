@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { signToken, AUTH_COOKIE_NAME } from "@/lib/auth";
+import { signToken, AUTH_COOKIE_NAME, hashPassword } from "@/lib/auth";
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
-    const demoUser =
+    let demoUser =
       (await prisma.user.findFirst({
         where: { email: "spershika@finvessa.in" },
       })) ||
@@ -18,11 +18,43 @@ export async function POST() {
       })) ||
       (await prisma.user.findFirst());
 
+    // Auto-provision demo account if missing so demo login NEVER fails
     if (!demoUser) {
-      return NextResponse.json(
-        { error: "Demo user not found. Please run seed script first." },
-        { status: 404 }
-      );
+      const defaultPasswordHash = await hashPassword("Demo@1234");
+      demoUser = await prisma.user.create({
+        data: {
+          email: "spershika@finvessa.in",
+          name: "Spershika Sharma",
+          passwordHash: defaultPasswordHash,
+          currency: "INR",
+        },
+      });
+
+      const account = await prisma.account.create({
+        data: {
+          userId: demoUser.id,
+          name: "HDFC Salary Account",
+          type: "CHECKING",
+          balanceCents: 45000000,
+          currency: "INR",
+          color: "#0284c7",
+        },
+      });
+
+      await prisma.virtualCard.create({
+        data: {
+          userId: demoUser.id,
+          accountId: account.id,
+          cardholderName: "SPERSHIKA SHARMA",
+          cardNumberMasked: "•••• •••• •••• 8820",
+          fullNumber: "6521 8820 9012 8820",
+          cardExpiry: "08/29",
+          cardCvv: "482",
+          cardType: "RUPAY",
+          cardStyle: "SAPPHIRE_CYAN",
+          spendingLimitCents: 15000000,
+        },
+      });
     }
 
     const sessionUser = {
@@ -39,11 +71,16 @@ export async function POST() {
       user: sessionUser,
     });
 
+    // Detect HTTPS vs plain HTTP across proxies, local IPs, and Vercel
+    const isHttps =
+      req.headers.get("x-forwarded-proto") === "https" ||
+      req.url.startsWith("https://");
+
     response.cookies.set({
       name: AUTH_COOKIE_NAME,
       value: token,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isHttps,
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60,
       path: "/",

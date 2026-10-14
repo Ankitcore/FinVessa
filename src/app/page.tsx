@@ -73,24 +73,18 @@ export default function HomePage() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link
               href="/how-it-works"
-              className="hidden sm:block text-xs sm:text-sm font-semibold text-slate-300 hover:text-white px-3 py-1.5 transition-colors"
+              className="hidden sm:block text-xs sm:text-sm font-semibold text-slate-300 hover:text-white px-3 py-1.5 transition-colors whitespace-nowrap"
             >
               How It Works
             </Link>
             <Link
-              href="/login"
-              className="text-xs sm:text-sm font-semibold text-slate-300 hover:text-white px-3 py-1.5 transition-colors"
+              href={user ? "/dashboard" : "/login"}
+              className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm shadow-glow transition-colors whitespace-nowrap shrink-0"
             >
-              Sign In
-            </Link>
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm shadow-glow transition-colors"
-            >
-              <span>Explore Dashboard</span>
+              <span>{user ? "Dashboard" : "Sign In"}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

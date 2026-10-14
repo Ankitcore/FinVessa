@@ -127,14 +127,14 @@ export function Header({
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <button
               onClick={onOpenMobileMenu}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:hidden text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.08] transition-colors flex items-center justify-center shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 lg:hidden text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.08] transition-colors flex items-center justify-center shrink-0"
               aria-label="Open mobile navigation menu"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
             </button>
 
             <div className="min-w-0 flex-1">
-              <h1 className="text-base sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2 truncate">
+              <h1 className="text-sm xs:text-base sm:text-xl lg:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
                 {title}
               </h1>
               {subtitle && (
@@ -166,13 +166,14 @@ export function Header({
             />
           </div>
 
-          {/* Quick Action Button */}
+          {/* Quick Action Button - Hidden on mobile to free up space for page title */}
           <button
             onClick={onOpenQuickAction}
-            className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold shadow-glow transition-colors shrink-0 min-h-[40px]"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold shadow-glow transition-colors shrink-0 min-h-[40px]"
+            title="Create new transaction or transfer"
           >
             <Plus className="w-4 h-4" />
-            <span className="hidden xs:inline">New Action</span>
+            <span className="hidden md:inline">New Action</span>
           </button>
 
           {/* How It Works Guide Pill */}
@@ -188,7 +189,7 @@ export function Header({
           {/* Eye Icon for Balance Visibility */}
           <button
             onClick={toggleBalanceVisibility}
-            className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors shrink-0"
+            className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors shrink-0"
             title={isBalanceHidden ? "Show account balances" : "Hide account balances"}
             aria-label="Toggle balance privacy"
           >
@@ -203,7 +204,7 @@ export function Header({
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setIsNotifOpen((prev) => !prev)}
-              className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors relative shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] transition-colors relative shrink-0"
               aria-label="Notifications"
             >
               <Bell className="w-4 h-4" />
@@ -281,7 +282,7 @@ export function Header({
           {/* User profile avatar */}
           <Link
             href="/settings"
-            className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 p-[1.5px] transition-transform hover:scale-105 shrink-0"
+            className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 p-[1.5px] transition-opacity hover:opacity-90 shrink-0"
             title="User Profile & Settings"
           >
             <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-xs font-bold text-white overflow-hidden">

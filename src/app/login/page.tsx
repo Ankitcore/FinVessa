@@ -14,13 +14,14 @@ import {
   Loader2,
   ShieldCheck,
   Zap,
+  X,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/components/ui/Toast";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, refreshUser } = useAuth();
+  const { login, demoLogin } = useAuth();
   const { toast } = useToast();
 
   const [email, setEmail] = useState("");
@@ -38,7 +39,7 @@ export default function LoginPage() {
     const result = await login(email, password);
     if (result.success) {
       toast.success("Signed in successfully. Welcome back!");
-      router.push("/dashboard");
+      window.location.href = "/dashboard";
     } else {
       setErrorMsg(result.error || "Invalid email or password");
       setLoading(false);
@@ -48,19 +49,13 @@ export default function LoginPage() {
   const handleDemoLogin = async () => {
     setErrorMsg("");
     setDemoLoading(true);
-    try {
-      const res = await fetch("/api/auth/demo-login", { method: "POST" });
-      const data = await res.json();
-      if (res.ok) {
-        toast.success("Welcome, Spershika Sharma! Demo session initialized.");
-        await refreshUser();
-        router.push("/dashboard");
-      } else {
-        setErrorMsg(data.error || "Demo login failed");
-        setDemoLoading(false);
-      }
-    } catch {
-      setErrorMsg("Network error. Please try again.");
+    const result = await demoLogin();
+    if (result.success) {
+      toast.success("Welcome, Spershika Sharma! Demo session initialized.");
+      // Hard navigation ensures cookies are committed and flushed on all mobile WebKit and Chromium engines
+      window.location.href = "/dashboard";
+    } else {
+      setErrorMsg(result.error || "Demo login failed");
       setDemoLoading(false);
     }
   };
@@ -68,6 +63,16 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-transparent text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <div className="glass-card max-w-md w-full rounded-3xl p-7 sm:p-9 border border-white/10 relative z-10 shadow-2xl">
+        {/* Cancel / Close Button */}
+        <Link
+          href="/"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-white/[0.04] hover:bg-white/[0.1] active:bg-white/[0.15] border border-white/[0.08] flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer touch-manipulation"
+          aria-label="Close and return to home"
+          title="Cancel and return to home"
+        >
+          <X className="w-4 h-4" />
+        </Link>
+
         {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl overflow-hidden bg-[#0d1424] border border-white/10 p-1 mb-4 shadow-glow">
@@ -94,7 +99,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleDemoLogin}
             disabled={demoLoading || loading}
-            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 hover:text-white font-semibold text-xs transition-colors shadow-glow"
+            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 min-h-[48px] rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 active:bg-cyan-500/30 border border-cyan-500/30 text-cyan-300 hover:text-white font-semibold text-xs sm:text-sm transition-colors shadow-glow cursor-pointer touch-manipulation select-none"
           >
             {demoLoading ? (
               <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
