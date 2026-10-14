@@ -1,9 +1,18 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
-const JWT_SECRET = process.env.JWT_SECRET || "finvessa-secure-jwt-secret-key-32-chars-long-2026";
+// Fallback runtime key generated once per server lifecycle if environment variable is omitted
+const ephemeralSecret = crypto.randomBytes(32).toString("hex");
+const JWT_SECRET =
+  process.env.JWT_SECRET && process.env.JWT_SECRET.trim().length >= 16
+    ? process.env.JWT_SECRET.trim()
+    : process.env.NODE_ENV === "production"
+    ? ephemeralSecret
+    : "finvessa-dev-local-secret-32-chars-long";
+
 export const AUTH_COOKIE_NAME = "finvessa_session";
 
 export interface SessionUser {

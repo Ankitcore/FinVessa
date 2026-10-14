@@ -22,7 +22,20 @@ export async function GET(req: NextRequest) {
       }),
       prisma.budget.findMany({ where: { userId: session.id }, include: { category: true } }),
       prisma.bill.findMany({ where: { userId: session.id } }),
-      prisma.virtualCard.findMany({ where: { userId: session.id } }),
+      prisma.virtualCard.findMany({
+        where: { userId: session.id },
+        select: {
+          id: true,
+          cardholderName: true,
+          cardNumberMasked: true,
+          cardExpiry: true,
+          cardType: true,
+          cardStyle: true,
+          isFrozen: true,
+          spendingLimitCents: true,
+          createdAt: true,
+        },
+      }),
     ]);
 
     const exportPayload = {
