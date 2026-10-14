@@ -16,11 +16,13 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { Footer } from "@/components/layout/Footer";
 import { HowItWorksPresentation } from "@/components/presentation/HowItWorksPresentation";
+import { CreatorModal } from "@/components/modals/CreatorModal";
 
 export default function HomePage() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showCreatorModal, setShowCreatorModal] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,6 +76,15 @@ export default function HomePage() {
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-4">
+            <button
+              type="button"
+              onClick={() => setShowCreatorModal(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-xl hover:bg-white/[0.04] transition-colors whitespace-nowrap cursor-pointer touch-manipulation"
+              title="View Creator Information"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span>Creator</span>
+            </button>
             <Link
               href="/how-it-works"
               className="hidden sm:block text-xs sm:text-sm font-semibold text-slate-300 hover:text-white px-3 py-1.5 transition-colors whitespace-nowrap"
@@ -182,6 +193,12 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+
+      {/* Creator Pop-up Modal */}
+      <CreatorModal
+        isOpen={showCreatorModal}
+        onClose={() => setShowCreatorModal(false)}
+      />
 
       {/* Global Comprehensive Footer */}
       <Footer />
