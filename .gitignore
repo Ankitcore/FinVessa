@@ -36,14 +36,11 @@ pnpm-debug.log*
 *.crt
 
 # SQLite Database & Storage Files
-*.db
 *.db-journal
-*.sqlite
-*.sqlite3
-prisma/*.db
+*.sqlite3-journal
 prisma/*.db-journal
-prisma/*.sqlite
-prisma/*.sqlite3
+prisma/*.sqlite-journal
+!prisma/dev.db
 
 # Operating System & IDE Files
 .DS_Store

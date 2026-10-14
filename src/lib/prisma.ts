@@ -5,10 +5,15 @@ import fs from "fs";
 function getDatabaseUrl(): string | undefined {
   if (process.env.VERCEL) {
     const tmpDbPath = path.join("/tmp", "dev.db");
-    if (!fs.existsSync(tmpDbPath)) {
+    const needsCopy = !fs.existsSync(tmpDbPath) || fs.statSync(tmpDbPath).size === 0;
+    if (needsCopy) {
       const sourceDbPaths = [
         path.join(process.cwd(), "prisma", "dev.db"),
         path.join(process.cwd(), "dev.db"),
+        path.join(__dirname, "..", "..", "..", "prisma", "dev.db"),
+        path.join(__dirname, "..", "prisma", "dev.db"),
+        path.join(__dirname, "prisma", "dev.db"),
+        path.join(__dirname, "dev.db"),
       ];
       for (const src of sourceDbPaths) {
         if (fs.existsSync(src)) {

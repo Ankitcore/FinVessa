@@ -1,25 +1,36 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { signToken, AUTH_COOKIE_NAME, hashPassword } from "@/lib/auth";
+import { ensureDatabaseInitialized } from "@/lib/initDb";
 
 export async function POST(req: Request) {
   try {
-    let demoUser =
-      (await prisma.user.findFirst({
+    let demoUser = null;
+
+    try {
+      demoUser =
+        (await prisma.user.findFirst({
+          where: { email: "spershika@finvessa.in" },
+        })) ||
+        (await prisma.user.findFirst({
+          where: {
+            OR: [
+              { email: "demo@finvessa.in" },
+              { email: "aarav@finvessa.in" },
+            ],
+          },
+        })) ||
+        (await prisma.user.findFirst());
+    } catch {
+      await ensureDatabaseInitialized();
+      demoUser = await prisma.user.findFirst({
         where: { email: "spershika@finvessa.in" },
-      })) ||
-      (await prisma.user.findFirst({
-        where: {
-          OR: [
-            { email: "demo@finvessa.in" },
-            { email: "aarav@finvessa.in" },
-          ],
-        },
-      })) ||
-      (await prisma.user.findFirst());
+      });
+    }
 
     // Auto-provision demo account if missing so demo login NEVER fails
     if (!demoUser) {
+      await ensureDatabaseInitialized();
       const defaultPasswordHash = await hashPassword("Demo@1234");
       demoUser = await prisma.user.create({
         data: {
