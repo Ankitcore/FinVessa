@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Image from "next/image";
 import {
   X,
   Github,
@@ -72,11 +73,16 @@ export function CreatorModal({ isOpen, onClose }: CreatorModalProps) {
             {/* Creator Badge & Avatar */}
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-4">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-500 via-sky-400 to-blue-600 p-[2px] shadow-glow flex items-center justify-center">
-                  <div className="w-full h-full bg-[#0a1120] rounded-[14px] flex items-center justify-center">
-                    <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-white via-cyan-200 to-cyan-400 tracking-tight">
-                      AK
-                    </span>
+                <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-cyan-400 via-sky-300 to-blue-500 p-[2px] shadow-glow flex items-center justify-center">
+                  <div className="w-full h-full bg-[#0a1120] rounded-[14px] overflow-hidden relative">
+                    <Image
+                      src="/ankit-kumar.jpg"
+                      alt="Ankit Kumar - Creator of FINVESSA"
+                      width={96}
+                      height={96}
+                      priority
+                      className="w-full h-full object-cover object-top"
+                    />
                   </div>
                 </div>
                 <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center shadow-md border-2 border-[#090e1a]">
