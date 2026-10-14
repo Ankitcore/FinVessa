@@ -102,29 +102,48 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-8 p-6 rounded-2xl glass-card border border-white/[0.08] relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4"
+        className="mb-8 p-6 sm:p-7 rounded-2xl glass-card border border-white/[0.08] relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-5 bg-gradient-to-r from-slate-900/90 via-[#0d1627]/95 to-slate-900/90 shadow-xl"
       >
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[11px] font-semibold mb-2.5">
+        <div className="relative z-10 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[11px] font-semibold mb-3">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Bharat RuPay & Banking Connected</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            See your money. <span className="text-gradient-cyan">Shape your future</span>
+
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight flex flex-wrap items-center gap-x-2.5 gap-y-1">
+            <span>Welcome back,</span>
+            <span className="text-gradient-cyan font-black">
+              {user?.name || "Spershika Sharma"}
+            </span>
+            <motion.span
+              animate={{ rotate: [0, 16, -10, 16, -4, 12, 0] }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "easeInOut",
+              }}
+              className="inline-block origin-[70%_70%] text-2xl sm:text-3xl lg:text-4xl select-none"
+              role="img"
+              aria-label="Waving hand"
+            >
+              👋
+            </motion.span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
-            Welcome back,{" "}
-            <strong className="font-extrabold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-md shadow-[0_0_12px_rgba(6,182,212,0.15)] inline-flex items-center text-sm sm:text-base tracking-tight text-white font-bold">
-              <span className="text-gradient-cyan font-black">{user?.name || "Spershika Sharma"}</span>
-            </strong>
-            . Unified overview of your wealth, liquid cash flows, and investments.
+
+          <p className="text-xs sm:text-sm text-slate-400 mt-2 font-medium leading-relaxed">
+            <span className="text-slate-300 font-semibold">See your money. Shape your future.</span>{" "}
+            Unified overview of your wealth, liquid cash flows, and investments.
           </p>
         </div>
 
-        <div className="relative z-10 flex items-center gap-3">
-          <div className="px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-right">
-            <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Today&apos;s Status</span>
-            <span className="text-xs font-bold text-emerald-400 flex items-center justify-end gap-1">
+        <div className="relative z-10 flex items-center gap-3 self-start md:self-center">
+          <div className="px-4 py-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm md:text-right flex flex-col justify-center shadow-inner">
+            <div className="flex items-center md:justify-end gap-1.5 text-[10px] sm:text-[11px] text-slate-400 font-medium uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Today&apos;s Status</span>
+            </div>
+            <span className="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">
               Ledger Synchronized
             </span>
           </div>
