@@ -160,7 +160,7 @@ const HOW_TO_USE_SLIDES: SlideData[] = [
     bulletPoints: [
       "Monitor the Monthly Obligations Settlement progress bar",
       "Receive overdue warnings before due dates lapse",
-      "Export your complete financial ledger to CSV for tax planning",
+      "Export your complete financial ledger to JSON for tax planning",
     ],
     callout: "Automation: Mark Paid instantly creates a debited ledger entry and updates your net balance.",
     demoType: "bills",

@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
         }
 
         const catName = tx.category?.name || "Other";
-        const catColor = tx.category?.color || "#8B5CF6";
+        const catColor = tx.category?.color || "#0284C7";
         if (!categoryTotals[catName]) {
           categoryTotals[catName] = { name: catName, color: catColor, amountCents: 0, count: 0 };
         }

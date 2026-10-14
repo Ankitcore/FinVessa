@@ -7,8 +7,8 @@ const createAccountSchema = z.object({
   name: z.string().min(2, "Account name is required"),
   type: z.enum(["CHECKING", "SAVINGS", "CREDIT_CARD", "INVESTMENT", "CASH"]),
   balanceCents: z.number().int().default(0),
-  color: z.string().default("#8B5CF6"),
-  currency: z.string().default("USD"),
+  color: z.string().default("#0284C7"),
+  currency: z.string().default("INR"),
 });
 
 export async function GET(req: NextRequest) {

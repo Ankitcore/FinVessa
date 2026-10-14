@@ -12,6 +12,7 @@ import {
   CreditCard as CardIcon,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useToast } from "@/components/ui/Toast";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 
@@ -35,6 +36,7 @@ interface VirtualCardWidgetProps {
 
 export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProps) {
   const { toast } = useToast();
+  const { formatAmount } = useCurrency();
   const [showFullNumber, setShowFullNumber] = useState<boolean>(false);
   const [showCvv, setShowCvv] = useState<boolean>(false);
   const [isFrozen, setIsFrozen] = useState<boolean>(card?.isFrozen || false);
@@ -257,7 +259,7 @@ export function VirtualCardWidget({ card, onCardUpdated }: VirtualCardWidgetProp
 
         <div className="flex items-center gap-1.5 text-slate-400">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Limit: {formatCurrency(card?.spendingLimitCents || 500000)}</span>
+          <span>Limit: {formatAmount(card?.spendingLimitCents || 500000, true)}</span>
         </div>
       </div>
 

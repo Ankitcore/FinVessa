@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
               name: "HDFC Primary Salary Account",
               type: "CHECKING",
               balanceCents: 5000000, // ₹50,000.00 starter balance
-              color: "#8B5CF6",
+              color: "#0284C7",
             },
             {
               name: "SBI Emergency Savings Vault",
@@ -66,9 +66,9 @@ export async function POST(req: NextRequest) {
             { name: "Rent & Society Maintenance", type: "EXPENSE", icon: "Home", color: "#F43F5E" },
             { name: "Groceries & Blinkit", type: "EXPENSE", icon: "ShoppingCart", color: "#F59E0B" },
             { name: "Dining & Swiggy/Zomato", type: "EXPENSE", icon: "Utensils", color: "#EC4899" },
-            { name: "Electronics & Tech", type: "EXPENSE", icon: "Cpu", color: "#8B5CF6" },
+            { name: "Electronics & Tech", type: "EXPENSE", icon: "Cpu", color: "#0284C7" },
             { name: "Electricity & Utilities", type: "EXPENSE", icon: "Zap", color: "#06B6D4" },
-            { name: "Movies & Entertainment", type: "EXPENSE", icon: "Film", color: "#A855F7" },
+            { name: "Movies & Entertainment", type: "EXPENSE", icon: "Film", color: "#3B82F6" },
           ],
         },
       },

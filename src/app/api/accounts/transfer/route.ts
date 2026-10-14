@@ -48,6 +48,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (fromAcc.type !== "CREDIT_CARD" && fromAcc.balanceCents < amountCents) {
+      return NextResponse.json(
+        { error: "Insufficient funds in source account for this transfer" },
+        { status: 400 }
+      );
+    }
+
     // Atomic database transaction
     const result = await prisma.$transaction(async (txClient) => {
       // 1. Debit from source account

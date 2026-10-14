@@ -133,8 +133,8 @@ model VirtualCard {
   fullNumber         String?   // Demo purposes
   cardExpiry         String    // e.g. "08/29"
   cardCvv            String    @default("739")
-  cardType           String    @default("VISA") // VISA, MASTERCARD
-  cardStyle          String    @default("PURPLE_CYAN") // PURPLE_CYAN, MIDNIGHT_DARK, NEON_EMERALD
+  cardType           String    @default("RUPAY") // RUPAY, VISA, MASTERCARD
+  cardStyle          String    @default("SAPPHIRE_CYAN") // SAPPHIRE_CYAN, MIDNIGHT_DARK, NEON_EMERALD
   isFrozen           Boolean   @default(false)
   spendingLimitCents Int       @default(500000) // Default $5,000.00
   createdAt          DateTime  @default(now())

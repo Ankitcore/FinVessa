@@ -34,7 +34,10 @@ export async function GET(req: NextRequest) {
     };
 
     if (accountFilter !== "all") {
-      txWhere.accountId = accountFilter;
+      txWhere.OR = [
+        { accountId: accountFilter },
+        { transferAccountId: accountFilter },
+      ];
     }
 
     // Fetch user accounts
@@ -115,7 +118,7 @@ export async function GET(req: NextRequest) {
         if (endDate && txDate > endDate) continue;
 
         const catName = tx.category?.name || "General";
-        const catColor = tx.category?.color || "#8B5CF6";
+        const catColor = tx.category?.color || "#0284C7";
         if (!categoryMap[catName]) {
           categoryMap[catName] = { name: catName, color: catColor, amountCents: 0, amount: 0 };
         }

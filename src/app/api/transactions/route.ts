@@ -44,7 +44,10 @@ export async function GET(req: NextRequest) {
     }
 
     if (accountId !== "ALL") {
-      where.accountId = accountId;
+      where.OR = [
+        { accountId: accountId },
+        { transferAccountId: accountId },
+      ];
     }
 
     if (categoryId !== "ALL") {
@@ -129,6 +132,13 @@ export async function POST(req: NextRequest) {
       });
       if (!destAccount) {
         return NextResponse.json({ error: "Destination account not found" }, { status: 404 });
+      }
+
+      if (sourceAccount.type !== "CREDIT_CARD" && sourceAccount.balanceCents < data.amountCents) {
+        return NextResponse.json(
+          { error: "Insufficient funds in source account for this transfer" },
+          { status: 400 }
+        );
       }
 
       // Execute atomic transfer

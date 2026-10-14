@@ -43,7 +43,7 @@ export default function AccountsPage() {
   const [createName, setCreateName] = useState("");
   const [createType, setCreateType] = useState("CHECKING");
   const [createBalance, setCreateBalance] = useState("1000.00");
-  const [createColor, setCreateColor] = useState("#8B5CF6");
+  const [createColor, setCreateColor] = useState("#0284C7");
   const [submitting, setSubmitting] = useState(false);
 
   // Transfer states
