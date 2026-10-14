@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getRequestSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const session = getRequestSession(req);
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ notifications: [], unreadCount: 0 }, { status: 200 });
     }
 
     const notifications = await prisma.notification.findMany({

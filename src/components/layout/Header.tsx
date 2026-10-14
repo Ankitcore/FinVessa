@@ -50,6 +50,11 @@ export function Header({
 
   // Fetch notifications
   useEffect(() => {
+    if (!user) {
+      setNotifications([]);
+      setUnreadCount(0);
+      return;
+    }
     async function loadNotifications() {
       try {
         const res = await fetch("/api/notifications");
@@ -63,7 +68,7 @@ export function Header({
       }
     }
     loadNotifications();
-  }, []);
+  }, [user]);
 
   // Close notification popover on outside click
   useEffect(() => {

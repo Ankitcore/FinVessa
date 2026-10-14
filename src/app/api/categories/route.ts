@@ -2,17 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { getRequestSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const session = getRequestSession(req);
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const userId = session?.id || null;
 
     const categories = await prisma.category.findMany({
-      where: {
-        OR: [{ userId: session.id }, { userId: null }],
-      },
+      where: userId
+        ? { OR: [{ userId }, { userId: null }] }
+        : { userId: null },
       orderBy: { name: "asc" },
     });
 

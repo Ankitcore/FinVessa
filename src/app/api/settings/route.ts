@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getRequestSession, hashPassword, verifyPassword } from "@/lib/auth";
+import { getRequestSession, getRequestSessionOrDemo, hashPassword, verifyPassword } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 
@@ -13,9 +13,11 @@ const updateSettingsSchema = z.object({
   newPassword: z.string().min(6).optional(),
 });
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
-    const session = getRequestSession(req);
+    const session = await getRequestSessionOrDemo(req);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
